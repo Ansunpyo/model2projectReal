@@ -1,0 +1,60 @@
+ul {
+	list-style: none;
+	padding-left: 0;
+}
+li {
+	float: left;
+}
+.writeWrap {
+	text-align: left;
+	display: flex;
+	flex-wrap: wrap;
+}
+.titleBigWrap {
+	width: 100%;
+	margin-bottom: 12px;
+}
+.titleHeader {
+	width: 20%;
+}
+.titleInput {
+	width: 80%;
+}
+.titleInput>input {
+	width: 60px;
+}
+.contentsBigWrap {
+	width: 100%;
+}
+.contentsHeader {
+	width: 20%;
+}
+.contentsInput {
+	width: 80%;
+}
+.popup {
+    display: none;
+    z-index: 200;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    background-color: #fff;
+	word-break: break-all;
+}
+.popup h3 {
+    border-bottom: 1px solid #ccc;
+    color: #606060;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-indent: 20px;
+    line-height: 64px;
+}
+.popup .content {
+    padding: 20px;
+    line-height: 1.6;
+}
+.popup .content p {
+    margin-bottom: 12px;
+}
+.Q {
+	cursor: pointer;
+}

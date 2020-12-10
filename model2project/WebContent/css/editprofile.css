@@ -1,0 +1,45 @@
+.bigEdit {
+	background: white;
+	width: 98%;
+	height: 60px;
+	margin: auto;
+	margin-bottom: 60px;
+	padding-left: 30px;
+	line-height: 60px;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+.inputSlot {
+	color: #686824;
+	width: 670px;
+	height: 40px;
+	font-weight: 600;
+	font-size: 1.2rem;
+	margin-top:40px;
+	padding-left:40px;
+}
+.inputSlot>input, .inputSlot>select {
+	width: 670px;
+	height: 40px;
+	padding-left: 15px;
+}
+radio {
+	width: 40px;
+	margin-top: 40px;
+	margin-left: 0px;
+}
+
+.submitButton {
+	margin: 60px 200px;
+}
+input[type="submit"] {
+	width: 300px;
+	height: 60px;
+	font-size: 1.5rem;
+	font-weight: 600;
+	background: #adea98;
+	border: 0px;
+}
+input[type="submit"]:hover {
+	box-shadow: 0px 0px 5px 5px gray;
+}

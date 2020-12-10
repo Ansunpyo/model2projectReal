@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+body {
+	background: black;
+}
+
+.logoToMain {
+	cursor: pointer;
+}
+
+body * {
+	margin: 0px;
+	padding: 0px;
+	color: #222328;
+	text-decoration: none;
+	background-color: #ffffff;
+	box-sizing: border-box;
+}
+.loginCont {
+	width: 480px;
+	margin: auto;
+	opacity: 0.9;
+}
+
+.tabs {
+	width: 480px;
+	height: 60px;
+	display: flex;
+}
+
+.loginTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 240px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.loginTab.on {
+	background-color: #ffffff;
+	border: 1px solid #bcbcbc;
+	border-bottom: 0px;
+}
+
+.joinTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 240px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.joinTab.on {
+	background-color: #ffffff;
+	border: 1px solid #bcbcbc;
+	border-bottom: 0px;
+}
+
+.loginFormDiv {
+	border: 1px solid #bcbcbc;
+	border-top: 0px;
+	text-align: center;
+}
+
+.loginFormDiv2 {
+	width: 478px;
+	height: 400px;
+	padding: 30px;
+	padding-top: 100px;
+}
+
+.inputSlot {
+	width: 370px;
+	height: 40px;
+	margin: 5px auto;
+	padding: 0 10px;
+	border: 1px solid #6f6f6f;
+	border-radius: 4px;
+	color: #6d6d6d;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+input[type=submit] {
+	margin-top: 10px;
+	width: 370px;
+	height: 40px;
+	background: linear-gradient(to right, #a2f4bc, #62d39a);
+	border: 0;
+	border-radius: 6px;
+	font-size: 1.4rem;
+	font-weight: 600;
+}
+
+input:hover {
+	box-shadow: 0px 0px 12px gray;
+}
+
+input[type=submit]:focus {
+	outline: none;
+	background: linear-gradient(to right, #53bd6e, #34af55);
+}
+
+.loginExtra {
+	margin: 10px auto;
+	position: relative;
+	width: 370px;
+	text-align: left;
+}
+
+.forgotPW {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.joinFormDiv {
+	display: none;
+	padding-top: 80px;
+	border: 1px solid #bcbcbc;
+	border-top: 0px;
+	text-align: center;
+}
+
+.joinFormDiv2 {
+	width: 478px;
+	height: 600px;
+	padding: 30px;
+}
+
+hr {
+	width: 390px;
+	margin: 15px;
+}
+
+.genderDiv {
+	text-align: left;
+	color: #6d6d6d;
+	font-size: 1.2rem;
+	font-weight: 600;
+	padding-left: 35px;
+}
+
+.tabs2 {
+	width: 410px;
+	height: 60px;
+	display: flex;
+}
+
+.studentTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 205px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.studentTab.on {
+	background-color: #ffffff;
+	border: 1px solid #bcbcbc;
+}
+
+.teacherTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 205px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.teacherTab.on {
+	background-color: #ffffff;
+	border: 1px solid #bcbcbc;
+}
+
+.teacherInfo {
+	display: none;
+}

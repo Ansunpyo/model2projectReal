@@ -1,0 +1,26 @@
+$(function(){
+	$(".loginTab").click(function(){
+		$(this).siblings().removeClass("on");
+		$(this).addClass("on");
+		$(".loginFormDiv").show();
+		$(".joinFormDiv").hide();
+	});
+	$(".joinTab").click(function(){
+		$(this).siblings().removeClass("on");
+		$(this).addClass("on");
+		$(".loginFormDiv").hide();
+		$(".joinFormDiv").show();
+	});
+	$(".studentTab").click(function(){
+		$(this).siblings().removeClass("on");
+		$(this).addClass("on");
+		$(".teacherInfo").hide();
+		$(".studentInfo").show();
+	});
+	$(".teacherTab").click(function(){
+		$(this).siblings().removeClass("on");
+		$(this).addClass("on");
+		$(".studentInfo").hide();
+		$(".teacherInfo").show();
+	});
+});

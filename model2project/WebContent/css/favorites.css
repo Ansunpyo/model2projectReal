@@ -1,0 +1,53 @@
+.editcont {
+	display: flex;
+	margin: auto;
+	margin-top: 80px;
+	width: 1200px;
+	height: 1200px;
+}
+
+.sidebar {
+	width: 25%;
+	height: 100%;
+	border-right: 1px solid #e2e2e2;
+}
+
+.bigMyPage {
+	width: 70%;
+	margin: 60px 10px 60px auto;
+	text-align: center;
+	color: black;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.myPageMenu {
+	width: 65%;
+	height: 45px;
+	line-height: 45px;
+	margin: 40px 0 auto auto;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+.myPageMenu>a {
+	color: #242424;
+	text-decoration: none;
+}
+.myPageMenu>a:hover {
+	color: #242424;
+	text-decoration: none;
+}
+.myPageMenu.on {
+	border-right: 4px solid #ff2807;
+}
+.myPageMenu>img {
+	vertical-align: middle;
+}
+
+.contents {
+	width: 75%;
+	height: 100%;
+	background: #eeeeee;
+	padding: 20px;
+}
+

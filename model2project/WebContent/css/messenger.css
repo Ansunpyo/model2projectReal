@@ -1,0 +1,193 @@
+a {
+	color: black;
+}
+a:hover {
+	text-decoration: none;
+	color: #33b1a0;
+}
+ul {
+	list-style: none;
+	margin:0px;
+	padding:0px;
+}
+li {
+	float: left;
+}
+.bbsWrapper {
+	margin-bottom: 40px;
+}
+.bbsHeader {
+	width: 100%;
+	padding:0px 25px;
+	line-height: 65px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    background: #22ad9c;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 2px 2px 2px 2px gray;
+}
+.bbsTitleHeader {
+	text-align: left;
+	width: 60%;
+	border-right: 1px solid #ffffff;
+}
+.bbsWriterHeader {
+	text-align: center;
+	width: 20%;
+	border-right: 1px solid #ffffff;
+}
+.bbsDeleteHeader {
+	text-align: center;
+	width: 20%;
+}
+
+.bbsBody {
+	width: 100%;
+	padding:0px 25px;
+	line-height: 70px;
+    color: #232323;
+    font-size: 14px;
+    font-weight: 600;
+    background: #f7f7f7;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 2px 2px 2px 2px gray;
+}
+.bbsBodyContents {
+	width: 100%;
+}
+.bbsTitle {
+	width: 60%;
+    cursor: pointer;
+	text-align: left;
+	font-weight: 600;
+	font-size: 1.2rem;
+	line-height: 35px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+	border-right: 1px solid rgba(0,0,0,0.5);
+}
+.bbsTitleDetail {
+	width: 90%;
+	color: #606060;
+	font-weight: 400;
+	font-size: 1rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+}
+.bbsWriter {
+	width: 20%;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+	border-right: 1px solid rgba(0,0,0,0.5);
+}
+.messageDeleteButton {
+	width: 20%;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+}
+.bbsViewWrapperList {
+	width: 100%;
+	text-align: center;
+}
+.bbsViewWriter {
+	width: 100%;
+	font-size: 1.2rem;
+	font-weight: 600;
+    background-color: #22ad9c;
+    border-bottom: 1px solid #0a5831;
+}
+.bbsViewWriterHeader {
+	width: 20%;
+	padding: 25px;
+	text-align: center;
+	color: white;
+	border-right: 1px solid #0a5831;
+}
+.bbsViewWriterName {
+	width: 80%;
+	text-align: left;
+	color: black;
+    background-color: #ffffff;
+    padding: 25px;
+}
+
+.bbsViewTitle {
+	width: 100%;
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: white;
+    background-color: #22ad9c;
+}
+.bbsViewTitleHeader {
+	width: 20%;
+	padding: 25px;
+	text-align: center;
+	border-right: 1px solid #0a5831;
+}
+.bbsViewTitleText {
+	width: 80%;
+	padding: 25px;
+	text-align: left;
+	color: black;
+    background-color: #ffffff;
+    border-bottom: 1px solid black;
+}
+.bbsViewBody {
+	width: 100%;
+	padding: 25px;
+	background-color: #ffffff;
+	color: black;
+}
+
+.messagePopup {
+    display: none;
+    position: fixed;
+    top: 110px;
+    left: 50%;
+    margin-left: -300px;
+    z-index: 200;
+    width: 600px;
+    height: 500px;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    background-color: #fff;
+	white-space: normal;
+	text-overflow: scroll;
+}
+.messagePopup h3 {
+    border-bottom: 1px solid #ccc;
+    color: #606060;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-indent: 20px;
+    line-height: 64px;
+}
+.messagePopup .messageContents {
+    padding: 20px;
+    line-height: 1.6;
+    width: 500px;
+}
+.messagePopup .close {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+.messagePopup .close button {
+    height: 44px;
+    width: 44px;
+    border: 1px solid #aaa;
+    background-color: #efefef;
+    color: #888;
+    font: 24px/44px arial,sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
