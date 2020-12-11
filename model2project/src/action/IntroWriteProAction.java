@@ -1,6 +1,8 @@
 package action;
 
 import java.io.PrintWriter;
+import java.util.Enumeration;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,14 +28,22 @@ public class IntroWriteProAction implements Action {
 		intro = new Intro(); 
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String id = loginMember.getId();
-		intro.setContents(request.getParameter("contents"));
-		intro.setImg1(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		intro.setImg2(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		intro.setImg3(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		intro.setImg4(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		intro.setImg5(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		intro.setImg6(multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
+		String id = null;
+		if(loginMember != null) id = loginMember.getId();
+		intro.setContents(multi.getParameter("contents"));
+		Enumeration<?> images = multi.getFileNames();
+		if(images.hasMoreElements())
+		intro.setImg1(multi.getOriginalFileName((String)images.nextElement()));
+		if(images.hasMoreElements())
+		intro.setImg2(multi.getOriginalFileName((String)images.nextElement()));
+		if(images.hasMoreElements())
+		intro.setImg3(multi.getOriginalFileName((String)images.nextElement()));
+		if(images.hasMoreElements())
+		intro.setImg4(multi.getOriginalFileName((String)images.nextElement()));
+		if(images.hasMoreElements())
+		intro.setImg5(multi.getOriginalFileName((String)images.nextElement()));
+		if(images.hasMoreElements())
+		intro.setImg6(multi.getOriginalFileName((String)images.nextElement()));
 		
 		IntroWriteProService introWriteProService = new IntroWriteProService();
 		boolean isWriteSuccess = introWriteProService.registArticle(id, intro);

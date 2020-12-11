@@ -1,94 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="vo.Intro" %>
+<%@ page import="vo.Intro, vo.Member, java.util.*, java.text.SimpleDateFormat" %>
 <%
-	Intro article = (Intro) session.getAttribute("article");
+	ArrayList[] articleList = (ArrayList[])session.getAttribute("articleList");
+	ArrayList<Intro> intList = articleList[0];
+	ArrayList<Member> memList = articleList[1];
+	Intro article = intList.get(0);
+	Member articlem = memList.get(0);
+	String nowPage = request.getParameter("page");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <title>MVC 게시판</title>
-<script>
-	function modifyintro(){
-		modifyform.submit();
-	}
-</script>
 <style>
-	#registForm {
-		width: 500px;
-		height: 610px;
-		border: 1ox sikud redl
-		margin: auto;
+	body,h1,h2,h3,h4,h5,h6,p,address,header,footer,section,aside,nav,ul,ol,li,dl,dt,dd,input,textarea,select,button {
+    	margin: 0;
+    	padding: 0;
+    	font-family: 'Malgun Gothic',sans-serif;
+    	font-size: 14px;
+    	color: #222328;
+	}
+	
+	body {
+	    background-image: url(https://roman-flossler.github.io/StoryShowGallery/img/bg.png);
+	}
+	
+	li {
+   		list-style: none;
+	}
+
+	.clearfix {
+		*zoom: 1;
+	}
+	.slider{
+		width: 1200px;
+		height: 300px; 
+		overflow: hidden;
+		margin: 0 auto;
 	}
 	
 	h2 {
 		text-align: center;
 	}
 	
-	table {
-		margin: auto;
-		width: 450px;
-	}
-	
-	.td_left {
-		width: 150px;
-		background: orange;
-	}
-	
-	.td_right {
-		wdth: 300px;
-		background: skyblue;
-	}
-	
-	#commandCell {
+	#basicInfoArea {
+		height: 40px;
 		text-align: center;
 	}
+	
+	#articleContentArea {
+		background: orange;
+		margin-top: 20px;
+		height: 350px;
+		text-align: center;
+		overflow: auto;
+	}
+	
+	#commandList {
+		margin: auto;
+		width: 500px;
+		text-align: center;
+	}
+	
+	#container {
+    width: 1200px;
+    margin: 10px auto 0;
+}
+#container .notice {
+    position: relative;
+    float: left;
+    width: 800px;
+    margin-right: 15px;
+}
+#container .notice1 {
+    position: relative;
+    float: left;
+    width: 355px;
+    margin-right: 15px;
+}
+#container .notice h4 {
+    position: relative;
+    z-index: 1;
+    float: left;
+    height: 35px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    background-color: #d7d7d7;
+    font-size: 16px;
+    font-weight: bold;
+    color: #606060;
+    line-height: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+#container .notice h4.on {
+    border-bottom-color: #fff;
+    background-color: #fff;
+}
+
+#container .notice ul {
+
+}
+#container .notice .news ul {
+    padding-top: 20px;
+}
+#container .notice .news ul li {
+    overflow: hidden;
+    margin: 0 10px;
+    border-bottom: 1px solid #dbdbdb;
+    line-height: 30px;
+}
+#container .notice .news ul li a {
+    float: left;
+}
+#container .notice .news ul li span {
+    float: right;
+    color: #606060;
+}
+#container .notice .gallery ul {
+    display: none;
+    padding: 20px 0 0 12px;
+}
+#container .notice .gallery ul li {
+    float: left;
+    margin-right: 13px;
+}
+#container .notice .gallery ul li.last {
+    margin-right: 0;
+}
 </style>
 </head>
 <body>
-	<!-- 게시판 등록 -->
-	<section id="writeForm">
-		<h2>게시판글수정</h2>
-		<form action="introModifyPro.do" method="post" name="modifyform">
-			<input type="hidden" name="intro_num" value="<%=article.getIntro_num() %>"/>
-			<input type="hidden" name="page" value="<%=request.getParameter("page") %>"/>
-			<table>
-				<tr>
-					<td class="td_left"><label for="contents">내용</label></td>
-					<td class="td_right"><textarea id="contents" name="contents" cols="40" rows="15" required="required"><%=article.getContents() %></textarea></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img1">사진1</label></td>
-					<td class="td_right"><input name="img1" type="file" id="img1" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img2">사진2</label></td>
-					<td class="td_right"><input name="img2" type="file" id="img2" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img3">사진3</label></td>
-					<td class="td_right"><input name="img3" type="file" id="img3" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img4">사진4</label></td>
-					<td class="td_right"><input name="img4" type="file" id="img4" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img5">사진5</label></td>
-					<td class="td_right"><input name="img5" type="file" id="img5" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="img6">사진6</label></td>
-					<td class="td_right"><input name="img6" type="file" id="img6" required="required" /></td>
-				</tr>
-			</table>
-			<section id="commandCell">
-				<a href="javascript:modifyintro()">[수정]</a>&nbsp;&nbsp;
-				<a href="javascript:history.go(-1)">[뒤로]</a>
-			</section>
-		</form>
-	</section>
-	<!-- 게시판 등록 -->
+<section id="container" class="clearfix">
+	<form method="post" action="introModifyPro.do">
+	<input type="hidden" name="intro_num" value="<%=article.getIntro_num() %>"/>
+	<input type="hidden" name="page" value="<%=nowPage %>"/>
+	<section class="notice1">
+			<a href ="#"><img src="/upload/<%=article.getImg1() %>" alt="-" 
+			style="width : 355px; height:300px; align:center;"/><span></span></a>
+			<ul>
+				<li><input name="img1" type="file" id="img1" required="required" /></li>
+				<li><input name="img2" type="file" id="img2"/></li>
+				<li><input name="img3" type="file" id="img3"/></li>
+				<li><input name="img4" type="file" id="img4"/></li>
+				<li><input name="img5" type="file" id="img5"/></li>
+				<li><input name="img6" type="file" id="img6"/></li>
+			</ul>
+		</section>
+		<section class="notice">
+			<div class="news">
+				<ul>
+					<li><a>name</a><span><%=articlem.getName() %></span></li>
+					<li><a>E-mail</a><span><%=articlem.getEmail() %></span></li>
+					<li><a>gender</a><span><%=articlem.getGender() %></span></li>
+					<li><a>major</a><span><%=articlem.getMajor() %></span></li>
+					<li><a>education</a><span><%=articlem.getEducation() %></span></li>
+					<li><a>introduce</a><span><textarea id="contents" name="contents" cols="50" rows="1"
+					 required="required"><%=article.getContents() %></textarea></span></li>
+				</ul>				
+			</div>
+		</section>
+	<div>
+		<div>
+			<button style="margin-top:20px; margin-right:40px; float:right;"
+		 	type="button" class="btn btn-success" onclick="history.back(-1);">돌아가기</button>
+			<input type="submit" style="margin-top:20px; margin-right:20px; float:right;" 
+			class="btn btn-primary" value="수정하기"/>
+		</div>	
+	</div>
+	</form>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

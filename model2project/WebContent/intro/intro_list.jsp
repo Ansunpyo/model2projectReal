@@ -18,6 +18,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
  		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+ 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/story-show-gallery@2/dist/ssg.min.css">
+ 		<link rel="stylesheet" href="src/ssg.css" type="text/css" media="all">
+		<link rel='stylesheet' href='./css/index.css' type='text/css' media='all' />
 		<title>강사소개</title>
 <style>
 body {
@@ -56,7 +59,7 @@ body {
 </header>
 	<div class="container" id="main">
 <%
-	if(loginMember == null){
+	if(loginMember == null) {
 		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
 	} else {
 %>
@@ -73,11 +76,13 @@ body {
 	for(int i=0;i<articleList.size();i++) {
 %>
 					<td style="text-align: center;">
-						<img src="/upload/<%=articleList.get(i).getImg1() %>" alt="-" 
-						style="width : 355px; height:300px; align:center;"/>
+					<div class="gallery ssg wider vipssg fs">
+						<a href='/upload/<%=articleList.get(i).getImg1() %>'><img src="/upload/<%=articleList.get(i).getImg1() %>" alt="text cation" 
+						style="width : 355px; height:300px; align:center;"/></a>
+					</div>
 						<br><a href="introDetail.do?intro_num=<%=articleList.get(i).getIntro_num() %>&page=<%=nowPage %>">
-						<%=articleList.get(i).getContents() %>
-						</a>
+						<%=articleList.get(i).getContents() %><br>
+						</a>						
 					</td>
 <%
 	if(i%3==2) {
@@ -138,8 +143,9 @@ body {
 	}
 %>		
 	</div>
-	</div>	
+	</div>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/story-show-gallery@2/dist/ssg.min.js"> </script>	
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 		<script>

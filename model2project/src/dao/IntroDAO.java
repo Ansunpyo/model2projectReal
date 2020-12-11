@@ -200,7 +200,7 @@ public class IntroDAO {
 	public boolean isArticleIntroWriter(int intro_num, String password) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String intro_sql = "SELECT * FROM intro WHERE intro_num = ?";
+		String intro_sql = "SELECT * FROM member JOIN intro ON member.number = intro.number WHERE intro_num = ?";
 		boolean isWriter = false;
 		
 		try {
@@ -208,8 +208,9 @@ public class IntroDAO {
 			pstmt.setInt(1, intro_num);
 			rs = pstmt.executeQuery();
 			rs.next();
+
 			
-			if(password.contentEquals(rs.getString("password"))) {
+			if(password.equals(rs.getString("password"))) {
 				isWriter = true;
 			}
 		} catch (SQLException ex) {
@@ -219,11 +220,12 @@ public class IntroDAO {
 		}
 		return isWriter;
 	}
+	
 	//글 수정
 	public int updateArticle(Intro article) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE intro SET contents = ?, img1 = ?, img2 = ?, img3 = ?, img4 = ?, img5 = ?, img6 = ?, WHERE intro_num = ?";
+		String sql = "UPDATE intro SET contents = ?, img1 = ?, img2 = ?, img3 = ?, img4 = ?, img5 = ?, img6 = ? WHERE intro_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

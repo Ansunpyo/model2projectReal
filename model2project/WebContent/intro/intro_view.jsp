@@ -175,20 +175,9 @@
     float: left;
 }
 #container .notice2 .news ul li span {
-    float: right;
-    color: #606060;
+	float: right;
+	color: #606060;
 }
-#container .notice2 .gallery ul {
-    display: none;
-    padding: 20px 0 0 12px;
-}
-#container .notice2 .gallery ul li {
-    float: left;
-    margin-right: 13px;
-}
-#container .notice2 .gallery ul li.last {
-    margin-right: 0;
-}	
 </style>
 </head>
 <body>
@@ -206,6 +195,7 @@
 					<li><a href="#">gender</a><span><%=articlem.getGender() %></span></li>
 					<li><a href="#">major</a><span><%=articlem.getMajor() %></span></li>
 					<li><a href="#">education</a><span><%=articlem.getEducation() %></span></li>
+					<li><a href="#">introduce</a><span><%=article.getContents() %></span></li>
 				</ul>				
 			</div>
 		</section>
@@ -223,21 +213,15 @@
 		<div class="mr-auto">
 			<button style="margin-top:20px; margin-right:10px; float:right;"
 		 	type="button" class="btn btn-success" onclick="history.back(-1);">목록으로</button>
-		 	<button style="margin-top:20px; margin-right:10px; float:right;"
+		 	<button id="button_event" style="margin-top:20px; margin-right:10px; float:right;"
 		 	type="button" class="btn btn-danger" onclick =
-			"location.href = 'introDeleteForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>'">삭제하기</button>
-		 	
+			"location.href = 'introDeleteForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>'">삭제하기</button>		 	
 			<button style="margin-top:20px; margin-right:10px; float:right;" 
 			type="button" class="btn btn-primary" onclick =
 			"location.href = 'introModifyForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>'">수정하기</button>
-		</div>	
+		</div>
 	</div>
 		</section>
-<!-- 교사본인에게만 보이는 탭( -->	
-<!-- 		<section id="commandList">
-			<a href="introModifyForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>">[수정]</a>
-			<a href="introDeleteForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>">[삭제]</a> -->
-<!-- )교사본인에게만 보이는 탭 -->	
 	</section>
 </body>
 </html>

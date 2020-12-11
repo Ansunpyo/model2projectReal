@@ -1,18 +1,19 @@
 package svc;
 
 import static db.JdbcUtil.*;
+
 import java.sql.Connection;
 import dao.IntroDAO;
 import vo.Intro;
 
 public class IntroModifyProService {
 
-	public boolean isArticleWriter(int intro_num, String pass) {
+	public boolean isArticleWriter(int intro_num, String password) {
 		boolean isArticleWriter = false;
 		Connection conn = getConnection();
 		IntroDAO introDAO = IntroDAO.getInstance();
 		introDAO.setConnection(conn);
-		isArticleWriter = introDAO.isArticleIntroWriter(intro_num, pass);
+		isArticleWriter = introDAO.isArticleIntroWriter(intro_num, password);
 		if(conn != null) close(conn);
 		return isArticleWriter;
 	}

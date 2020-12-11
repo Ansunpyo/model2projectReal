@@ -79,6 +79,11 @@
 			</div>
 			<div>
 				<input name="img1" type="file" id="img1" required="required" />
+				<input name="img2" type="file" id="img2"/>
+				<input name="img3" type="file" id="img3"/>
+				<input name="img4" type="file" id="img4"/>
+				<input name="img5" type="file" id="img5"/>
+				<input name="img6" type="file" id="img6"/>
 			</div>
 			<section id="commandCell" style="margin-top: 120px;">
 				<button type="submit" class="btn btn-primary" onclick="submit">등록하기</button>
