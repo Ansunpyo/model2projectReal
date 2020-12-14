@@ -6,11 +6,10 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Member;
 import vo.Message;
-import vo.Review;
 
 public class MessengerDAO {
 	private static MessengerDAO messengerDAO;
@@ -61,12 +60,12 @@ public class MessengerDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList[] selectMessageList(String id, int nowPageNumber) {
+	public LinkedList[] selectMessageList(String id, int nowPageNumber) {
 		String sql = "SELECT member.name, message.title, message.contents, message.time, message.message_num from member join message on member.number = message.sender and message.receiver = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
 		
-		ArrayList<Member> memList = new ArrayList<Member>();
-		ArrayList<Message> mesList = new ArrayList<Message>();
-		ArrayList[] messageList = null;
+		LinkedList<Member> memList = new LinkedList<Member>();
+		LinkedList<Message> mesList = new LinkedList<Message>();
+		LinkedList[] messageList = null;
 		Member mem = null;
 		Message mes = null;
 		try {
@@ -90,7 +89,7 @@ public class MessengerDAO {
 					memList.add(mem);
 				} while(rs.next());
 			}
-			messageList = new ArrayList[] {mesList, memList};
+			messageList = new LinkedList[] {mesList, memList};
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -136,12 +135,12 @@ public class MessengerDAO {
 		return result;
 	}
 
-	public ArrayList[] selectMyMessageList(String id, int nowPage) {
+	public LinkedList[] selectMyMessageList(String id, int nowPage) {
 		String sql = "SELECT member.name, message.title, message.contents, message.time, message.message_num from member join message on member.number = message.receiver and message.sender = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
 		
-		ArrayList<Member> memList = new ArrayList<Member>();
-		ArrayList<Message> mesList = new ArrayList<Message>();
-		ArrayList[] messageList = null;
+		LinkedList<Member> memList = new LinkedList<Member>();
+		LinkedList<Message> mesList = new LinkedList<Message>();
+		LinkedList[] messageList = null;
 		Member mem = null;
 		Message mes = null;
 		try {
@@ -165,7 +164,7 @@ public class MessengerDAO {
 					memList.add(mem);
 				} while(rs.next());
 			}
-			messageList = new ArrayList[] {mesList, memList};
+			messageList = new LinkedList[] {mesList, memList};
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

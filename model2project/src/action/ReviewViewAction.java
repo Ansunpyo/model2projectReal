@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class ReviewViewAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			ReviewViewService reviewViewService = new ReviewViewService();
-			ArrayList<Object> reviewViewList = reviewViewService.getReviewView(review_num);
+			LinkedList<Object> reviewViewList = reviewViewService.getReviewView(review_num);
 
 			session.setAttribute("reviewViewList", reviewViewList);
 			if(loginMember.getId().equals("admin")) {

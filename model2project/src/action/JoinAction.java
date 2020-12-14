@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import svc.JoinService;
-import svc.LoginService;
 import vo.ActionForward;
 import vo.Member;
 

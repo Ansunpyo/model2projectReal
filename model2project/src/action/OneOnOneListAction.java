@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class OneOnOneListAction implements Action {
 			String id = loginMember.getId();
 			forward = new ActionForward();
 			OneOnOneListService oneOnOneListService = new OneOnOneListService();
-			ArrayList<One_On_One> oneOnOneList = oneOnOneListService.getOneOnOneList(id);
+			LinkedList<One_On_One> oneOnOneList = oneOnOneListService.getOneOnOneList(id);
 			session.setAttribute("oneOnOneList", oneOnOneList);
 			forward.setPath("one_on_one.jsp");
 			return forward;

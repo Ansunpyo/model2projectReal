@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import svc.OneOnOneAdListService;
 import svc.OneOnOneLastPageService;
-import svc.ReviewLastPageService;
 import vo.ActionForward;
 import vo.Member;
 
@@ -26,7 +25,7 @@ public class One_on_oneadListAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			OneOnOneAdListService oneOnOneAdListService = new OneOnOneAdListService();
-			ArrayList[] oneOnOneAdList = oneOnOneAdListService.getOneOnOneAdList(nowPage);
+			LinkedList[] oneOnOneAdList = oneOnOneAdListService.getOneOnOneAdList(nowPage);
 			OneOnOneLastPageService oneOnOneLastPageService = new OneOnOneLastPageService();
 			int lastPage = oneOnOneLastPageService.getOneOnOneLastPage();
 			session.setAttribute("lastPage", lastPage);

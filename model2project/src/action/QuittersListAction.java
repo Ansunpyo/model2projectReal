@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ public class QuittersListAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			QuittersListService quittersListService = new QuittersListService();
-			ArrayList<Member> memList = quittersListService.getQuittersList(nowPage);
+			LinkedList<Member> memList = quittersListService.getQuittersList(nowPage);
 			QuittersLastPageService quittersLastPageService = new QuittersLastPageService();
 			int lastPage = quittersLastPageService.getQuittersLastPage();
 			session.setAttribute("lastPage", lastPage);

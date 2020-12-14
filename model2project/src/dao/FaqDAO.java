@@ -6,11 +6,9 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Faq;
-import vo.Lecture;
-import vo.Member;
 
 public class FaqDAO {
 	private static FaqDAO faqDAO;
@@ -33,9 +31,9 @@ public class FaqDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList<Faq> selectFaqList() {
+	public LinkedList<Faq> selectFaqList() {
 		String sql = "SELECT question, answer, faq_num FROM faq ORDER BY faq_num";
-		ArrayList<Faq> faqList = new ArrayList<Faq>();
+		LinkedList<Faq> faqList = new LinkedList<Faq>();
 		Faq faq = null;
 		try {
 			pstmt = conn.prepareStatement(sql);

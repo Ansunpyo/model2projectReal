@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -57,7 +57,7 @@
 		if (request.getParameter("page") != null) nowPageNumber = Integer.parseInt(request.getParameter("page"));
 		if (nowPageNumber < 1) nowPageNumber = 1;
 		if (nowPageNumber > lastPage) nowPageNumber = lastPage;
-		ArrayList<Member> memList = (ArrayList<Member>)session.getAttribute("memList");
+		LinkedList<Member> memList = (LinkedList<Member>)session.getAttribute("memList");
 		int startNumber = (nowPageNumber - 1) / pageCount * range + 1;
 		int endNumber = startNumber + range - 1;
 		if (nowPageNumber <= 1) {
@@ -131,7 +131,7 @@
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    
 %>
-						    <li class="page-item"><a class="page-link" href="members.do?page=<%=i%>"><%=i %></a></li>
+						    <li class="page-item<% if(nowPageNumber==i){%> active<%} %>"><a class="page-link" href="members.do?page=<%=i%>"><%=i %></a></li>
 <%
 				}
 %>

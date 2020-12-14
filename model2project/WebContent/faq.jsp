@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Faq, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Faq, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -28,7 +28,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
 					<li class="nav-item"><a class="nav-link" href="editProfilePage.do">마이페이지</a></li>
 					<li class="nav-item active"><a class="nav-link" href="faq.do">고객센터
 							<span class="sr-only">(current)</span></a></li>
@@ -47,7 +47,7 @@
 	if(loginMember == null){
 		out.println("<script>alert('로그인이 필요합니다.');location.href='loginPage.do';</script>");
 	} else {
-				ArrayList<Faq> faqList = (ArrayList<Faq>)session.getAttribute("faqList");
+				LinkedList<Faq> faqList = (LinkedList<Faq>)session.getAttribute("faqList");
 %>
 	<div class="editcont">
 		<div class="sidebar">

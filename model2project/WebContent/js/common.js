@@ -10,25 +10,6 @@ $(function(){
 			.next().stop().slideUp(200);
 	});
 
-	// slider
-	var $images = 2;
-	var $now = 0;
-	var $height = $('.slider ul li').height();
-	setInterval(function(){
-		if($now == $images) {
-			$now = 0;
-			$('.slider ul').animate({
-				top: $now * -$height
-			});
-		}
-		else {
-			$now += 1; 
-			$('.slider ul').animate({
-				top: $now * -$height
-			});
-		}
-	}, 2500);
-
 	// tab
 	$('#container .notice h4').on('click', function(){
 		$(this)

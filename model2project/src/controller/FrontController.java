@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.BannerAction;
+import action.BannerDeleteAction;
+import action.BannerUploadAction;
 import action.CategoryDeleteAction;
 import action.CategoryInsertAction;
 import action.CategoryListAction;
@@ -22,6 +24,11 @@ import action.FaqWriteAction;
 import action.FavoritesAction;
 import action.FavoritesDeleteAction;
 import action.FreeBoardAction;
+import action.FreeBoardDeleteAction;
+import action.FreeBoardUpdateAction;
+import action.FreeBoardUpdatePageAction;
+import action.FreeBoardViewAction;
+import action.FreeBoardWriteAction;
 import action.IntroDeleteProAction;
 import action.IntroDetailAction;
 import action.IntroListAction;
@@ -29,19 +36,30 @@ import action.IntroModifyFormAction;
 import action.IntroModifyProAction;
 import action.IntroWriteProAction;
 import action.JoinAction;
+import action.LectureListAction;
 import action.LoginAction;
 import action.LoginPageAction;
 import action.LogoutAction;
+import action.MainAction;
+import action.MainadAction;
 import action.MembersListAction;
 import action.MessageDeleteAction;
 import action.MessageSendAction;
 import action.MessengerAction;
+import action.MyFreeAction;
 import action.MyMessageAction;
 import action.MyReviewAction;
+import action.NoticeAction;
+import action.NoticeDeleteAction;
+import action.NoticeUpdateAction;
+import action.NoticeUpdatePageAction;
+import action.NoticeViewAction;
+import action.NoticeWriteAction;
 import action.OneOnOneListAction;
 import action.OneOnOneSendAction;
 import action.One_on_oneAnswerAction;
 import action.One_on_oneadListAction;
+import action.PwCheckAction;
 import action.QuitAction;
 import action.QuittersListAction;
 import action.ReviewAction;
@@ -82,6 +100,20 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/quit.do")) {
 			forward = new ActionForward();
 			forward.setPath("/quit.jsp");
+		} else if(command.contentEquals("/main.do")) {
+			action = new MainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/mainad.do")) {
+			action = new MainadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if(command.contentEquals("/login.do")) {
 			action = new LoginAction();
 			try {
@@ -293,10 +325,12 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if(command.contentEquals("/logout.do")) {
-			HttpSession session = request.getSession();
-			session.invalidate();
-			forward = new ActionForward();
-			forward.setPath("/index.jsp");
+			action = new LogoutAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if(command.contentEquals("/quitters.do")) {
 			action = new QuittersListAction();
 			try {
@@ -372,6 +406,134 @@ public class FrontController extends HttpServlet {
 			}
 		} else if(command.contentEquals("/freeBoard.do")) {
 			action = new FreeBoardAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/freeWritePage.do")) {
+			forward = new ActionForward();
+			forward.setPath("freeBoardWrite.jsp");
+		} else if(command.contentEquals("/freeWrite.do")) {
+			action = new FreeBoardWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/freeView.do")) {
+			action = new FreeBoardViewAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/freeDelete.do")) {
+			action = new FreeBoardDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/freeUpdatePage.do")) {
+			action = new FreeBoardUpdatePageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/freeUpdate.do")) {
+			action = new FreeBoardUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/myFree.do")) {
+			action = new MyFreeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/notice.do")) {
+			action = new NoticeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/noticeView.do")) {
+			action = new NoticeViewAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/noticeDelete.do")) {
+			action = new NoticeDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/noticeUpdatePage.do")) {
+			action = new NoticeUpdatePageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/noticeUpdate.do")) {
+			action = new NoticeUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/noticeWritePage.do")) {
+			forward = new ActionForward();
+			forward.setPath("noticeWrite.jsp");
+		} else if(command.contentEquals("/noticeWrite.do")) {
+			action = new NoticeWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/forgotPw.do")) {
+			forward = new ActionForward();
+			forward.setPath("forgotPw.jsp");
+		} else if(command.contentEquals("/pwCheck.do")) {
+			action = new PwCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/banner.do")) {
+			action = new BannerAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/deleteBanner.do")) {
+			action = new BannerDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/bannerUpload.do")) {
+			action = new BannerUploadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureList.do")) {
+			action = new LectureListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

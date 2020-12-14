@@ -37,6 +37,12 @@ public class IntroModifyProAction implements Action {
 			article.setImg4(request.getParameter("img4"));
 			article.setImg5(request.getParameter("img5"));
 			article.setImg6(request.getParameter("img6"));
+			article.setImgex1(request.getParameter("imgex1"));
+			article.setImgex2(request.getParameter("imgex2"));
+			article.setImgex3(request.getParameter("imgex3"));
+			article.setImgex4(request.getParameter("imgex4"));
+			article.setImgex5(request.getParameter("imgex5"));
+			article.setImgex6(request.getParameter("imgex6"));
 			isModifySuccess = introModifyProService.modifyArticle(article);
 			
 			if(!isModifySuccess) {

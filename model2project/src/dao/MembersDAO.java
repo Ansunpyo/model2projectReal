@@ -5,7 +5,7 @@ import static db.JdbcUtil.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Member;
 
@@ -31,9 +31,9 @@ public class MembersDAO {
 	public void setConnection(Connection conn) {
 		this.conn = conn;
 	}
-	public ArrayList<Member> selectMembersList(int nowPage) {
+	public LinkedList<Member> selectMembersList(int nowPage) {
 		String sql = "SELECT * FROM member ORDER BY number DESC LIMIT ?, " + pageCount;
-		ArrayList<Member> memList = new ArrayList<Member>();
+		LinkedList<Member> memList = new LinkedList<Member>();
 		Member mem = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -87,9 +87,9 @@ public class MembersDAO {
 		}
 		return result;
 	}
-	public ArrayList<Member> selectQuittersList(int nowPage) {
+	public LinkedList<Member> selectQuittersList(int nowPage) {
 		String sql = "SELECT * FROM quitter LIMIT ?, " + pageCount;
-		ArrayList<Member> memList = new ArrayList<Member>();
+		LinkedList<Member> memList = new LinkedList<Member>();
 		Member mem = null;
 		try {
 			pstmt = conn.prepareStatement(sql);

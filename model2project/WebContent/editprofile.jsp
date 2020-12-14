@@ -29,7 +29,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
 					<li class="nav-item active"><a class="nav-link" href="editProfilePage.do">마이페이지
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.do">고객센터</a></li>

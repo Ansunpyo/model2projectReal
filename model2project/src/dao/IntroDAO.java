@@ -80,6 +80,12 @@ public class IntroDAO {
 				intro.setImg4(rs.getString("img4"));
 				intro.setImg5(rs.getString("img5"));
 				intro.setImg6(rs.getString("img6"));
+				intro.setImgex1(rs.getString("imgex1"));
+				intro.setImgex2(rs.getString("imgex2"));
+				intro.setImgex3(rs.getString("imgex3"));
+				intro.setImgex4(rs.getString("imgex4"));
+				intro.setImgex5(rs.getString("imgex5"));
+				intro.setImgex6(rs.getString("imgex6"));
 				intro.setReadcount(rs.getInt("readcount"));
 				articleList.add(intro);
 			}
@@ -112,18 +118,24 @@ public class IntroDAO {
 			}
 			
 			
-			sql = "INSERT INTO intro VALUES (?,NULL,?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO intro VALUES (?,?,?,null,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setString(2,article.getContents());
-			pstmt.setInt(3, 0);
+			pstmt.setInt(2, 0);
+			pstmt.setString(3,article.getContents());
 			pstmt.setString(4,article.getImg1());
 			pstmt.setString(5,article.getImg2());
 			pstmt.setString(6,article.getImg3());
 			pstmt.setString(7,article.getImg4());
 			pstmt.setString(8,article.getImg5());
 			pstmt.setString(9,article.getImg6());
+			pstmt.setString(10,article.getImgex1());
+			pstmt.setString(11,article.getImgex2());
+			pstmt.setString(12,article.getImgex3());
+			pstmt.setString(13,article.getImgex4());
+			pstmt.setString(14,article.getImgex5());
+			pstmt.setString(15,article.getImgex6());
 			
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception ex) {
@@ -163,7 +175,7 @@ public class IntroDAO {
 		ArrayList[] articleList = null;
 		
 		try {
-			pstmt = conn.prepareStatement("SELECT m.name, m.email, m.gender, m.major, m.education, i.intro_num, i.contents, i.readcount, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6 FROM member AS m JOIN intro AS i ON m.number = i.number WHERE m.id = ?");
+			pstmt = conn.prepareStatement("SELECT m.name, m.email, m.gender, m.major, m.education, i.intro_num, i.contents, i.readcount, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6, i.imgex1, i.imgex2, i.imgex3, i.imgex4, i.imgex5, i.imgex6 FROM member AS m JOIN intro AS i ON m.number = i.number WHERE m.id = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
@@ -178,6 +190,12 @@ public class IntroDAO {
 				intro.setImg4(rs.getString("img4"));
 				intro.setImg5(rs.getString("img5"));
 				intro.setImg6(rs.getString("img6"));
+				intro.setImgex1(rs.getString("imgex1"));
+				intro.setImgex2(rs.getString("imgex2"));
+				intro.setImgex3(rs.getString("imgex3"));
+				intro.setImgex4(rs.getString("imgex4"));
+				intro.setImgex5(rs.getString("imgex5"));
+				intro.setImgex6(rs.getString("imgex6"));
 				intro.setReadcount(rs.getInt("readcount"));	//강사만 볼 수 있게 설정
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
@@ -225,7 +243,7 @@ public class IntroDAO {
 	public int updateArticle(Intro article) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE intro SET contents = ?, img1 = ?, img2 = ?, img3 = ?, img4 = ?, img5 = ?, img6 = ? WHERE intro_num = ?";
+		String sql = "UPDATE intro SET contents = ?, img1 = ?, img2 = ?, img3 = ?, img4 = ?, img5 = ?, img6 = ?, imgex1 = ?, imgex2 = ?, imgex3 = ?, imgex4 = ?, imgex5 = ?, imgex6 = ? WHERE intro_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -236,10 +254,16 @@ public class IntroDAO {
 			pstmt.setString(5, article.getImg4());
 			pstmt.setString(6, article.getImg5());
 			pstmt.setString(7, article.getImg6());
-			pstmt.setInt(8, article.getIntro_num());
+			pstmt.setString(8, article.getImgex1());
+			pstmt.setString(9, article.getImgex2());
+			pstmt.setString(10, article.getImgex3());
+			pstmt.setString(11, article.getImgex4());
+			pstmt.setString(12, article.getImgex5());
+			pstmt.setString(13, article.getImgex6());
+			pstmt.setInt(14, article.getIntro_num());
 			updateCount = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("boardModify 에러 : " + e);
+			System.out.println("introModify 에러 : " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
 		}
@@ -264,7 +288,7 @@ public class IntroDAO {
 
 	public Intro selectArticleForModify(int intro_num) {
 		PreparedStatement pstmt = null;
-		String sql = "SELECT contents, img1, img2, img3, img4, img5, img6 FROM intro WHERE intro_num = ?";
+		String sql = "SELECT contents, img1, img2, img3, img4, img5, img6, imgex1, imgex2, imgex3, imgex4, imgex5, imgex6 FROM intro WHERE intro_num = ?";
 		ResultSet rs = null;
 		Intro intro = null;
 		try {
@@ -276,14 +300,20 @@ public class IntroDAO {
 				intro = new Intro();
 				intro.setContents(rs.getString("contents"));
 				intro.setImg1(rs.getString("img1"));
-				intro.setImg1(rs.getString("img2"));
-				intro.setImg1(rs.getString("img3"));
-				intro.setImg1(rs.getString("img4"));
-				intro.setImg1(rs.getString("img5"));
-				intro.setImg1(rs.getString("img6"));
+				intro.setImg2(rs.getString("img2"));
+				intro.setImg3(rs.getString("img3"));
+				intro.setImg4(rs.getString("img4"));
+				intro.setImg5(rs.getString("img5"));
+				intro.setImg6(rs.getString("img6"));
+				intro.setImgex1(rs.getString("imgex1"));
+				intro.setImgex2(rs.getString("imgex2"));
+				intro.setImgex3(rs.getString("imgex3"));
+				intro.setImgex4(rs.getString("imgex4"));
+				intro.setImgex5(rs.getString("imgex5"));
+				intro.setImgex6(rs.getString("imgex6"));
 			}
 		} catch (Exception e) {
-			System.out.println("boardModify 에러 : " + e);
+			System.out.println("introModify 에러 : " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
 		}

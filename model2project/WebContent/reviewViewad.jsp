@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -49,7 +49,7 @@
 	if(loginMember == null){
 		out.println("<script>alert('로그인이 필요합니다.');location.href='loginPage.do';</script>");
 	} else {
-				ArrayList<Object> reviewViewList = (ArrayList<Object>)session.getAttribute("reviewViewList");
+				LinkedList<Object> reviewViewList = (LinkedList<Object>)session.getAttribute("reviewViewList");
 				if(request.getParameter("page") != null) nowPage = Integer.parseInt(request.getParameter("page"));
 				Review re = (Review) reviewViewList.get(0);
 				Member mem = (Member) reviewViewList.get(1);
@@ -60,7 +60,6 @@
 			<div class="bigMyPage">My Page</div>
 			<div>
 				<div class="myPageMenu on"><a href="review.do"><img src="images/star_icon.png">&nbsp;리뷰 관리</a></div>
-				<div class="myPageMenu"><a href="event.do"><img src="images/event_icon.png">&nbsp;이벤트 관리</a></div>
 				<div class="myPageMenu"><a href="faq.do"><img src="images/faq_icon.png">&nbsp;FAQ 관리</a></div>
 				<div class="myPageMenu"><a href="category.do"><img src="images/category_icon.png">&nbsp;카테고리 관리</a></div>
 				<div class="myPageMenu"><a href="banner.do"><img src="images/banner_icon.png">&nbsp;메인배너 관리</a></div>

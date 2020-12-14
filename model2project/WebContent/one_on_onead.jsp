@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.One_On_One, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.One_On_One, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -58,7 +58,7 @@
 		if (request.getParameter("page") != null) nowPageNumber = Integer.parseInt(request.getParameter("page"));
 		if (nowPageNumber < 1) nowPageNumber = 1;
 		if (nowPageNumber > lastPage) nowPageNumber = lastPage;
-		ArrayList[] oneOnOneAdList = (ArrayList[])session.getAttribute("oneOnOneAdList");
+		LinkedList[] oneOnOneAdList = (LinkedList[])session.getAttribute("oneOnOneAdList");
 		
 			
 		int startNumber = (nowPageNumber - 1) / pageCount * range + 1;
@@ -85,8 +85,8 @@
 <%
 		if(oneOnOneAdList != null) {
 			
-			ArrayList<Member> memList = oneOnOneAdList[0];
-			ArrayList<One_On_One> oneList = oneOnOneAdList[1];
+			LinkedList<Member> memList = oneOnOneAdList[0];
+			LinkedList<One_On_One> oneList = oneOnOneAdList[1];
 			
 			if(oneList != null) {	
 				

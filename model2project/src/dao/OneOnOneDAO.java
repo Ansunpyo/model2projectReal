@@ -6,7 +6,7 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Member;
 import vo.One_On_One;
@@ -34,9 +34,9 @@ public class OneOnOneDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList<One_On_One> selectOneOnOneList(String id) {
+	public LinkedList<One_On_One> selectOneOnOneList(String id) {
 		String sql = "SELECT title, contents, answer FROM one_on_one WHERE number = (SELECT number FROM member WHERE id = ?)";
-		ArrayList<One_On_One> oneList = new ArrayList<One_On_One>();
+		LinkedList<One_On_One> oneList = new LinkedList<One_On_One>();
 		One_On_One one = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -84,11 +84,11 @@ public class OneOnOneDAO {
 		return result;
 	}
 
-	public ArrayList[] selectOneOnOneAdList(int nowPage) {
+	public LinkedList[] selectOneOnOneAdList(int nowPage) {
 		String sql = "SELECT m.name, o.title, o.contents, o.answer, o.one_on_one_num FROM member AS m JOIN one_on_one AS o ON m.number = o.number ORDER BY o.one_on_one_num DESC LIMIT ?," + pageCount;
-		ArrayList[] oneOnOneAdList = null;
-		ArrayList<One_On_One> oneList = new ArrayList<One_On_One>();
-		ArrayList<Member> memList = new ArrayList<Member>();
+		LinkedList[] oneOnOneAdList = null;
+		LinkedList<One_On_One> oneList = new LinkedList<One_On_One>();
+		LinkedList<Member> memList = new LinkedList<Member>();
 		One_On_One one = null;
 		Member mem = null;
 		try {
@@ -111,7 +111,7 @@ public class OneOnOneDAO {
 					memList.add(mem);
 					oneList.add(one);
 				} while(rs.next());
-				oneOnOneAdList = new ArrayList[] {memList, oneList};
+				oneOnOneAdList = new LinkedList[] {memList, oneList};
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,12 +1,11 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ReviewDAO;
 import svc.ReviewLastPageService;
 import svc.ReviewService;
 import vo.ActionForward;
@@ -26,7 +25,7 @@ public class ReviewAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			ReviewService reviewService = new ReviewService();
-			ArrayList[] reviewList = reviewService.getReviewList(nowPage);
+			LinkedList[] reviewList = reviewService.getReviewList(nowPage);
 			ReviewLastPageService reviewLastPageService = new ReviewLastPageService();
 			int lastPage = reviewLastPageService.getReviewLastPage();
 			session.setAttribute("lastPage", lastPage);

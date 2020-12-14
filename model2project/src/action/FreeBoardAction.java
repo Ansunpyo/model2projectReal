@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import svc.FreeBoardLastPageService;
 import svc.FreeBoardService;
-import svc.ReviewLastPageService;
-import svc.ReviewService;
 import vo.ActionForward;
 import vo.Member;
 
@@ -27,7 +25,7 @@ public class FreeBoardAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			FreeBoardService freeBoardService = new FreeBoardService();
-			ArrayList[] freeList = freeBoardService.getFreeList(nowPage);
+			LinkedList[] freeList = freeBoardService.getFreeList(nowPage);
 			FreeBoardLastPageService freeBoardLastPageService = new FreeBoardLastPageService();
 			int lastPage = freeBoardLastPageService.getFreeLastPage();
 			session.setAttribute("lastPage", lastPage);

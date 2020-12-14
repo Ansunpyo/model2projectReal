@@ -4,18 +4,18 @@ import static db.JdbcUtil.close;
 import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import dao.FaqDAO;
 import vo.Faq;
 
 public class FaqListService {
 
-	public ArrayList<Faq> getFaqList() {
+	public LinkedList<Faq> getFaqList() {
 		Connection conn = getConnection();
 		FaqDAO faqDAO = FaqDAO.getInstance();
 		faqDAO.setConnection(conn);
-		ArrayList<Faq> faqList = faqDAO.selectFaqList();
+		LinkedList<Faq> faqList = faqDAO.selectFaqList();
 		close(conn);
 		
 		return faqList;

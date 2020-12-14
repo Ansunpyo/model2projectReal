@@ -6,7 +6,7 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Lecture;
 import vo.Member;
@@ -60,12 +60,12 @@ public class ReviewDAO {
 		return result;
 	}
 
-	public ArrayList[] selectReviewList(int nowPageNumber) {
+	public LinkedList[] selectReviewList(int nowPageNumber) {
 		String sql = "SELECT r.title, r.contents, r.review_num, l.lecture_title, l.lecture_num, m.name FROM review AS r JOIN member AS m on r.number = m.number JOIN lecture AS l ON r.lecture_num = l.lecture_num ORDER BY r.review_num DESC LIMIT ?, " + pageCount;
-		ArrayList<Lecture> lecList = new ArrayList<Lecture>();
-		ArrayList<Member> memList = new ArrayList<Member>();
-		ArrayList<Review> reviewContentList = new ArrayList<Review>();
-		ArrayList[] reviewList = null;
+		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
+		LinkedList<Member> memList = new LinkedList<Member>();
+		LinkedList<Review> reviewContentList = new LinkedList<Review>();
+		LinkedList[] reviewList = null;
 		Lecture lec = null;
 		Member mem = null;
 		Review re = null;
@@ -91,7 +91,7 @@ public class ReviewDAO {
 					reviewContentList.add(re);
 				} while(rs.next());
 			}
-			reviewList = new ArrayList[] {lecList, memList, reviewContentList};
+			reviewList = new LinkedList[] {lecList, memList, reviewContentList};
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -101,9 +101,9 @@ public class ReviewDAO {
 		return reviewList;
 	}
 
-	public ArrayList<Object> selectReviewView(int review_num) {
+	public LinkedList<Object> selectReviewView(int review_num) {
 		String sql = "SELECT r.review_num, r.title, r.contents, m.name FROM review AS r JOIN member AS m ON r.number = m.number WHERE r.review_num = ?";
-		ArrayList<Object> reviewViewList = null;
+		LinkedList<Object> reviewViewList = null;
 		Member mem = null;
 		Review re = null;
 		try {
@@ -119,7 +119,7 @@ public class ReviewDAO {
 				re.setTitle(rs.getString("title"));
 				re.setContents(rs.getString("contents"));
 			}
-			reviewViewList = new ArrayList<Object>();
+			reviewViewList = new LinkedList<Object>();
 			reviewViewList.add(re);
 			reviewViewList.add(mem);
 			
@@ -191,10 +191,10 @@ public class ReviewDAO {
 		return result;
 	}
 
-	public ArrayList<Lecture> selectLectureList() {
+	public LinkedList<Lecture> selectLectureList() {
 		String sql = "SELECT lecture_title, lecture_num FROM Lecture order by lecture_num desc";
 		Lecture lec = null;
-		ArrayList<Lecture> lecList = new ArrayList<Lecture>();
+		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -238,12 +238,12 @@ public class ReviewDAO {
 		return result;
 	}
 
-	public ArrayList[] selectMyReviewList(String id, int nowPage) {
+	public LinkedList[] selectMyReviewList(String id, int nowPage) {
 		String sql = "SELECT r.title, r.contents, r.review_num, l.lecture_title, l.lecture_num, m.name FROM review AS r JOIN member AS m on r.number = m.number JOIN lecture AS l ON r.lecture_num = l.lecture_num WHERE r.number = (SELECT number FROM member WHERE id = ?) ORDER BY r.review_num DESC LIMIT ?, " + pageCount;
-		ArrayList<Lecture> lecList = new ArrayList<Lecture>();
-		ArrayList<Member> memList = new ArrayList<Member>();
-		ArrayList<Review> reviewContentList = new ArrayList<Review>();
-		ArrayList[] reviewList = null;
+		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
+		LinkedList<Member> memList = new LinkedList<Member>();
+		LinkedList<Review> reviewContentList = new LinkedList<Review>();
+		LinkedList[] reviewList = null;
 		Lecture lec = null;
 		Member mem = null;
 		Review re = null;
@@ -270,7 +270,7 @@ public class ReviewDAO {
 					reviewContentList.add(re);
 				} while(rs.next());
 			}
-			reviewList = new ArrayList[] {lecList, memList, reviewContentList};
+			reviewList = new LinkedList[] {lecList, memList, reviewContentList};
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

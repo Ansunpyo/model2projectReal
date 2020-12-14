@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class ReviewWritePageAction implements Action {
 		
 		if(loginMember != null) {
 			forward = new ActionForward();
-			ArrayList<Lecture> lecList = null;
+			LinkedList<Lecture> lecList = null;
 			ReviewWritePageService reviewWritePageService = new ReviewWritePageService();
 			lecList = reviewWritePageService.reviewWritePage();
 			

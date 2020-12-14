@@ -148,9 +148,6 @@ a:hover {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-#container .notice .news ul {
-    padding-top: 20px;
-}
 #container .notice .news ul li {
     overflow: hidden;
     margin: 0 10px;

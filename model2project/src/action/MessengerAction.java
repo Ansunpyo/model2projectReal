@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ public class MessengerAction implements Action {
 			String id = loginMember.getId();
 			forward = new ActionForward();
 			MessengerService messengerService = new MessengerService();
-			ArrayList[] messageList = messengerService.getMessageList(id, nowPage);
+			LinkedList[] messageList = messengerService.getMessageList(id, nowPage);
 			MessengerLastPageService messengerLastPageService = new MessengerLastPageService();
 			int lastPage = messengerLastPageService.getMessengerLastPage(id);
 			session.setAttribute("messageLastPage", lastPage);

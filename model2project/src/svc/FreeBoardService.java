@@ -4,17 +4,17 @@ import static db.JdbcUtil.close;
 import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import dao.FreeDAO;
 
 public class FreeBoardService {
 
-	public ArrayList[] getFreeList(int nowPage) {
+	public LinkedList[] getFreeList(int nowPage) {
 		Connection conn = getConnection();
 		FreeDAO freeDAO = FreeDAO.getInstance();
 		freeDAO.setConnection(conn);
-		ArrayList[] freeList = freeDAO.selectFreeList(nowPage);
+		LinkedList[] freeList = freeDAO.selectFreeList(nowPage);
 		close(conn);
 		
 		return freeList;

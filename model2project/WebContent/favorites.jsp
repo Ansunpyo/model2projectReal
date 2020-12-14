@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -28,7 +28,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
 					<li class="nav-item active"><a class="nav-link" href="editProfilePage.do">마이페이지
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.do">고객센터</a></li>
@@ -47,7 +47,7 @@
 	if(loginMember == null){
 		out.println("<script>alert('로그인이 필요합니다.');location.href='loginPage.do';</script>");
 	} else {
-				ArrayList[] favorList = (ArrayList[])session.getAttribute("favoritesList");
+				LinkedList[] favorList = (LinkedList[])session.getAttribute("favoritesList");
 %>
 	<div class="editcont">
 		<div class="sidebar">
@@ -66,8 +66,8 @@
 			        <h6 class="border-bottom border-gray pb-2 mb-0">Favorites</h6>
 			        
 <%
-				ArrayList<Lecture> lecList = favorList[0];
-				ArrayList<Member> memList = favorList[1];
+				LinkedList<Lecture> lecList = favorList[0];
+				LinkedList<Member> memList = favorList[1];
 				for (int i = 0; i<lecList.size();i++) {
 %>
 			        <div class="media text-muted pt-3">

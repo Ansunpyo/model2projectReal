@@ -84,6 +84,12 @@
 				<input name="img4" type="file" id="img4"/>
 				<input name="img5" type="file" id="img5"/>
 				<input name="img6" type="file" id="img6"/>
+				<input type="text" class="inputSlot" name="imgex1" placeholder="사진 소개1" required="required"/>
+				<input type="text" class="inputSlot" name="imgex2" placeholder="사진 소개2"/>
+				<input type="text" class="inputSlot" name="imgex3" placeholder="사진 소개3"/>
+				<input type="text" class="inputSlot" name="imgex4" placeholder="사진 소개4"/>				
+				<input type="text" class="inputSlot" name="imgex5" placeholder="사진 소개5"/>				
+				<input type="text" class="inputSlot" name="imgex6" placeholder="사진 소개6"/>				
 			</div>
 			<section id="commandCell" style="margin-top: 120px;">
 				<button type="submit" class="btn btn-primary" onclick="submit">등록하기</button>

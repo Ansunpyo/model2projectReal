@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import svc.ReviewUpdatePageService;
 import vo.ActionForward;
-import vo.Lecture;
 import vo.Member;
 import vo.Review;
 

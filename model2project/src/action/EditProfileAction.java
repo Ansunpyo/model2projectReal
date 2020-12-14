@@ -4,12 +4,9 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import svc.EditProfileService;
-import svc.JoinService;
 import vo.ActionForward;
-import vo.Member;
 
 public class EditProfileAction implements Action {
 

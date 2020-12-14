@@ -4,17 +4,17 @@ import static db.JdbcUtil.close;
 import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import dao.ReviewDAO;
 
 public class MyReviewService {
 
-	public ArrayList[] getMyReviewList(String id, int nowPage) {
+	public LinkedList[] getMyReviewList(String id, int nowPage) {
 		Connection conn = getConnection();
 		ReviewDAO reviewDAO = ReviewDAO.getInstance();
 		reviewDAO.setConnection(conn);
-		ArrayList[] reviewList = reviewDAO.selectMyReviewList(id, nowPage);
+		LinkedList[] reviewList = reviewDAO.selectMyReviewList(id, nowPage);
 		close(conn);
 		
 		return reviewList;

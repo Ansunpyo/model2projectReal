@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class FaqAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			FaqListService faqListService = new FaqListService();
-			ArrayList<Faq> faqList = faqListService.getFaqList();
+			LinkedList<Faq> faqList = faqListService.getFaqList();
 			session.setAttribute("faqList", faqList);
 			if(loginMember.getId().equals("admin")) {
 				forward.setPath("faqad.jsp");

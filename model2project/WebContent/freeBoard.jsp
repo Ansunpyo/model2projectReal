@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Free, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Free, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -34,9 +34,8 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
-					<li class="nav-item active"><a class="nav-link" href="editProfilePage.do">마이페이지
-							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="editProfilePage.do">마이페이지</a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.do">고객센터</a></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -58,7 +57,7 @@
 				if (request.getParameter("page") != null) nowPageNumber = Integer.parseInt(request.getParameter("page"));
 				if (nowPageNumber < 1) nowPageNumber = 1;
 				if (nowPageNumber > lastPage) nowPageNumber = lastPage;
-				ArrayList[] freeList = (ArrayList[])session.getAttribute("freeList");
+				LinkedList[] freeList = (LinkedList[])session.getAttribute("freeList");
 				int startNumber = (nowPageNumber - 1) / pageCount * range + 1;
 				int endNumber = startNumber + range - 1;
 				if (nowPageNumber <= 1) {
@@ -94,15 +93,15 @@
 <%
 			} else {
 				
-				ArrayList<Free> frList = freeList[0];
-				ArrayList<Member> memList = freeList[1];
+				LinkedList<Free> frList = freeList[0];
+				LinkedList<Member> memList = freeList[1];
 				
 				for (int i = 0; i < frList.size();i++) {
 %>
 								<li class="bbsBody">
 									<ul class="bbsBodyContents">
 										<li class="bbsTitle">
-											<a href="reviewView.do?page=<%=nowPageNumber %>&review_num=<%=frList.get(i).getFree_num() %>"><%=frList.get(i).getTitle() %></a>
+											<a href="freeView.do?page=<%=nowPageNumber %>&free_num=<%=frList.get(i).getFree_num() %>"><%=frList.get(i).getTitle() %></a>
 											<div class="bbsTitleDetail"><%=frList.get(i).getContents() %></div>
 										</li>
 										<li class="bbsWriter"><%=memList.get(i).getName() %></li>
@@ -124,7 +123,7 @@
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    
 %>
-						    <li class="page-item"><a class="page-link" href="freeBoard.do?page=<%=i%>"><%=i %></a></li>
+						    <li class="page-item<% if(nowPageNumber==i){%> active<%} %>"><a class="page-link" href="freeBoard.do?page=<%=i%>"><%=i %></a></li>
 <%
 				}
 %>

@@ -11,6 +11,12 @@ public class Intro {
 	private String img4;
 	private String img5;
 	private String img6;
+	private String imgex1;
+	private String imgex2;
+	private String imgex3;
+	private String imgex4;
+	private String imgex5;
+	private String imgex6;
 
 	public int getNumber() {
 		return number;
@@ -23,11 +29,11 @@ public class Intro {
 	public int getIntro_num() {
 		return intro_num;
 	}
-	
+
 	public void setIntro_num(int intro_num) {
 		this.intro_num = intro_num;
 	}
-	
+
 	public int getReadcount() {
 		return readcount;
 	}
@@ -92,4 +98,51 @@ public class Intro {
 		this.img6 = img6;
 	}
 
+	public String getImgex1() {
+		return imgex1;
+	}
+
+	public void setImgex1(String imgex1) {
+		this.imgex1 = imgex1;
+	}
+
+	public String getImgex2() {
+		return imgex2;
+	}
+
+	public void setImgex2(String imgex2) {
+		this.imgex2 = imgex2;
+	}
+
+	public String getImgex3() {
+		return imgex3;
+	}
+
+	public void setImgex3(String imgex3) {
+		this.imgex3 = imgex3;
+	}
+
+	public String getImgex4() {
+		return imgex4;
+	}
+
+	public void setImgex4(String imgex4) {
+		this.imgex4 = imgex4;
+	}
+
+	public String getImgex5() {
+		return imgex5;
+	}
+
+	public void setImgex5(String imgex5) {
+		this.imgex5 = imgex5;
+	}
+
+	public String getImgex6() {
+		return imgex6;
+	}
+
+	public void setImgex6(String imgex6) {
+		this.imgex6 = imgex6;
+	}
 }

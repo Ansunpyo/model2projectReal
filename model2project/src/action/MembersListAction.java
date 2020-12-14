@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ public class MembersListAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			MembersListService membersListService = new MembersListService();
-			ArrayList<Member> memList = membersListService.getMembersList(nowPage);
+			LinkedList<Member> memList = membersListService.getMembersList(nowPage);
 			MembersLastPageService membersLastPageService = new MembersLastPageService();
 			int lastPage = membersLastPageService.getMembersLastPage();
 			session.setAttribute("lastPage", lastPage);

@@ -6,6 +6,15 @@ public class Lecture {
 	private String lecture_title;
 	private int subject_code;
 	private String video;
+	private int price;
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public int getNumber() {
 		return number;

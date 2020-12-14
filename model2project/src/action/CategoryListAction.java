@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class CategoryListAction implements Action {
 		if(loginMember != null) {
 			forward = new ActionForward();
 			CategoryListService categoryListService = new CategoryListService();
-			ArrayList<Subject> subList = categoryListService.getSubjectList();
+			LinkedList<Subject> subList = categoryListService.getSubjectList();
 			session.setAttribute("subList", subList);
 			forward.setPath("category.jsp");
 			return forward;

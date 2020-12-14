@@ -33,7 +33,7 @@
 					</div>
 					<div class="loginExtra">
 						<label><input type="checkbox" name="rememberID" value="remember"/> Remember Me</label>
-						<span class="forgotPW"><a href="#"><h6>Forgot Password?</h6></a></span>
+						<span class="forgotPW"><a href="forgotPw.do"><h6>Forgot Password?</h6></a></span>
 					</div>
 					<div>
 						<input type="submit" value="로그인" />

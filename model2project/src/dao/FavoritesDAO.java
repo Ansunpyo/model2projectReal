@@ -6,7 +6,7 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import vo.Lecture;
 import vo.Member;
@@ -32,11 +32,11 @@ public class FavoritesDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList[] selectFavoritesList(String id) {
+	public LinkedList[] selectFavoritesList(String id) {
 		String sql = "SELECT l.lecture_title, l.lecture_num, m.name FROM lecture l JOIN member m ON l.number = m.number WHERE l.lecture_num IN (SELECT lecture_num FROM favorites WHERE NUMBER = (SELECT NUMBER FROM member WHERE id = ?))";
-		ArrayList<Lecture> lecList = new ArrayList<Lecture>();
-		ArrayList<Member> memList = new ArrayList<Member>(); 
-		ArrayList[] favorList = null;
+		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
+		LinkedList<Member> memList = new LinkedList<Member>(); 
+		LinkedList[] favorList = null;
 		Lecture lec = null;
 		Member mem = null;
 		try {
@@ -56,7 +56,7 @@ public class FavoritesDAO {
 					memList.add(mem);
 				} while(rs.next());
 			}
-			favorList = new ArrayList[] {lecList, memList};
+			favorList = new LinkedList[] {lecList, memList};
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

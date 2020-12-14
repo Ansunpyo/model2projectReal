@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -29,7 +29,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
 					<li class="nav-item active"><a class="nav-link" href="editProfilePage.do">마이페이지
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.do">고객센터</a></li>
@@ -110,13 +110,6 @@
 	<!-- Optional JavaScript; -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-	<script>
-      function confirmDelete() {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-          location.href="reviewDelete.do";
-        }
-      }
-    </script>
 	<script>
 		$(function(){
 			$("#main").css("margin-top", $("nav").outerHeight(true) + "px");

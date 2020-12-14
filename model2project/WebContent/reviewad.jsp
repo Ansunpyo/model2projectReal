@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -58,7 +58,7 @@
 		if (request.getParameter("page") != null) nowPageNumber = Integer.parseInt(request.getParameter("page"));
 		if (nowPageNumber < 1) nowPageNumber = 1;
 		if (nowPageNumber > lastPage) nowPageNumber = lastPage;
-		ArrayList[] reviewList = (ArrayList[])session.getAttribute("reviewList");
+		LinkedList[] reviewList = (LinkedList[])session.getAttribute("reviewList");
 		int startNumber = (nowPageNumber - 1) / pageCount * range + 1;
 		int endNumber = startNumber + range - 1;
 		if (nowPageNumber <= 1) {
@@ -73,7 +73,6 @@
 			<div class="bigMyPage">My Page</div>
 			<div>
 				<div class="myPageMenu on"><a href="review.do"><img src="images/star_icon.png">&nbsp;리뷰 관리</a></div>
-				<div class="myPageMenu"><a href="event.do"><img src="images/event_icon.png">&nbsp;이벤트 관리</a></div>
 				<div class="myPageMenu"><a href="faq.do"><img src="images/faq_icon.png">&nbsp;FAQ 관리</a></div>
 				<div class="myPageMenu"><a href="category.do"><img src="images/category_icon.png">&nbsp;카테고리 관리</a></div>
 				<div class="myPageMenu"><a href="banner.do"><img src="images/banner_icon.png">&nbsp;메인배너 관리</a></div>
@@ -81,7 +80,7 @@
 		</div>
 			<div class="contents">
 				<div class="row justify-content-center">
-					<div class="col-md-12">
+					<div class="col-md-12 mb-5">
 						<div class="bbsWrapper">
 							<ul class="bbsWrapperList">
 								<li class="bbsHeader">
@@ -98,9 +97,9 @@
 <%
 			} else {
 				
-				ArrayList<Lecture> lecList = reviewList[0];
-				ArrayList<Member> memList = reviewList[1];
-				ArrayList<Review> reList = reviewList[2];
+				LinkedList<Lecture> lecList = reviewList[0];
+				LinkedList<Member> memList = reviewList[1];
+				LinkedList<Review> reList = reviewList[2];
 				
 				for (int i = 0; i < lecList.size();i++) {
 %>
@@ -131,7 +130,7 @@
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    
 %>
-						    <li class="page-item"><a class="page-link" href="review.do?page=<%=i%>"><%=i %></a></li>
+						    <li class="page-item<% if(nowPageNumber==i){%> active<%} %>"><a class="page-link" href="review.do?page=<%=i%>"><%=i %></a></li>
 <%
 				}
 %>

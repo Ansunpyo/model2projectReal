@@ -6,10 +6,8 @@ import static db.JdbcUtil.commit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-import vo.Lecture;
-import vo.Member;
 import vo.Subject;
 
 public class CategoryDAO {
@@ -33,9 +31,9 @@ public class CategoryDAO {
 		this.conn = conn;
 	}
 
-	public ArrayList<Subject> selectSubjectList() {
+	public LinkedList<Subject> selectSubjectList() {
 		String sql = "SELECT * FROM subject";
-		ArrayList<Subject> subList = new ArrayList<Subject>(); 
+		LinkedList<Subject> subList = new LinkedList<Subject>(); 
 		Subject sub = null;
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -1,13 +1,11 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import svc.MessengerLastPageService;
-import svc.MessengerService;
 import svc.MyMessageLastPageService;
 import svc.MyMessageService;
 import vo.ActionForward;
@@ -28,7 +26,7 @@ public class MyMessageAction implements Action {
 			String id = loginMember.getId();
 			forward = new ActionForward();
 			MyMessageService myMessageService = new MyMessageService();
-			ArrayList[] messageList = myMessageService.getMyMessageList(id, nowPage);
+			LinkedList[] messageList = myMessageService.getMyMessageList(id, nowPage);
 			MyMessageLastPageService myMessageLastPageService = new MyMessageLastPageService();
 			int lastPage = myMessageLastPageService.getMessengerLastPage(id);
 			session.setAttribute("messageLastPage", lastPage);

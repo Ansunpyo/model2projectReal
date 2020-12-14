@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import svc.FaqWriteService;
-import svc.ReviewWriteService;
 import vo.ActionForward;
 import vo.Faq;
 import vo.Member;

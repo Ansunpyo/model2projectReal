@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -29,7 +29,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="introList.do">강사소개
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#carrer">강의목록</a></li>
+					<li class="nav-item"><a class="nav-link" href="lectureList.do">강의목록</a></li>
 					<li class="nav-item active"><a class="nav-link" href="editProfilePage.do">마이페이지
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.do">고객센터</a></li>
@@ -48,7 +48,7 @@
 	if(loginMember == null){
 		out.println("<script>alert('로그인이 필요합니다.');location.href='loginPage.do';</script>");
 	} else {
-		ArrayList<Lecture> lecList = (ArrayList<Lecture>) session.getAttribute("lecList");
+		LinkedList<Lecture> lecList = (LinkedList<Lecture>) session.getAttribute("lecList");
 		if(lecList == null) {
 			out.println("<script>alert('강의가 없습니다.');location.back();</script>");
 		} else {
@@ -97,12 +97,12 @@
 									<li class="bbsViewTitle">
 										<ul>
 											<li class="bbsViewTitleHeader">TITLE</li>
-											<li class="bbsViewTitleText"><input type="text" name="title" required="required" autocomplete="off" /></li>
+											<li class="bbsViewTitleText"><input type="text" name="title" class="form-control" required="required" autocomplete="off" /></li>
 										</ul>
 									</li>
 									<li class="bbsViewBody">
 										<div>
-											<textarea cols="50" rows="10" style="resize: none;" name="contents" placeholder="500자까지 적을 수 있습니다."></textarea>
+											<textarea cols="50" rows="10" style="resize: none;" name="contents" class="form-control" placeholder="500자까지 적을 수 있습니다."></textarea>
 										</div>
 									</li>
 								</ul>

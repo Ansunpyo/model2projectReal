@@ -24,8 +24,6 @@ li {
     font-size: 14px;
     font-weight: 600;
     background: #22ad9c;
-    border-radius: 10px;
-    margin-bottom: 25px;
     box-shadow: 2px 2px 2px 2px gray;
 }
 .bbsTitleHeader {
@@ -51,8 +49,6 @@ li {
     font-size: 14px;
     font-weight: 600;
     background: #f7f7f7;
-    border-radius: 10px;
-    margin-bottom: 25px;
     box-shadow: 2px 2px 2px 2px gray;
 }
 .bbsBodyContents {
@@ -146,4 +142,5 @@ li {
 	padding: 25px;
 	background-color: #ffffff;
 	color: black;
+	word-break:break-all;
 }

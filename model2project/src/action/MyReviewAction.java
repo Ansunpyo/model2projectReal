@@ -1,6 +1,6 @@
 package action;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ public class MyReviewAction implements Action {
 			String id = loginMember.getId();
 			forward = new ActionForward();
 			MyReviewService myReviewService = new MyReviewService();
-			ArrayList[] reviewList = myReviewService.getMyReviewList(id, nowPage);
+			LinkedList[] reviewList = myReviewService.getMyReviewList(id, nowPage);
 			MyReviewLastPageService myReviewLastPageService = new MyReviewLastPageService();
 			int lastPage = myReviewLastPageService.getMyReviewLastPage(id);
 			session.setAttribute("lastPage", lastPage);

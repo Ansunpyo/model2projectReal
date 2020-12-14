@@ -2,9 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ page import="vo.PageInfo, vo.Intro, vo.Member, java.util.*, java.text.SimpleDateFormat" %>
 <%
-	ArrayList<Intro> articleList = (ArrayList<Intro>)request.getAttribute("articleList");
-	Member loginMember = (Member) session.getAttribute("loginMember");
-	String classify = loginMember.getClassify();		
+	ArrayList<Intro> articleList = null;
+	Member loginMember = null;
+	String classify = null;
+	if(request.getAttribute("articleList") != null)	articleList = (ArrayList<Intro>)request.getAttribute("articleList");
+	if(session.getAttribute("loginMember") != null) {
+		loginMember = (Member) session.getAttribute("loginMember");
+		classify = loginMember.getClassify();	
+	} else {
+		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
+	}
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
 	int nowPage = pageInfo.getPage();
@@ -58,15 +65,7 @@ body {
 	</nav>
 </header>
 	<div class="container" id="main">
-<%
-	if(loginMember == null) {
-		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
-	} else {
-%>
 		<table>
-<%
-	}
-%>		
 <%
 	if(articleList != null && listCount > 0) {
 %>
@@ -77,8 +76,29 @@ body {
 %>
 					<td style="text-align: center;">
 					<div class="gallery ssg wider vipssg fs">
-						<a href='/upload/<%=articleList.get(i).getImg1() %>'><img src="/upload/<%=articleList.get(i).getImg1() %>" alt="text cation" 
-						style="width : 355px; height:300px; align:center;"/></a>
+						<a href='/upload/<%=articleList.get(i).getImg1() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg1() %>" alt="<%=articleList.get(i).getImgex1() %>" 
+						style="width : 355px; height:410px; align:center;"/></a>
+						
+						<a href='/upload/<%=articleList.get(i).getImg2() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg2() %>" alt="<%=articleList.get(i).getImgex2() %>" 
+						style="display:none"/></a>
+						
+						<a href='/upload/<%=articleList.get(i).getImg3() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg3() %>" alt="<%=articleList.get(i).getImgex3() %>" 
+						style="display:none"/></a>
+						
+						<a href='/upload/<%=articleList.get(i).getImg4() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg4() %>" alt="<%=articleList.get(i).getImgex4() %>" 
+						style="display:none"/></a>
+						
+						<a href='/upload/<%=articleList.get(i).getImg5() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg5() %>" alt="<%=articleList.get(i).getImgex5() %>" 
+						style="display:none"/></a>
+						
+						<a href='/upload/<%=articleList.get(i).getImg6() %>'>
+						<img src="/upload/<%=articleList.get(i).getImg6() %>" alt="<%=articleList.get(i).getImgex6() %>" 
+						style="display:none"/></a>
 					</div>
 						<br><a href="introDetail.do?intro_num=<%=articleList.get(i).getIntro_num() %>&page=<%=nowPage %>">
 						<%=articleList.get(i).getContents() %><br>
@@ -136,7 +156,7 @@ body {
 	</nav>
 	<div class="row">
 <%
-	if(!classify.equals("학생")){
+	if(classify != null && (!classify.equals("학생"))){
 %>
 		<div class="ml-auto"><a href="introWriteForm.do"><input type="button" class="btn btn-primary" value="작성하기"/></a></div>
 <% 		
