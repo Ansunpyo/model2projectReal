@@ -19,9 +19,8 @@ public class IntroDetailAction implements Action {
 		String page = request.getParameter("page");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String id = loginMember.getId();
 		IntroDetailService introDetailService = new IntroDetailService();
-		ArrayList[] articleList = introDetailService.getArticle(id, intro_num);
+		ArrayList[] articleList = introDetailService.getArticle(intro_num);
 		ActionForward forward = new ActionForward();
 		request.setAttribute("page", page);
 		session.setAttribute("articleList", articleList);

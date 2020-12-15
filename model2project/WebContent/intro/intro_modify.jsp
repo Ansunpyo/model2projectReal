@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-<title>MVC 게시판</title>
+<title>강사소개 수정</title>
 <style>
 	body,h1,h2,h3,h4,h5,h6,p,address,header,footer,section,aside,nav,ul,ol,li,dl,dt,dd,input,textarea,select,button {
     	margin: 0;
@@ -148,6 +148,14 @@
 				<li><input name="img4" type="file" id="img4"/></li>
 				<li><input name="img5" type="file" id="img5"/></li>
 				<li><input name="img6" type="file" id="img6"/></li>
+			</ul>
+			<ul>
+				<li><input type="text" class="inputSlot" name="imgex1" placeholder="사진 소개1" required="required"/>
+				<input type="text" class="inputSlot" name="imgex2" placeholder="사진 소개2"/>
+				<input type="text" class="inputSlot" name="imgex3" placeholder="사진 소개3"/>
+				<input type="text" class="inputSlot" name="imgex4" placeholder="사진 소개4"/>		
+				<input type="text" class="inputSlot" name="imgex5" placeholder="사진 소개5"/>			
+				<input type="text" class="inputSlot" name="imgex6" placeholder="사진 소개6"/></li>
 			</ul>
 		</section>
 		<section class="notice">

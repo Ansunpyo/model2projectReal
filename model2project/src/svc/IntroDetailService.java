@@ -9,7 +9,7 @@ import vo.Intro;
 
 public class IntroDetailService {
 
-	public ArrayList[] getArticle(String id, int intro_num) {
+	public ArrayList[] getArticle(int intro_num) {
 		Connection conn = getConnection();
 		IntroDAO introDAO = IntroDAO.getInstance();
 		introDAO.setConnection(conn);
@@ -21,7 +21,7 @@ public class IntroDetailService {
 			rollback(conn);
 		}
 		
-		ArrayList[] articleList = introDAO.selectArticle(id, intro_num);
+		ArrayList[] articleList = introDAO.selectArticle(intro_num);
 		if(conn != null) close(conn);
 		
 		return articleList;

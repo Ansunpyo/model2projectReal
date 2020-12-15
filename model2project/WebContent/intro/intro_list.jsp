@@ -2,17 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ page import="vo.PageInfo, vo.Intro, vo.Member, java.util.*, java.text.SimpleDateFormat" %>
 <%
+	ArrayList[] bigArticleList = null;
 	ArrayList<Intro> articleList = null;
+	ArrayList<Member> articleListm = null;
 	Member loginMember = null;
 	String classify = null;
-	if(request.getAttribute("articleList") != null)	articleList = (ArrayList<Intro>)request.getAttribute("articleList");
+	if(session.getAttribute("articleList") != null) {
+		bigArticleList = (ArrayList[])session.getAttribute("articleList");
+		articleList = bigArticleList[0];
+		articleListm = bigArticleList[1];
+	}
 	if(session.getAttribute("loginMember") != null) {
 		loginMember = (Member) session.getAttribute("loginMember");
 		classify = loginMember.getClassify();	
 	} else {
 		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
 	}
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	PageInfo pageInfo = (PageInfo)session.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
@@ -75,7 +81,7 @@ body {
 	for(int i=0;i<articleList.size();i++) {
 %>
 					<td style="text-align: center;">
-					<div class="gallery ssg wider vipssg fs">
+					<div class="gallery ssg wider vipssg fs" style="margin-top:10px;">
 						<a href='/upload/<%=articleList.get(i).getImg1() %>'>
 						<img src="/upload/<%=articleList.get(i).getImg1() %>" alt="<%=articleList.get(i).getImgex1() %>" 
 						style="width : 355px; height:410px; align:center;"/></a>
@@ -101,8 +107,10 @@ body {
 						style="display:none"/></a>
 					</div>
 						<br><a href="introDetail.do?intro_num=<%=articleList.get(i).getIntro_num() %>&page=<%=nowPage %>">
-						<%=articleList.get(i).getContents() %><br>
+						<%=articleListm.get(i).getName() %><br>
 						</a>						
+						<%=articleListm.get(i).getMajor() %><br>
+						<%=articleListm.get(i).getEducation() %>
 					</td>
 <%
 	if(i%3==2) {

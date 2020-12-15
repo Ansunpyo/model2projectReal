@@ -56,21 +56,25 @@ public class IntroDAO {
 	}
 	
 	//글 목록 보기
-	public ArrayList<Intro> selectArticleList(int page, int limit){
+	public ArrayList[] selectArticleList(int page, int limit){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String intro_list_sql = "SELECT * FROM intro ORDER BY intro_num DESC, number ASC LIMIT ?, ?";
+		String sql = "SELECT i.number, i.intro_num, i.contents, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6, i.imgex1, i.imgex2, i.imgex3, i.imgex4, i.imgex5, i.imgex6, i.readcount, m.name, m.major, m.education FROM intro AS i JOIN member AS m ON i.number = m.number ORDER BY intro_num DESC, m.number ASC LIMIT ?, ?";
 		ArrayList<Intro> articleList = new ArrayList<Intro>();
+		ArrayList<Member> articleListm = new ArrayList<Member>();
+		ArrayList[] bigArticleList = null;
 		Intro intro = null;
+		Member mem = null;
 		int startrow = (page - 1) * 10; //읽기 시작할 row 번호
 		
 		try {
-			pstmt = conn.prepareStatement(intro_list_sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startrow);
 			pstmt.setInt(2, limit);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				intro = new Intro();
+				mem = new Member();
 				intro.setNumber(rs.getInt("number"));
 				intro.setIntro_num(rs.getInt("intro_num"));
 				intro.setContents(rs.getString("contents"));
@@ -87,8 +91,13 @@ public class IntroDAO {
 				intro.setImgex5(rs.getString("imgex5"));
 				intro.setImgex6(rs.getString("imgex6"));
 				intro.setReadcount(rs.getInt("readcount"));
+				mem.setName(rs.getString("name"));
+				mem.setMajor(rs.getString("major"));
+				mem.setEducation(rs.getString("education"));
 				articleList.add(intro);
+				articleListm.add(mem);
 			}
+			bigArticleList = new ArrayList[] {articleList, articleListm};
 		} catch (Exception ex) {
 			System.out.println("getintroList 에러 : " + ex);
 		} finally {
@@ -96,7 +105,7 @@ public class IntroDAO {
 			if (pstmt != null) close(pstmt);
 		}
 		
-		return articleList;
+		return bigArticleList;
 	}
 	
 	//글 등록
@@ -122,7 +131,7 @@ public class IntroDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setInt(2, 0);
+			pstmt.setInt(2, num);
 			pstmt.setString(3,article.getContents());
 			pstmt.setString(4,article.getImg1());
 			pstmt.setString(5,article.getImg2());
@@ -165,7 +174,7 @@ public class IntroDAO {
 		return updateCount;
 	}
 	//글 내용 보기
-	public ArrayList[] selectArticle(String id, int intro_num) {
+	public ArrayList[] selectArticle(int intro_num) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Intro intro = null;
@@ -175,37 +184,39 @@ public class IntroDAO {
 		ArrayList[] articleList = null;
 		
 		try {
-			pstmt = conn.prepareStatement("SELECT m.name, m.email, m.gender, m.major, m.education, i.intro_num, i.contents, i.readcount, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6, i.imgex1, i.imgex2, i.imgex3, i.imgex4, i.imgex5, i.imgex6 FROM member AS m JOIN intro AS i ON m.number = i.number WHERE m.id = ?");
-			pstmt.setString(1, id);
+			pstmt = conn.prepareStatement("SELECT m.name, m.email, m.gender, m.major, m.education, i.intro_num, i.contents, i.readcount, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6, i.imgex1, i.imgex2, i.imgex3, i.imgex4, i.imgex5, i.imgex6 FROM member AS m JOIN intro AS i ON m.number = i.number WHERE i.intro_num = ?");
+			pstmt.setInt(1, intro_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				intro = new Intro();
-				member = new Member();
-				intro.setIntro_num(rs.getInt("intro_num"));
-				intro.setContents(rs.getString("contents"));
-				intro.setImg1(rs.getString("img1"));
-				intro.setImg2(rs.getString("img2"));
-				intro.setImg3(rs.getString("img3"));
-				intro.setImg4(rs.getString("img4"));
-				intro.setImg5(rs.getString("img5"));
-				intro.setImg6(rs.getString("img6"));
-				intro.setImgex1(rs.getString("imgex1"));
-				intro.setImgex2(rs.getString("imgex2"));
-				intro.setImgex3(rs.getString("imgex3"));
-				intro.setImgex4(rs.getString("imgex4"));
-				intro.setImgex5(rs.getString("imgex5"));
-				intro.setImgex6(rs.getString("imgex6"));
-				intro.setReadcount(rs.getInt("readcount"));	//강사만 볼 수 있게 설정
-				member.setName(rs.getString("name"));
-				member.setEmail(rs.getString("email"));
-				member.setGender(rs.getString("gender"));
-				member.setMajor(rs.getString("major"));
-				member.setEducation(rs.getString("education"));
-				intList.add(intro);
-				memList.add(member);
-				articleList = new ArrayList[] {intList, memList};
+				do {
+					intro = new Intro();
+					member = new Member();
+					intro.setIntro_num(rs.getInt("intro_num"));
+					intro.setContents(rs.getString("contents"));
+					intro.setImg1(rs.getString("img1"));
+					intro.setImg2(rs.getString("img2"));
+					intro.setImg3(rs.getString("img3"));
+					intro.setImg4(rs.getString("img4"));
+					intro.setImg5(rs.getString("img5"));
+					intro.setImg6(rs.getString("img6"));
+					intro.setImgex1(rs.getString("imgex1"));
+					intro.setImgex2(rs.getString("imgex2"));
+					intro.setImgex3(rs.getString("imgex3"));
+					intro.setImgex4(rs.getString("imgex4"));
+					intro.setImgex5(rs.getString("imgex5"));
+					intro.setImgex6(rs.getString("imgex6"));
+					intro.setReadcount(rs.getInt("readcount"));	//강사만 볼 수 있게 설정
+					member.setName(rs.getString("name"));
+					member.setEmail(rs.getString("email"));
+					member.setGender(rs.getString("gender"));
+					member.setMajor(rs.getString("major"));
+					member.setEducation(rs.getString("education"));
+					intList.add(intro);
+					memList.add(member);
+				} while(rs.next());
 			}
+			articleList = new ArrayList[] {intList, memList};
 		} catch (Exception ex) {
 			System.out.println("getDetail 에러 : " + ex);
 		} finally {

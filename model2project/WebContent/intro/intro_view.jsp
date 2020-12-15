@@ -212,7 +212,7 @@
 	<div id="notice2">
 		<div class="mr-auto">
 			<button style="margin-top:20px; margin-right:10px; float:right;"
-		 	type="button" class="btn btn-success" onclick="history.back(-1);">목록으로</button>
+		 	type="button" class="btn btn-success" onclick = "location.href = 'introList.do'">목록으로</button>
 		 	<button id="button_event" style="margin-top:20px; margin-right:10px; float:right;"
 		 	type="button" class="btn btn-danger" onclick =
 			"location.href = 'introDeleteForm.do?intro_num=<%=article.getIntro_num() %>&page=<%=nowPage %>'">삭제하기</button>		 	

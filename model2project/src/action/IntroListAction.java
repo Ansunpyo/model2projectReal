@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import svc.IntroListService;
 import vo.ActionForward;
-import vo.Intro;
 import vo.PageInfo;
 public class IntroListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ArrayList<Intro> articleList = new ArrayList<Intro>();
+		ArrayList[] articleList = null;
 		int page=1;
 		int limit=12;
-		
+		HttpSession session = request.getSession();
 		if(request.getParameter("page")!=null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
@@ -41,8 +41,8 @@ public class IntroListAction implements Action {
 		pageInfo.setMaxPage(maxPage);
 		pageInfo.setPage(page);
 		pageInfo.setStartPage(startPage);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("articleList", articleList);
+		session.setAttribute("pageInfo", pageInfo);
+		session.setAttribute("articleList", articleList);
 		ActionForward forward = new ActionForward();
 		forward.setPath("/intro/intro_list.jsp");
 		return forward;

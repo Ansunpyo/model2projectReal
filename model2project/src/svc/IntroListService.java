@@ -19,8 +19,8 @@ public class IntroListService {
 		return listCount;
 	}
 
-	public ArrayList<Intro> getArticleList(int page, int limit) {
-		ArrayList<Intro> articleList=null;
+	public ArrayList[] getArticleList(int page, int limit) {
+		ArrayList[] articleList=null;
 		Connection conn = getConnection();
 		IntroDAO introDAO=IntroDAO.getInstance();
 		introDAO.setConnection(conn);

@@ -47,8 +47,8 @@ public class BannerDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(pstmt);
-			close(rs);
+			if(pstmt != null)close(pstmt);
+			if(rs != null)close(rs);
 		}
 		return banList;
 	}
