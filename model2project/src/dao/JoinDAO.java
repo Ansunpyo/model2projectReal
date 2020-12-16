@@ -54,6 +54,8 @@ public class JoinDAO {
 				joinedMember.setGender(gender);
 				joinedMember.setMajor(major);
 				joinedMember.setName(name);
+			} else {
+				rollback(conn);
 			}
 			commit(conn);
 		} catch (Exception e) {
@@ -94,6 +96,8 @@ public class JoinDAO {
 				joinedMember.setEmail(email);
 				joinedMember.setGender(gender);
 				joinedMember.setName(name);
+			} else {
+				rollback(conn);
 			}
 			commit(conn);
 		} catch (Exception e) {

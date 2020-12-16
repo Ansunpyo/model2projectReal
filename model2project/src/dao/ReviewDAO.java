@@ -1,6 +1,7 @@
 package dao;
 
 import static db.JdbcUtil.close;
+import static db.JdbcUtil.rollback;
 import static db.JdbcUtil.commit;
 
 import java.sql.Connection;
@@ -44,10 +45,10 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			
@@ -139,6 +140,9 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, review_num);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,6 +184,9 @@ public class ReviewDAO {
 			pstmt.setString(2, re.getContents());
 			pstmt.setInt(3, re.getReview_num());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,6 +234,9 @@ public class ReviewDAO {
 			pstmt.setString(3, re.getContents());
 			pstmt.setString(4, re.getTitle());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -289,10 +299,10 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			

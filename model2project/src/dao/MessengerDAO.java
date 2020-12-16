@@ -2,6 +2,7 @@ package dao;
 
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,10 +34,10 @@ public class MessengerDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			
@@ -106,6 +107,9 @@ public class MessengerDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, message_num);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,6 +130,10 @@ public class MessengerDAO {
 			pstmt.setString(3, mes.getTitle());
 			pstmt.setString(4, mes.getContents());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
+			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -183,10 +191,10 @@ public class MessengerDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			

@@ -34,7 +34,7 @@
 	
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#">주문관리
+					<li class="nav-item"><a class="nav-link" href="purchaseAllList.do">주문관리
 					</a></li>
 					<li class="nav-item active"><a class="nav-link" href="members.do">회원관리
 							<span class="sr-only">(current)</span></a></li>
@@ -106,8 +106,8 @@
 <%
 				if(memList.get(i).getClassify().equals("교사")) {
 %>
-				      <td>수학과</td>
-				      <td>수학대학교</td>
+				      <td><%=memList.get(i).getMajor() %></td>
+				      <td><%=memList.get(i).getEducation() %></td>
 <%
 				} else {
 %>

@@ -53,6 +53,7 @@
 							<ul>
 								<li><a href="faq.do">자주묻는 질문</a></li>
 								<li><a href="one_on_one.do">1:1문의하기</a></li>
+								<li><a href="purchaseList.do">구매내역</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -154,16 +155,6 @@
 		</footer>
 		<!-- //footer -->
 	</div>
-	<!-- Popup -->
-	<div class="popup">
-		<h3>POPUP Title</h3>
-		<div class="content">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt iste dolore dicta placeat ipsam beatae, esse dignissimos eum ea, aperiam odio, perspiciatis praesentium ullam. Laudantium vitae quas minus nihil repellendus.</p>			
-		</div>
-		<p class="close"><button type="button" title="팝업레이어 닫기">X</button></p>
-	</div>
-	
-	<!-- //Popup -->
 	
 	<script src="./js/jquery-1.12.4.min.js"></script>
 	<script src="./js/common.js"></script>

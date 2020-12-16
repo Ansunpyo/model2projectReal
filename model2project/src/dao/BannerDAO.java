@@ -47,8 +47,8 @@ public class BannerDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null)close(pstmt);
-			if(rs != null)close(rs);
+			close(pstmt);
+			close(rs);
 		}
 		return banList;
 	}
@@ -60,6 +60,9 @@ public class BannerDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, img);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,6 +80,9 @@ public class BannerDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ban.getImg());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();

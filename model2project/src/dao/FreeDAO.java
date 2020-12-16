@@ -2,6 +2,7 @@ package dao;
 
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,10 +78,10 @@ public class FreeDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			
@@ -102,6 +103,9 @@ public class FreeDAO {
 			pstmt.setString(2, fr.getTitle());
 			pstmt.setString(3, fr.getContents());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,6 +155,9 @@ public class FreeDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, free_num);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -192,6 +199,9 @@ public class FreeDAO {
 			pstmt.setString(2, fr.getContents());
 			pstmt.setInt(3, fr.getFree_num());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -248,10 +258,10 @@ public class FreeDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			

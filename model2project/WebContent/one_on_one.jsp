@@ -56,6 +56,7 @@
 			<div>
 				<div class="myPageMenu"><a href="faq.do"><img src="images/faq_icon.png">&nbsp;자주묻는 질문</a></div>
 				<div class="myPageMenu on"><a href="one_on_one.do"><img src="images/oneonone_icon.png">&nbsp;1:1 문의하기</a></div>
+				<div class="myPageMenu"><a href="purchaseList.do"><img src="images/event_icon.png">&nbsp;구매내역</a></div>
 			</div>
 		</div>
 			<div class="contents justify-content-center">
@@ -99,6 +100,14 @@
 %>
 				    <div class="col-sm-12 bg-white py-3 shadow mb-3">
 				    	<h5 class="Q"><%=oneList.get(i).getTitle() %></h5>
+<%
+				    if(oneList.get(i).getAnswer() != null) {				    	
+%>
+				    	
+								<div class="badge badge-primary float-left">답변 완료</div>
+<%
+				    }
+%>
 				    	<div><hr></div>
 				    	<div class="popup" style="word-break: break-all;">
 							<%=oneList.get(i).getContents() %>

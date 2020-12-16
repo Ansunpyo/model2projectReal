@@ -2,6 +2,7 @@ package dao;
 
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,6 +64,9 @@ public class CategoryDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, code);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,6 +84,9 @@ public class CategoryDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sub.getSubject_name());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();

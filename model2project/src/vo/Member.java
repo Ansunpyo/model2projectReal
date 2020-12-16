@@ -1,6 +1,7 @@
 package vo;
 
 public class Member {
+	private int number;
 	private String classify;
 	private String id;
 	private String password;
@@ -9,6 +10,14 @@ public class Member {
 	private String gender;
 	private String major;
 	private String education;
+	
+	public int getNumber() {
+		return number;
+	}
+	
+	public void setNumber(int i) {
+		this.number = i;
+	}
 
 	public String getClassify() {
 		return classify;

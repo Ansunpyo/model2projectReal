@@ -2,6 +2,7 @@ package dao;
 
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,10 +71,10 @@ public class NoticeDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			
@@ -117,6 +118,9 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, notice_num);
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -158,6 +162,9 @@ public class NoticeDAO {
 			pstmt.setString(2, not.getContents());
 			pstmt.setInt(3, not.getNotice_num());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -177,6 +184,9 @@ public class NoticeDAO {
 			pstmt.setString(1, not.getTitle());
 			pstmt.setString(2, not.getContents());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();

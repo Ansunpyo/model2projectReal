@@ -37,6 +37,9 @@ import action.IntroModifyProAction;
 import action.IntroWriteProAction;
 import action.JoinAction;
 import action.LectureListAction;
+import action.LectureListCheckedAction;
+import action.LectureUploadAction;
+import action.LectureUploadPageAction;
 import action.LoginAction;
 import action.LoginPageAction;
 import action.LogoutAction;
@@ -47,6 +50,7 @@ import action.MessageDeleteAction;
 import action.MessageSendAction;
 import action.MessengerAction;
 import action.MyFreeAction;
+import action.MyLectureAction;
 import action.MyMessageAction;
 import action.MyReviewAction;
 import action.NoticeAction;
@@ -59,6 +63,11 @@ import action.OneOnOneListAction;
 import action.OneOnOneSendAction;
 import action.One_on_oneAnswerAction;
 import action.One_on_oneadListAction;
+import action.PurchaseAllListAction;
+import action.PurchaseDoRefundAction;
+import action.PurchaseListAction;
+import action.PurchaseRefundAction;
+import action.PurchaseRefundListAction;
 import action.PwCheckAction;
 import action.QuitAction;
 import action.QuittersListAction;
@@ -534,6 +543,69 @@ public class FrontController extends HttpServlet {
 			}
 		} else if(command.contentEquals("/lectureList.do")) {
 			action = new LectureListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/purchaseList.do")) {
+			action = new PurchaseListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/purchaseRefund.do")) {
+			action = new PurchaseRefundAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/purchaseAllList.do")) {
+			action = new PurchaseAllListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/purchaseRefundList.do")) {
+			action = new PurchaseRefundListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/purchaseDoRefund.do")) {
+			action = new PurchaseDoRefundAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureListChecked.do")) {
+			action = new LectureListCheckedAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/myLecture.do")) {
+			action = new MyLectureAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureUploadPage.do")) {
+			action = new LectureUploadPageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureUpload.do")) {
+			action = new LectureUploadAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

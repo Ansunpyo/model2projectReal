@@ -28,8 +28,8 @@
 						<li>
 							<a href="#">주문관리</a>
 							<ul>
-								<li><a href="#">결제목록</a></li>
-								<li><a href="#">결제 취소</a></li>
+								<li><a href="purchaseAllList.do">결제목록</a></li>
+								<li><a href="purchaseRefundList.do">결제 취소</a></li>
 							</ul>	
 						</li>
 						<li>
@@ -153,16 +153,6 @@
 		</footer>
 		<!-- //footer -->
 	</div>
-	<!-- Popup -->
-	<div class="popup">
-		<h3>POPUP Title</h3>
-		<div class="content">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt iste dolore dicta placeat ipsam beatae, esse dignissimos eum ea, aperiam odio, perspiciatis praesentium ullam. Laudantium vitae quas minus nihil repellendus.</p>			
-		</div>
-		<p class="close"><button type="button" title="팝업레이어 닫기">X</button></p>
-	</div>
-	
-	<!-- //Popup -->
 	
 	<script src="./js/jquery-1.12.4.min.js"></script>
 	<script src="./js/common.js"></script>

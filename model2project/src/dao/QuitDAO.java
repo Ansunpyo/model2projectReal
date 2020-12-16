@@ -1,6 +1,7 @@
 package dao;
 
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +34,9 @@ public class QuitDAO {
 			pstmt.setString(1, id);
 			
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 			
 		} catch (Exception e) {

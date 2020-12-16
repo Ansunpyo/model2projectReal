@@ -5,7 +5,6 @@ public class Lecture {
 	private int lecture_num;
 	private String lecture_title;
 	private int subject_code;
-	private String video;
 	private int price;
 
 	public int getPrice() {
@@ -48,12 +47,5 @@ public class Lecture {
 		this.subject_code = subject_code;
 	}
 
-	public String getVideo() {
-		return video;
-	}
-
-	public void setVideo(String video) {
-		this.video = video;
-	}
 
 }

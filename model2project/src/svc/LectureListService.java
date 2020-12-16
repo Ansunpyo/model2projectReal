@@ -20,4 +20,24 @@ public class LectureListService {
 		return lectureList;
 	}
 
+	public LinkedList[] getLecList(String[] subject, int nowPage) {
+		Connection conn = getConnection();
+		LectureDAO lectureDAO = LectureDAO.getInstance();
+		lectureDAO.setConnection(conn);
+		LinkedList[] lectureList = lectureDAO.selectLectureList(subject, nowPage);
+		close(conn);
+		
+		return lectureList;
+	}
+
+	public LinkedList[] getLecList(String id, int nowPage) {
+		Connection conn = getConnection();
+		LectureDAO lectureDAO = LectureDAO.getInstance();
+		lectureDAO.setConnection(conn);
+		LinkedList[] lectureList = lectureDAO.selectLectureList(id, nowPage);
+		close(conn);
+		
+		return lectureList;
+	}
+
 }

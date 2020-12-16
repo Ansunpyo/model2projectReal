@@ -2,6 +2,7 @@ package dao;
 
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,6 +74,9 @@ public class OneOnOneDAO {
 			pstmt.setString(2, one.getTitle());
 			pstmt.setString(3, one.getContents());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,10 +134,10 @@ public class OneOnOneDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("c");
-				if (result % 5 != 0) {
-					result = (result / 5) + 1;
+				if (result % pageCount != 0) {
+					result = (result / pageCount) + 1;
 				} else {
-					result = result / 5;
+					result = result / pageCount;
 				}
 			}
 			
@@ -154,6 +158,9 @@ public class OneOnOneDAO {
 			pstmt.setString(1, one.getAnswer());
 			pstmt.setInt(2, one.getOne_on_one_num());
 			result = pstmt.executeUpdate();
+			if (result <= 0) {
+				rollback(conn);
+			}
 			
 			commit(conn);
 		} catch (Exception e) {
