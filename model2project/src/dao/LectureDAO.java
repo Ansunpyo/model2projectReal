@@ -364,4 +364,31 @@ public class LectureDAO {
 		}
 		return vidList;
 	}
+
+	public LinkedList<Lecture_Video> getVid(int lecture_num) {
+		String sql = "SELECT * FROM lecture_video WHERE lecture_num = ? ORDER BY chapter";
+		LinkedList<Lecture_Video> vidList = new LinkedList<>();
+		Lecture_Video vid = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lecture_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					vid = new Lecture_Video();
+					vid.setVideo(rs.getString("video"));
+					vid.setChapter_title(rs.getString("chapter_title"));
+					vidList.add(vid);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return vidList;
+	}
 }

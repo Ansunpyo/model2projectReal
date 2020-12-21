@@ -30,8 +30,9 @@
 		</div>
 		<div class="photoList">
 			<ul>
-				<li>강의1</li>
-				<li>강의2</li>
+				<li>강의1</li> LinkedList<LectureVideo> vidlist = session.geta
+				<li><a href="vidList.get(i).getVideo()">  강의2</li> for문  vidList.get(i).getchapterTitle
+				
 				<li>강의3</li>
 				<li>강의4</li>
 				<li>강의5</li>
