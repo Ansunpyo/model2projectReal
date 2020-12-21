@@ -1,0 +1,138 @@
+create table quitter (
+	id varchar(20) not null,
+	email varchar(30) not null,
+	number int not null
+);
+
+create table member (
+	number int primary key auto_increment,
+	classify varchar(2) not null,
+	id varchar(20) not null unique,
+	password varchar(20) not null,
+	name varchar(5) not null,
+	email varchar(30) not null,
+	gender char(1) not null,
+	major varchar(20),
+	education varchar(50)
+);
+
+create table subject (
+	code int primary key,
+	subject_name varchar(20) not null
+);
+
+create table lecture (
+	number int not null,
+	lecture_num int primary key auto_increment,
+	lecture_title varchar(20) not null unique,
+	subject_code int not null,
+	price int default 0
+	constraint fk_member_lecture foreign key (number) references member (number),
+	constraint fk_subject_lecture foreign key (subject_code) references subject (code)
+);
+
+create table banner (
+	img varchar(50)
+);
+
+create table pay (
+	lecture_num int not null,
+	number int not null,
+	type varchar(10) not null,
+	pay_code varchar(20) default '계좌이체',
+	refund int default 0,
+	pay_number int primary key auto_increment,
+	date datetime default now()
+);
+
+create table favorites (
+	number int not null,
+	lecture_num int not null,
+	constraint fk_member_favorites foreign key (number) references member (number),
+	constraint fk_lecture_favorites foreign key (lecture_num) references lecture (lecture_num)
+);
+
+create table lecture_video (
+	lecture_num int,
+	chapter int,
+	video varchar(500),
+	primary key (lecture_num, chapter)
+);
+
+create table review (
+	number int not null,
+	lecture_num int not null,
+	contents varchar(500) not null,
+	title varchar(50) not null,
+	review_num int primary key auto_increment,
+	constraint fk_member_review foreign key (number) references member (number),
+	constraint fk_lecture_review foreign key (lecture_num) references lecture (lecture_num)
+);
+
+create table one_on_one (
+	number int not null,
+	title varchar(20) not null,
+	contents varchar(500) not null,
+	answer varchar(500),
+	one_on_one_num int primary key auto_increment,
+	constraint fk_member_one_on_one foreign key (number) references member (number)
+);
+
+create table freeboard (
+	number int not null,
+	title varchar(50) not null,
+	contents varchar(500) not null,
+	free_num int primary key auto_increment,
+	constraint fk_member_freeboard foreign key (number) references member (number)
+);
+
+create table notice (
+	title varchar(50) not null,
+	contents varchar(500) not null,
+	notice_num int primary key auto_increment
+);
+
+create table message (
+	sender int not null,
+	receiver int not null,
+	title varchar(20) not null,
+	contents varchar(300) not null,
+	time datetime default now(),
+	message_num int primary key auto_increment,
+    constraint fk_member_message_sender foreign key (sender) references member (number),
+    constraint fk_member_message_receiver foreign key (receiver) references member (number)
+);
+
+create table faq (
+	faq_num int primary key auto_increment,
+	question varchar(500) not null,
+	answer varchar(500) not null
+);
+
+create table intro (
+	number int not null,
+	intro_num int primary key auto_increment,
+	contents varchar(500),
+	readcount int,
+	img1 varchar(50),
+	img2 varchar(50),
+	img3 varchar(50),
+	img4 varchar(50),
+	img5 varchar(50),
+	img6 varchar(50),
+	imgex1 varchar(50),
+	imgex2 varchar(50),
+	imgex3 varchar(50),
+	imgex4 varchar(50),
+	imgex5 varchar(50),
+	imgex6 varchar(50)
+);
+
+DELIMITER $$
+CREATE TRIGGER quit_save
+AFTER DELETE ON member
+FOR EACH ROW
+BEGIN
+INSERT INTO quitter VALUES (old.id, old.email, old.number);
+END $$
+DELIMITER ;

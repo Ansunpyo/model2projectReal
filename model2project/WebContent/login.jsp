@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./css/login.css">
+
 <script src="js/jquery-3.5.1.js"></script>
+
 <script src="js/login.js"></script>
+
 </head>
 <body>
 	<img src="images/logo_black.png" onclick="location.href='index.do'" class="logoToMain" />

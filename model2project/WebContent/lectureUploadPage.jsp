@@ -60,7 +60,7 @@ a:hover {
 	
 	<div class="container mb-5" style="width:1200px;">
 		<div class="p-3 mb-2 d-flex flex-wrap bg-secondary text-light position-relative">
-			<form method="post" action="lectureUpload.do" style="margin:auto;">
+			<form method="post" action="lectureUpload.do" style="width:1000px; margin:auto;">
 				<div class="bg-light p-2">
 					<input type="text" class="form-control" name="lecture_title" placeholder="LECTURE TITLE" required="required" autocomplete="off" />
 				</div>
@@ -76,10 +76,10 @@ a:hover {
 					</select>
 				</div>
 				<div class="bg-light p-2">
-					<input type="text" class="form-control" name="video" placeholder="LECTURE URL(Youtube 주소만 입력해주세요!)" required="required" autocomplete="off" />
+					<input type="text" class="form-control videoUrl" name="chapter1" placeholder="CHAPTER1 TITLE" required="required" autocomplete="off" />
 				</div>
-				<div class="bg-light text-dark p-2">
-					<h6>CHAPTER 2 이후의 강의 영상은 해당 강의 페이지에서 추가하실 수 있습니다.</h6>
+				<div class="bg-light p-2">
+					<input type="text" class="form-control videoUrl" name="video" placeholder="CHAPTER1 URL(Youtube 주소만 입력해주세요!)" required="required" autocomplete="off" />
 				</div>
 				<div class="bg-light p-2">
 					<input type="number" class="form-control" name="price" placeholder="PRICE" min="0" required="required" autocomplete="off" />
@@ -106,7 +106,7 @@ a:hover {
 			$(window).resize(function(){
 				$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
 			});
-			$("input[name=video]").on("input",function(){
+			$(".videoUrl").on("input",function(){
 				var str = $(this).val()
 				var index = str.indexOf("youtube.com/watch?v=");
 				if(index >= 0) {

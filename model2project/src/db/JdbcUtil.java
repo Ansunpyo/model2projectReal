@@ -15,7 +15,7 @@ public class JdbcUtil {
 		
 		try {
 			Context init = new InitialContext();
-			DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/project");
+			DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/e1b_2lw");
 			con = ds.getConnection();
 			con.setAutoCommit(false);
 		} catch (Exception e) {

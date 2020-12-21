@@ -5,16 +5,11 @@ a:hover {
 	text-decoration: none;
 	color: #33b1a0;
 }
-ul {
-	list-style: none;
-	margin:0px;
-	padding:0px;
-}
-li {
-	float: left;
-}
 .bbsWrapper {
 	margin-bottom: 40px;
+}
+.bbsWrapperList li {
+	float: left;
 }
 .bbsHeader {
 	width: 100%;

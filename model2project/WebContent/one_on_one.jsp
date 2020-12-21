@@ -8,8 +8,8 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 	<title>2LW</title>
-	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="stylesheet" href="css/one_on_one.css">
 </head>
 <body>
@@ -50,6 +50,26 @@
 	} else {
 		LinkedList<One_On_One> oneList = (LinkedList<One_On_One>)session.getAttribute("oneOnOneList");
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="faq.do">자주묻는 질문</a></li>
+						<li><a href="one_on_one.do">1:1 문의하기</a></li>
+						<li><a href="purchaseList.do">구매내역</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">고객센터</div>
@@ -153,5 +173,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

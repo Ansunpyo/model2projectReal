@@ -78,6 +78,7 @@ import action.ReviewUpdatePageAction;
 import action.ReviewViewAction;
 import action.ReviewWriteAction;
 import action.ReviewWritePageAction;
+import svc.LectureDetailAction;
 import vo.ActionForward;
 
 @WebServlet("*.do")
@@ -179,7 +180,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.contentEquals("/quit.do")) {
+		} else if(command.contentEquals("/doQuit.do")) {
 			action = new QuitAction();
 			try {
 				forward = action.execute(request, response);
@@ -606,6 +607,13 @@ public class FrontController extends HttpServlet {
 			}
 		} else if(command.contentEquals("/lectureUpload.do")) {
 			action = new LectureUploadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureDetail.do")) {
+			action = new LectureDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -67,6 +67,25 @@
 					nextDisabled = " disabled";
 				}
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="notice.do">공지사항</a></li>
+						<li><a href="freeBoard.do">자유게시판</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">Board</div>
@@ -154,5 +173,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

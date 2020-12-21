@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import svc.MainBannerService;
 import svc.MainFreeService;
+import svc.MainLectureService;
 import svc.MainNoticeService;
 import vo.ActionForward;
 import vo.Banner;
 import vo.Free;
+import vo.Lecture_Video;
 import vo.Notice;
 
 public class MainAction implements Action {
@@ -21,6 +23,7 @@ public class MainAction implements Action {
 		LinkedList<Notice> notList = null;
 		LinkedList<Free> freeList = null;
 		LinkedList<Banner> banList = null;
+		LinkedList<Lecture_Video> lecList = null;
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		
@@ -36,8 +39,9 @@ public class MainAction implements Action {
 		banList = mainBannerService.getBanner();
 		session.setAttribute("banList", banList);
 		
-//		MainLectureService mainLectureService = new MainLectureService();
-		
+		MainLectureService mainLectureService = new MainLectureService();
+		lecList = mainLectureService.getLectureThumbnail();
+		session.setAttribute("lecList", lecList);
 		
 		forward = new ActionForward();
 		forward.setPath("main.jsp");

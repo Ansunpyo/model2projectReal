@@ -67,6 +67,29 @@
 					nextDisabled = " disabled";
 				}
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="editProfilePage.do">개인정보 수정</a></li>
+						<li><a href="favorites.do">즐겨찾기 목록</a></li>
+						<li><a href="review.do">리뷰 남기기</a></li>
+						<li><a href="messenger.do">쪽지함</a></li>
+						<li><a href="quit.do">회원 탈퇴</a></li>
+						<li><a href="logout.do">로그아웃</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">Board</div>
@@ -157,5 +180,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

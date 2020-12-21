@@ -50,6 +50,27 @@
 <%
 		LinkedList<Subject> subList = (LinkedList<Subject>)session.getAttribute("subList");
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="review.do">리뷰 관리</a></li>
+						<li><a href="faq.do">FAQ 관리</a></li>
+						<li><a href="category.do">카테고리 관리</a></li>
+						<li><a href="banner.do">메인배너 관리</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">My Page</div>
@@ -118,5 +139,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

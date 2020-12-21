@@ -72,6 +72,25 @@
 			nextDisabled = " disabled";
 		}
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="purchaseAllList.do">결제목록</a></li>
+						<li><a href="purchaseRefundList.do">결제 취소</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">주문관리</div>
@@ -163,5 +182,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

@@ -22,7 +22,6 @@ public class QuitAction implements Action {
 			int result = quitService.deleteMember(id);
 			
 			if(result > 0) {
-				session.invalidate();
 				Cookie idCookie = new Cookie("id", null);
 				idCookie.setMaxAge(0);
 				response.addCookie(idCookie);

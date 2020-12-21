@@ -8,9 +8,9 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 	<title>2LW</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="stylesheet" href="./css/editprofile.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 </head>
 <body>
 	<header>
@@ -49,6 +49,29 @@
 		out.println("<script>alert('로그인이 필요합니다.');location.href='loginPage.do';</script>");
 	} else {
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="editProfilePage.do">개인정보 수정</a></li>
+						<li><a href="favorites.do">즐겨찾기 목록</a></li>
+						<li><a href="review.do">리뷰 남기기</a></li>
+						<li><a href="messenger.do">쪽지함</a></li>
+						<li><a href="quit.do">회원 탈퇴</a></li>
+						<li><a href="logout.do">로그아웃</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">My Page</div>
@@ -67,15 +90,15 @@
 					<input type="hidden" name="id" value="<%=(String)loginMember.getId() %>">
 					<div class="inputSlot">
 						Password : <br />
-						<input type="password" name="password" required="required" autocomplete="off" />
+						<input type="password" class="form-control" name="password" required="required" autocomplete="off" />
 					</div>
 					<div class="inputSlot">
 						Name : <br />
-						<input type="text" name="name" value="<%=loginMember.getName() %>" required="required" autocomplete="off" />
+						<input type="text" class="form-control" name="name" value="<%=loginMember.getName() %>" required="required" autocomplete="off" />
 					</div>
 					<div class="inputSlot">
 						Email : <br />
-						<input type="text" name="email" value="<%=loginMember.getEmail() %>" required="required" autocomplete="off" />
+						<input type="text" class="form-control" name="email" value="<%=loginMember.getEmail() %>" required="required" autocomplete="off" />
 					</div>
 					<div class="inputSlot">
 						Gender :
@@ -93,11 +116,11 @@
 %>
 					<div class="inputSlot">
 						Major : <br />
-						<input type="text" name="major" value="<%=loginMember.getMajor() %>" required="required" autocomplete="off" />
+						<input type="text" class="form-control" name="major" value="<%=loginMember.getMajor() %>" required="required" autocomplete="off" />
 					</div>
 					<div class="inputSlot">
 						Education : <br />
-						<input type="text" name="education" value="<%=loginMember.getEducation() %>" required="required" autocomplete="off" />
+						<input type="text" class="form-control" name="education" value="<%=loginMember.getEducation() %>" required="required" autocomplete="off" />
 					</div>
 <%
 						}
@@ -124,5 +147,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

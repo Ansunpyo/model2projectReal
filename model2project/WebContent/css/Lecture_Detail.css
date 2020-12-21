@@ -1,0 +1,261 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;	
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+
+.inputSlot {
+	width: 345px;
+	height: 20px;
+	border: 1px solid #6f6f6f;
+	border-radius: 4px;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+textarea {
+	width: 345px;
+	height: 20px;
+	border: 0;
+	border-radius: 6px;
+	font-size: 1.4rem;
+	font-weight: 600;
+	resize: none;
+}
+
+textarea:hover {
+	box-shadow: 0px 0px 12px gray;
+}
+
+textarea:focus {
+	outline: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+	text-decoration: none;
+	margin: auto;
+}
+
+
+.sidebar {
+	width: 390px;
+	height: 650px;
+	opacity: 0.9;
+	border: 1px solid black;
+	float: left;
+}
+.tabs {
+	width: 390px;
+	height: 60px;
+	display: flex;
+}
+.listTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 195px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.listTab.on {
+	background-color: #ffffff;
+	border-bottom: 0px;
+}
+
+.manageTab {
+	flex: auto;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-weight: 600;
+	width: 195px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8a8a8a;
+	background-color: #d7d7d7;
+}
+
+.manageTab.on {
+	background-color: #ffffff;
+	border-bottom: 0px;
+}
+
+.lectureList {
+	width: 370px;
+	height: 580px;
+	margin: auto;
+	background-color: #E6E6E6;
+	position: relative;
+	overflow: hidden;
+}
+
+.lectureList ul {
+	list-style: none;
+}
+
+.lectureList ul li {
+	width: 370px;
+	height: 50px;
+	overflow: hidden;
+    border-bottom: 1px solid #dbdbdb;
+    line-height: 50px;
+	text-decoration: none;
+}
+
+.manageList {
+	width: 370px;
+	height: 580px;
+	margin: auto;
+	background-color: #E6E6E6;
+	position: relative;
+	overflow: hidden;
+}
+
+.manageList ul {
+	list-style: none;
+}
+
+.manageList ul li {
+	width: 370px;
+	height: 50px;
+    overflow: hidden;
+    border-bottom: 1px solid #dbdbdb;
+    line-height: 50px;
+	text-decoration: none;
+}
+
+.op {
+	width: 10px;
+	height: 650px;
+	background-color: #F5DA81;
+	font-color: white;
+}
+
+.cl {
+	width: 10px;
+	height: 650px;
+	background-color: #F5DA81;
+	font-color: white;
+}
+
+.lectureList>.up, .lectureList>.down {
+	margin: 0 auto;
+	width: 370px;
+	height: 35px;
+	background: #444;
+}
+
+.lectureList>.up:hover, .lectureList>.down:hover {
+	background: #333;
+}
+
+.lectureList>.up>a, .lectureList>.down>a {
+	display: block;
+	line-height: 35px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 700;
+	color: #8ac007;
+}
+
+.manageList>.up, .manageList>.down {
+	margin: 0 auto;
+	width: 370px;
+	height: 35px;
+	background: #444;
+}
+
+.manageList>.up:hover, .manageList>.down:hover {
+	background: #333;
+}
+
+.manageList>.up>a, .manageList>.down>a {
+	display: block;
+	line-height: 35px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 700;
+	color: #8ac007;
+}
+
+.photoList {
+	position: relative;
+	overflow: hidden;
+	width: 370px;
+	height: 510px;
+}
+
+.photoList>ul {
+	position: absolute;
+}
+
+.photoList>ul>li>a {
+	display: block;
+	width: 370px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 0.875rem;
+	background: rgba(0, 0, 0, 0);
+	color: #000;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	-webkit-transition: all 0.4s;
+	transition: all 0.4s;
+}
+
+.photoList>ul>li>a.on {
+	background: rgba(0, 0, 0, .1);
+	color: #f1f1f1;
+}

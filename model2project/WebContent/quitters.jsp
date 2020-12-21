@@ -67,6 +67,27 @@
 			nextDisabled = " disabled";
 		}
 %>
+	<div class="topbar">
+		<ul>
+			<li>
+				<div class="hamburger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			<li>
+				<div class="topbarMenu">
+					<ul>
+						<li><a href="members.do">회원 리스트</a></li>
+						<li><a href="quitters.do">탈퇴회원 리스트</a></li>
+						<li><a href="statistics.do">통계</a></li>
+						<li><a href="one_on_onead.do">1:1 문의함</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="editcont">
 		<div class="sidebar">
 			<div class="bigMyPage">회원관리</div>
@@ -140,5 +161,6 @@
 			});
 		});
 	</script>
+	<script src="js/sidebar.js"></script>
 </body>
 </html>

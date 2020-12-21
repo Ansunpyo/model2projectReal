@@ -80,13 +80,13 @@ a:hover {
 					nextDisabled = " disabled";
 				}
 %>
-	<div class="container mb-5" style="width:1200px;">
+	<div class="container mb-5">
 		<div class="p-3 mb-2 d-flex flex-wrap bg-secondary text-light position-relative">
 			<form method="post" action="lectureListChecked.do">
 <%
 		for(int i = 0; i < subjectList.size(); i++){
 %>
-				<label><input type="checkbox" name="subject" class="subject" value="<%=subjectList.get(i).getCode() %>" /> <%=subjectList.get(i).getSubject_name() %></label>&nbsp;
+				<label><input type="checkbox" name="subject" class="subject" value="<%=subjectList.get(i).getCode() %>" /> <%=subjectList.get(i).getSubject_name() %></label>&nbsp;<% if (i != 0 && i % 4 == 0) { %><br /> <% } %>
 <%
 		}
 %>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Notice, vo.Free, vo.Banner, java.util.LinkedList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Notice, vo.Free, vo.Banner, vo.Lecture_Video, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member)session.getAttribute("loginMember");
@@ -9,6 +9,7 @@
 	LinkedList<Notice> notList = (LinkedList<Notice>) session.getAttribute("notList");
 	LinkedList<Free> freeList = (LinkedList<Free>) session.getAttribute("freeList");
 	LinkedList<Banner> banList = (LinkedList<Banner>) session.getAttribute("banList");
+	LinkedList<Lecture_Video> lecList = (LinkedList<Lecture_Video>) session.getAttribute("lecList");
 %>
 <html lang="ko">
 <head>
@@ -114,14 +115,26 @@
 				<p><a href="#"><img src="./images/news.png" alt="뉴스 바로가기"></a></p>
 			</section>
 		</section>
+<%
+			if(lecList != null) {
+%>
 		<section>
 			<section id="container" class="clearfix">
 				<ul>
 					<li>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/kBdfcR-8hEY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/6Ql5mQdxeWk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/BDqvzFY72mg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/wLn28DrSF68" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<%
+					for(int i = 0; i < Math.min(4, lecList.size()); i++) {
+						String video = "";
+						if(lecList.get(i).getVideo().indexOf("&") > 0) {
+							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=") + 2, lecList.get(i).getVideo().indexOf("&"));
+						} else {
+							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=")+2);
+						}
+%>
+						<img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200">
+<%
+					}
+%>
 					</li>
 				</ul>
 			</section>
@@ -130,15 +143,26 @@
 			<section id="container" class="clearfix">
 				<ul>
 					<li>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/0JUN9aDxVmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/p2J7wSuFRl8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/3QsjdLlWHxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<iframe width="296" height="200" src="https://www.youtube.com/embed/r_w7pfulsn8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<%
+					for(int i = 4; i < Math.min(8, lecList.size()); i++) {
+						String video = "";
+						if(lecList.get(i).getVideo().indexOf("&") > 0) {
+							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=") + 2, lecList.get(i).getVideo().indexOf("&"));
+						} else {
+							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=")+2);
+						}
+%>
+						<img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200">
+<%
+					}
+%>
 					</li>
 				</ul>
 			</section>
 		</section>		
-						
+<%
+			}
+%>								
 		<!-- //container -->
 		<!-- footer -->
 		<footer id="footer" class="clearfix">
