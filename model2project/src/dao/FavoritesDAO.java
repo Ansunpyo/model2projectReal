@@ -87,4 +87,54 @@ public class FavoritesDAO {
 		}
 		return result;
 	}
+
+	public LinkedList<Integer> selectFavoritesList(String id, LinkedList[] lectureList) {
+		String sql = "SELECT * FROM favorites WHERE number = (SELECT number FROM member WHERE id = ?) AND lecture_num = ?";
+		LinkedList<Integer> favList = new LinkedList<>();
+		int favNum = 0;
+		try {
+			LinkedList<Lecture> lecList = lectureList[0];
+			for(Lecture l:lecList) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setInt(2, l.getLecture_num());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					favNum = l.getLecture_num();
+					favList.add(favNum);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return favList;
+	}
+
+	public int addFavorites(String id, int lecture_num) {
+		String sql = "INSERT INTO favorites VALUES ((SELECT number FROM member WHERE id = ?), ?)";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, lecture_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
 }

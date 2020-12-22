@@ -1,6 +1,6 @@
 package svc;
 
-import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 
@@ -15,6 +15,7 @@ public class BannerUploadService {
 		BannerDAO bannerDAO = BannerDAO.getInstance();
 		bannerDAO.setConnection(conn);
 		result = bannerDAO.uploadBanner(ban);
+		close(conn);
 		return result;
 	}
 

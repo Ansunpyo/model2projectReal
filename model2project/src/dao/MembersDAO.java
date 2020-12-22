@@ -137,5 +137,25 @@ public class MembersDAO {
 		}
 		return result;
 	}
+	public String dupChk(String id) {
+		String sql = "SELECT * FROM member WHERE id = ?";
+		String result = "";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = "fail";
+			} else {
+				result = "success";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
 	
 }

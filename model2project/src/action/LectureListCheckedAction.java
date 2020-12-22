@@ -47,11 +47,8 @@ public class LectureListCheckedAction implements Action {
 			LectureListService lectureListService = new LectureListService();
 			LinkedList[] lectureList = lectureListService.getLecList(subject, nowPage);
 			
-			LectureLastPageService lectureLastPageService = new LectureLastPageService();
-			int lastPage = lectureLastPageService.getLectureLastPage(subject);
-			
 			session.setAttribute("subjectList", subjectList);
-			session.setAttribute("lastPage", lastPage);
+			session.setAttribute("lastPage", 1);
 			session.setAttribute("lectureList", lectureList);
 			forward.setPath("lectureList.jsp?page=" + nowPage);
 			return forward;

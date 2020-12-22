@@ -89,6 +89,7 @@
 			        <h6 class="border-bottom border-gray pb-2 mb-0">Favorites</h6>
 			        
 <%
+		if(favorList != null) {
 				LinkedList<Lecture> lecList = favorList[0];
 				LinkedList<Member> memList = favorList[1];
 				for (int i = 0; i<lecList.size();i++) {
@@ -114,6 +115,7 @@
 			</div>
 	</div>
 <%			
+		}
 	}
 %>
 </div>

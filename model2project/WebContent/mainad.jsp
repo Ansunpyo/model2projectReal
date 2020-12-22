@@ -59,6 +59,27 @@
 			</div>
 		</header>
 		<!-- //header -->
+		<div class="topbar">
+			<ul>
+				<li>
+					<div class="hamburger">
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</li>
+				<li>
+					<div class="topbarMenu">
+						<ul>
+							<li><a href="purchaseAllList.do">주문관리</a></li>
+							<li><a href="members.do">회원관리</a></li>
+							<li><a href="logout.do">로그아웃</a></li>
+							<li><a href="review.do">마이페이지</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
 		<!-- slider -->
 		<div class="slider">
 			<ul class="clearfix">
@@ -210,6 +231,9 @@
 					});
 				}
 			}, 2500);
+			$(".hamburger").click(function(){
+				$(".topbarMenu").stop().slideToggle();
+			});
 		});
 	</script>
 </body>

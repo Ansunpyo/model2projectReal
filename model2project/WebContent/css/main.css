@@ -234,47 +234,81 @@ a:hover {
     line-height: 20px;
 }
 
-/* popup */
-.popup {
-    display: none;
-    position: absolute;
-    top: 110px;
-    left: 50%;
-    margin-left: -300px;
-    z-index: 200;
-    width: 600px;
-    height: 500px;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    background-color: #fff;
+.topbar {
+	position: relative;
+	display: none;
+	background: #e7e7e7;
+	height: 60px;
+	padding: 6px;
+	z-index: 100;
 }
-.popup h3 {
-    border-bottom: 1px solid #ccc;
-    color: #606060;
-    font-size: 16px;
-    text-transform: uppercase;
-    text-indent: 20px;
-    line-height: 64px;
+.topbar ul {
+	list-style: none;
+	z-index: 100;
 }
-.popup .content {
-    padding: 20px;
-    line-height: 1.6;
+.hamburger {
+	margin-left: 30px;
+	cursor: pointer;
+	width: 35px;
+	z-index: 100;
 }
-.popup .content p {
-    margin-bottom: 12px;
+.hamburger div {
+	width: 35px;
+	height: 5px;
+	background-color: black;
+	margin: 6px 0;
+	z-index: 100;
 }
-.popup .close {
-    position: absolute;
-    right: 25px;
-    top: 10px;
+.topbarMenu {
+	display: none;
+	z-index: 100;
 }
-.popup .close button {
-    height: 44px;
-    width: 44px;
-    border: 1px solid #aaa;
-    background-color: #efefef;
-    color: #888;
-    font: 24px/44px arial,sans-serif;
-    text-align: center;
-    cursor: pointer;
+.topbarMenu ul {
+	margin-left: 0px;
+	padding: 0px;
+	z-index: 100;
+}
+.topbarMenu ul li {
+	z-index: 100;
+	display: block;
+	width: 300px;
+	height: 60px;
+	padding: 5px;
+	background: #d7d7d7;
+	line-height: 60px;
+	border-bottom: 1px solid black;
+}
+@media (max-width:576px) {
+	.topbar {
+		display: block;
+	}
+	.wrap {
+		max-width: 576px;
+		min-width: auto;
+	}
+	.inner>.nav {
+		display: none;
+	}
+	.slider {
+		display: none;
+	}
+	#header {
+		max-width: 576px;
+	}
+	#container {
+		max-width: 576px;
+	}
+	#container>section {
+		max-width: 576px;
+	}
+	#footer {
+		display: none;
+	}
+	
+	.notice {
+		margin-bottom: 180px;
+	}
+	.quick {
+		float: left !important;
+	}
 }

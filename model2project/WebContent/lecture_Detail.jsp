@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Lecture_Video, vo.Lecture, java.util.LinkedList" %>
-
+    pageEncoding="UTF-8" import="vo.Lecture_Video, vo.Lecture, vo.Member, java.util.*" %>
+<%
+	Member loginMember = null;
+	String classify = null;
+	LinkedList<Lecture_Video> vidList = (LinkedList<Lecture_Video>)session.getAttribute("vidList");
+	LinkedList<Member> memList = (LinkedList<Member>)session.getAttribute("memList");
+	if(session.getAttribute("loginMember") != null) {
+		loginMember = (Member) session.getAttribute("loginMember");
+		classify = loginMember.getClassify();	
+	} else {
+		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +24,15 @@
 <body onresize="parent.resizeTo(1340,730)" onload="parent.resizeTo(1340,730)">
 <div class="main">
 <section style="float: left;">
-	<iframe width="900" height="650" src="https://www.youtube.com/embed/ClabczduRiE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+<%
+	String video = "";
+	if(vidList.get(0).getVideo().indexOf("&") > 0) {
+		video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=") + 2, vidList.get(0).getVideo().indexOf("&"));
+	} else {
+		video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=")+2);
+	}
+%>
+	<iframe width="900" height="650" src="https://www.youtube.com/embed/<%=video %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
 </section>
 <a class="op" style="float: left; text-align: center; font-size: 10px; line-height: 650px;">▶</a>
 <a class="cl" style="float: left; text-align: center; font-size: 10px; line-height: 650px;">◀</a>
@@ -29,28 +48,31 @@
 			<a href="#">▲</a>
 		</div>
 		<div class="photoList">
+<% 
+	if(vidList != null) {
+%>		
 			<ul>
-				<li>강의1</li> LinkedList<LectureVideo> vidlist = session.geta
-				<li><a href="vidList.get(i).getVideo()">  강의2</li> for문  vidList.get(i).getchapterTitle
-				
-				<li>강의3</li>
-				<li>강의4</li>
-				<li>강의5</li>
-				<li>강의6</li>
-				<li>강의7</li>
-				<li>강의8</li>
-				<li>강의9</li>
-				<li>강의10</li>
-				<li>강의11</li>
-				<li>강의12</li>
-				<li>강의13</li>
+<%
+
+	for(int i=0;i<vidList.size();i++) {
+%>				
+				<li><a href="vidList.get(i).getVideo()"><%=vidList.get(i).getChapter_title() %></a></li>
+<%					
+	}
+%>				
 			</ul>
+<%
+	} else {
+%>			
+					<h2 style="text-align: center; margin-top: 245px;">등록된 강의가 없습니다.</h2>
+<%
+	}
+%>
 		</div>
 		<div class="down">
 			<a href="#">▼</a>
 		</div>
 	</div>
-<!-- 여기서부터 강사만 볼 수 있는 강의 관리 Tab(if classify == 학생, 권한 없음) -->
 	<div class="manageList">
 		<div class="up">
 			<a href="#">▲</a>
@@ -68,7 +90,8 @@
 				<li>강의9</li>
 				<li class="lug" style="text-align: center;"><p style="display:block; cursor:pointer;">+</p></li>
 				<div class="lu">
-					<form>		
+					<form action="lectureDetailUpload.do" method="post" name="ldinfo">
+						<input type="hidden" name="lecture_num" value="<%=vidList.get(0).getLecture_num() %>"/>		
 						<textarea style="margin-top: 15px;" class="inputSlot" name="chapter_title" placeholder="강의제목" autocomplete="off" /></textarea>
 						<textarea style="margin-top: 5px;" class="inputSlot" name="video" placeholder="강의 URL" autocomplete="off" /></textarea>
 						<button style="margin-top: 5px; margin-left: 113px; height: 30px;">등록하기</button>

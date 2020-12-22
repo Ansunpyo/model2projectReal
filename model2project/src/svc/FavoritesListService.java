@@ -19,4 +19,14 @@ public class FavoritesListService {
 		
 		return favorList;
 	}
+
+	public LinkedList<Integer> getFavoritesList(String id, LinkedList[] lectureList) {
+		Connection conn = getConnection();
+		FavoritesDAO favoritesDAO = FavoritesDAO.getInstance();
+		favoritesDAO.setConnection(conn);
+		LinkedList<Integer> favorList = favoritesDAO.selectFavoritesList(id, lectureList);
+		close(conn);
+		
+		return favorList;
+	}
 }

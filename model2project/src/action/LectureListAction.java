@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import svc.FavoritesListService;
 import svc.LectureLastPageService;
 import svc.LectureListService;
 import svc.SubjectListService;
@@ -26,6 +27,7 @@ public class LectureListAction implements Action {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		if(loginMember != null) {
 			forward = new ActionForward();
+			String id = loginMember.getId();
 			
 			SubjectListService subjectListService = new SubjectListService();
 			LinkedList<Subject> subjectList = subjectListService.getSubjectList();
@@ -36,9 +38,13 @@ public class LectureListAction implements Action {
 			LectureLastPageService lectureLastPageService = new LectureLastPageService();
 			int lastPage = lectureLastPageService.getLectureLastPage();
 			
+			FavoritesListService favoritesListService = new FavoritesListService();
+			LinkedList<Integer> favList = favoritesListService.getFavoritesList(id, lectureList);
+			
 			session.setAttribute("subjectList", subjectList);
 			session.setAttribute("lastPage", lastPage);
 			session.setAttribute("lectureList", lectureList);
+			session.setAttribute("favList", favList);
 			forward.setPath("lectureList.jsp?page=" + nowPage);
 			return forward;
 		} else {

@@ -8,6 +8,9 @@ a:hover {
 .bbsWrapper {
 	margin-bottom: 40px;
 }
+.bbsViewWrapperList li {
+	float:left;
+}
 .bbsWrapperList li {
 	float:left;
 }

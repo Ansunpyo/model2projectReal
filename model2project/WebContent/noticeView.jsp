@@ -87,13 +87,13 @@
 						<div class="bbsWrapper">
 							<ul class="bbsViewWrapperList">
 								<li class="bbsViewWriter">
-									<ul>
+									<ul id="bbsFloatLeft">
 										<li class="bbsViewWriterHeader">WRITER</li>
 										<li class="bbsViewWriterName">ADMIN</li>
 									</ul>
 								</li>
 								<li class="bbsViewTitle">
-									<ul>
+									<ul id="bbsFloatLeft">
 										<li class="bbsViewTitleHeader">TITLE</li>
 										<li class="bbsViewTitleText"><%=not.getTitle() %></li>
 									</ul>

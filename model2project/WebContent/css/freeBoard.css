@@ -5,6 +5,15 @@ a:hover {
 	text-decoration: none;
 	color: #33b1a0;
 }
+.bbsViewWrapperList li {
+	float:left;
+}
+#bbsFloatLeft li {
+	float:left;
+}
+.bbsViewBody {
+	float:left;
+}
 .bbsWrapperList li {
 	float:left;
 }

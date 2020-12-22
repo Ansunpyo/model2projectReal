@@ -21,6 +21,7 @@ import action.EditProfilePageAction;
 import action.FaqAction;
 import action.FaqDeleteAction;
 import action.FaqWriteAction;
+import action.FavAddAction;
 import action.FavoritesAction;
 import action.FavoritesDeleteAction;
 import action.FreeBoardAction;
@@ -36,6 +37,8 @@ import action.IntroModifyFormAction;
 import action.IntroModifyProAction;
 import action.IntroWriteProAction;
 import action.JoinAction;
+import action.LectureDetailAction;
+import action.LectureDetailUploadAction;
 import action.LectureListAction;
 import action.LectureListCheckedAction;
 import action.LectureUploadAction;
@@ -78,7 +81,6 @@ import action.ReviewUpdatePageAction;
 import action.ReviewViewAction;
 import action.ReviewWriteAction;
 import action.ReviewWritePageAction;
-import svc.LectureDetailAction;
 import vo.ActionForward;
 
 @WebServlet("*.do")
@@ -614,6 +616,20 @@ public class FrontController extends HttpServlet {
 			}
 		} else if(command.contentEquals("/lectureDetail.do")) {
 			action = new LectureDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}  else if(command.contentEquals("/lectureDetailUpload.do")) {
+			action = new LectureDetailUploadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/favAdd.do")) {
+			action = new FavAddAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

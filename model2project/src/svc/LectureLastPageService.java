@@ -19,16 +19,6 @@ public class LectureLastPageService {
 		return lastPage;
 	}
 
-	public int getLectureLastPage(String[] subject) {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		int lastPage = lectureDAO.getLectureNumber(subject);
-		close(conn);
-		
-		return lastPage;
-	}
-
 	public int getLectureLastPage(String id) {
 		Connection conn = getConnection();
 		LectureDAO lectureDAO = LectureDAO.getInstance();

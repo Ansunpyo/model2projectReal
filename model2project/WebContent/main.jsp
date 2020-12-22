@@ -62,6 +62,27 @@
 			</div>
 		</header>
 		<!-- //header -->
+		<div class="topbar">
+			<ul>
+				<li>
+					<div class="hamburger">
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</li>
+				<li>
+					<div class="topbarMenu">
+						<ul>
+							<li><a href="introList.do">강사 소개</a></li>
+							<li><a href="lectureList.do">강의 목록</a></li>
+							<li><a href="editProfilePage.do">마이페이지</a></li>
+							<li><a href="faq.do">고객센터</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
 		<!-- slider -->
 		<div class="slider">
 			<ul class="clearfix">
@@ -212,6 +233,9 @@
 					});
 				}
 			}, 2500);
+			$(".hamburger").click(function(){
+				$(".topbarMenu").stop().slideToggle();
+			});
 		});
 	</script>
 </body>
