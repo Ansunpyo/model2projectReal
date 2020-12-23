@@ -290,7 +290,7 @@ public class IntroDAO {
 			pstmt.setInt(1, intro_num);
 			deleteCount = pstmt.executeUpdate();
 		} catch(Exception ex) {
-			System.out.println("boardDelete 에러 : " + ex);
+			System.out.println("introDelete 에러 : " + ex);
 		} finally {
 			if (pstmt != null) close(pstmt);
 		}

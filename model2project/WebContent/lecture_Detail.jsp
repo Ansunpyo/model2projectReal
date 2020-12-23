@@ -17,7 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>강의상세탭</title>
-<link rel="stylesheet" href="css/Lecture_Detail.css"/>
+<link rel="stylesheet" href="css/LD.css"/>
 <script src="js/jquery-3.5.1.js"></script>
 <script src="js/Lecture_Detail.js"></script>
 </head>
@@ -56,7 +56,7 @@
 
 	for(int i=0;i<vidList.size();i++) {
 %>				
-				<li><a href="vidList.get(i).getVideo()"><%=vidList.get(i).getChapter_title() %></a></li>
+				<li><a href="#" onclick="false" data-url="https://www.youtube.com/watch?v=r4frgG-Z_OQ" class="lectureList"><%=vidList.get(i).getChapter_title() %></a></li>
 <%					
 	}
 %>				
@@ -78,17 +78,30 @@
 			<a href="#">▲</a>
 		</div>
 		<div class="photoList">
+<% 
+	if(vidList != null) {
+%>		
 			<ul>
-				<li>강의1</li>
-				<li>강의2</li>
-				<li>강의3</li>
-				<li>강의4</li>
-				<li>강의5</li>
-				<li>강의6</li>
-				<li>강의7</li>
-				<li>강의8</li>
-				<li>강의9</li>
+<%
+
+	for(int i=0;i<vidList.size();i++) {
+%>					
+				<li><a style="margin-left: 25px;" href="#" onclick="false" ><%=vidList.get(i).getChapter_title() %>
+				<button onclick = "location.href ='lectureDetailDelete.do?chapter=<%=vidList.get(i).getChapter() %>&lecture_num=<%=vidList.get(i).getLecture_num() %>'" 
+				style="float: right; margin-top: 15px; margin-right: 40px;">X</button></a></li>
+<%					
+	}
+%>				
 				<li class="lug" style="text-align: center;"><p style="display:block; cursor:pointer;">+</p></li>
+<%
+	} else {
+%>		
+	
+<%
+	}
+%>				
+				
+				
 				<div class="lu">
 					<form action="lectureDetailUpload.do" method="post" name="ldinfo">
 						<input type="hidden" name="lecture_num" value="<%=vidList.get(0).getLecture_num() %>"/>		
@@ -106,5 +119,14 @@
 	</div>
 </section>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+	$(function(){
+		$(".lectureList").click(function(){
+			let nowUrl = $(this).attr("data-url");
+			console.log(nowUrl);
+		});
+	});
+</script>
 </body>
 </html>

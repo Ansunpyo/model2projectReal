@@ -38,6 +38,7 @@ import action.IntroModifyProAction;
 import action.IntroWriteProAction;
 import action.JoinAction;
 import action.LectureDetailAction;
+import action.LectureDetailDeleteAction;
 import action.LectureDetailUploadAction;
 import action.LectureListAction;
 import action.LectureListCheckedAction;
@@ -635,8 +636,22 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
+//		} else if(command.contentEquals("/lectureDetailDeleteForm.do")) {
+//			action = new LectureDetailDeleteAction();
+//			int lecture_num = Integer.parseInt(request.getParameter("lecture_num"));
+//			request.setAttribute("lecture_num", lecture_num);
+//			forward = new ActionForward();
+//			forward.setPath("/lectureDetailDeletePro.do");
+//			}
+		} else if(command.contentEquals("/lectureDetailDelete.do")) {
+			action = new LectureDetailDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}	
+			
 		if (forward != null) {
 			
 			if (forward.isRedirect()) {

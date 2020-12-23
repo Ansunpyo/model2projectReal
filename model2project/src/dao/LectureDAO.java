@@ -7,8 +7,10 @@ import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
+import vo.Intro;
 import vo.Lecture;
 import vo.Lecture_Video;
 import vo.Member;
@@ -19,27 +21,28 @@ public class LectureDAO {
 	private Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
+
 	int pageCount = 8;
 	int range = 5;
-	
+
 	private LectureDAO() {
-		
+
 	}
 
 	public static LectureDAO getInstance() {
-		if(lectureDAO == null) {
+		if (lectureDAO == null) {
 			lectureDAO = new LectureDAO();
 		}
 		return lectureDAO;
 	}
-	
+
 	public void setConnection(Connection conn) {
 		this.conn = conn;
 	}
 
 	public LinkedList[] selectLectureList(int nowPage) {
-		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 ORDER BY lecture_num DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 ORDER BY lecture_num DESC LIMIT ?, "
+				+ pageCount;
 		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
 		LinkedList<Member> memList = new LinkedList<Member>();
 		LinkedList<Subject> subList = new LinkedList<Subject>();
@@ -54,8 +57,8 @@ public class LectureDAO {
 			pstmt.setInt(1, (nowPage - 1) * pageCount);
 
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				do {
 					lec = new Lecture();
 					mem = new Member();
@@ -71,9 +74,9 @@ public class LectureDAO {
 					memList.add(mem);
 					subList.add(sub);
 					vidList.add(vid);
-				} while(rs.next());
+				} while (rs.next());
 			}
-			lectureList = new LinkedList[] {lecList, memList, subList, vidList};
+			lectureList = new LinkedList[] { lecList, memList, subList, vidList };
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -89,7 +92,7 @@ public class LectureDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				result = rs.getInt("c");
 				if (result % pageCount != 0) {
 					result = (result / pageCount) + 1;
@@ -97,7 +100,7 @@ public class LectureDAO {
 					result = result / pageCount;
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -114,13 +117,13 @@ public class LectureDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				do {
 					sub = new Subject();
 					sub.setCode(rs.getInt("code"));
 					sub.setSubject_name(rs.getString("subject_name"));
 					subjectList.add(sub);
-				} while(rs.next());
+				} while (rs.next());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,7 +135,8 @@ public class LectureDAO {
 	}
 
 	public LinkedList[] selectLectureList(String[] subject, int nowPage) {
-		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 AND s.code = ? ORDER BY lecture_num DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 AND s.code = ? ORDER BY lecture_num DESC LIMIT ?, "
+				+ pageCount;
 		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
 		LinkedList<Member> memList = new LinkedList<Member>();
 		LinkedList<Subject> subList = new LinkedList<Subject>();
@@ -144,19 +148,19 @@ public class LectureDAO {
 		Lecture_Video vid = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			for(String s:subject) {
+			for (String s : subject) {
 				pstmt.setString(1, s);
 				pstmt.setInt(2, (nowPage - 1) * pageCount);
-				
+
 				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
+
+				if (rs.next()) {
 					do {
 						lec = new Lecture();
 						mem = new Member();
 						sub = new Subject();
 						vid = new Lecture_Video();
-						
+
 						lec.setLecture_num(rs.getInt("lecture_num"));
 						lec.setLecture_title(rs.getString("lecture_title"));
 						lec.setPrice(rs.getInt("price"));
@@ -167,11 +171,11 @@ public class LectureDAO {
 						memList.add(mem);
 						subList.add(sub);
 						vidList.add(vid);
-					} while(rs.next());
-				
+					} while (rs.next());
+
 				}
 			}
-			lectureList = new LinkedList[] {lecList, memList, subList, vidList};
+			lectureList = new LinkedList[] { lecList, memList, subList, vidList };
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -187,21 +191,21 @@ public class LectureDAO {
 		int r = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			for(String s:subject) {
+			for (String s : subject) {
 				pstmt.setString(1, s);
 				rs = pstmt.executeQuery();
-				if(rs.next()) {
+				if (rs.next()) {
 					r = rs.getInt("c");
 				}
 				result += r;
 			}
-			
+
 			if (result % pageCount != 0) {
 				result = (result / pageCount) + 1;
 			} else {
 				result = result / pageCount;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -212,7 +216,8 @@ public class LectureDAO {
 	}
 
 	public LinkedList[] selectLectureList(String id, int nowPage) {
-		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 AND l.number = (SELECT number FROM member WHERE id = ?) ORDER BY lecture_num DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT l.lecture_num, m.name, l.lecture_title, l.price, s.subject_name, v.video FROM member AS m JOIN lecture AS l ON m.number = l.number JOIN subject AS s ON l.subject_code = s.code JOIN lecture_video AS v ON l.lecture_num = v.lecture_num WHERE v.chapter = 1 AND l.number = (SELECT number FROM member WHERE id = ?) ORDER BY lecture_num DESC LIMIT ?, "
+				+ pageCount;
 		LinkedList<Lecture> lecList = new LinkedList<Lecture>();
 		LinkedList<Member> memList = new LinkedList<Member>();
 		LinkedList<Subject> subList = new LinkedList<Subject>();
@@ -228,14 +233,14 @@ public class LectureDAO {
 			pstmt.setInt(2, (nowPage - 1) * pageCount);
 
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				do {
 					lec = new Lecture();
 					mem = new Member();
 					sub = new Subject();
 					vid = new Lecture_Video();
-					
+
 					lec.setLecture_num(rs.getInt("lecture_num"));
 					lec.setLecture_title(rs.getString("lecture_title"));
 					lec.setPrice(rs.getInt("price"));
@@ -246,9 +251,9 @@ public class LectureDAO {
 					memList.add(mem);
 					subList.add(sub);
 					vidList.add(vid);
-				} while(rs.next());
+				} while (rs.next());
 			}
-			lectureList = new LinkedList[] {lecList, memList, subList, vidList};
+			lectureList = new LinkedList[] { lecList, memList, subList, vidList };
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -265,7 +270,7 @@ public class LectureDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				result = rs.getInt("c");
 				if (result % pageCount != 0) {
 					result = (result / pageCount) + 1;
@@ -273,7 +278,7 @@ public class LectureDAO {
 					result = result / pageCount;
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -290,13 +295,13 @@ public class LectureDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				do {
 					sub = new Subject();
 					sub.setCode(rs.getInt("code"));
 					sub.setSubject_name(rs.getString("subject_name"));
 					subList.add(sub);
-				} while(rs.next());
+				} while (rs.next());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -317,21 +322,21 @@ public class LectureDAO {
 			pstmt.setInt(3, lec.getSubject_code());
 			pstmt.setInt(4, lec.getPrice());
 			result = pstmt.executeUpdate();
-			
-			if(result > 0) {
+
+			if (result > 0) {
 				sql = "INSERT INTO lecture_video VALUES ((SELECT lecture_num FROM lecture WHERE lecture_title = ?), 1, ?, ?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, lec.getLecture_title());
 				pstmt.setString(2, vid.getVideo());
 				pstmt.setString(3, vid.getChapter_title());
 				result = pstmt.executeUpdate();
-				if(result <= 0) {
+				if (result <= 0) {
 					rollback(conn);
 				}
 			} else {
 				rollback(conn);
 			}
-			
+
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -345,16 +350,16 @@ public class LectureDAO {
 		String sql = "SELECT v.video FROM lecture_video AS v JOIN lecture AS l ON v.lecture_num = l.lecture_num WHERE v.chapter = 1 AND l.price = 0 ORDER BY v.lecture_num DESC LIMIT 0, 8";
 		LinkedList<Lecture_Video> vidList = new LinkedList<Lecture_Video>();
 		Lecture_Video vid = null;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				do {
 					vid = new Lecture_Video();
 					vid.setVideo(rs.getString("video"));
 					vidList.add(vid);
-				} while(rs.next());
+				} while (rs.next());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -369,19 +374,20 @@ public class LectureDAO {
 		String sql = "SELECT * FROM lecture_video WHERE lecture_num = ? ORDER BY chapter";
 		LinkedList<Lecture_Video> vidList = new LinkedList<>();
 		Lecture_Video vid = null;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, lecture_num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				do {
 					vid = new Lecture_Video();
+					vid.setChapter(rs.getInt("chapter"));
 					vid.setLecture_num(rs.getInt("lecture_num"));
 					vid.setVideo(rs.getString("video"));
 					vid.setChapter_title(rs.getString("chapter_title"));
 					vidList.add(vid);
-				} while(rs.next());
+				} while (rs.next());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -389,13 +395,13 @@ public class LectureDAO {
 			close(pstmt);
 			close(rs);
 		}
-		
+
 		return vidList;
 	}
 
 	public int lectureDetailUpload(String id, Lecture lec, Lecture_Video vid) {
 		int result = 0;
-		try {	
+		try {
 			String sql = "INSERT INTO lecture_video VALUES (?, (SELECT chapter FROM (SELECT chapter FROM lecture_video WHERE lecture_num = ? ORDER BY chapter DESC LIMIT 0, 1) AS vid) + 1, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, lec.getLecture_num());
@@ -403,10 +409,10 @@ public class LectureDAO {
 			pstmt.setString(3, vid.getVideo());
 			pstmt.setString(4, vid.getChapter_title());
 			result = pstmt.executeUpdate();
-			if(result <= 0) {
+			if (result <= 0) {
 				rollback(conn);
 			}
-			
+
 			commit(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -415,4 +421,22 @@ public class LectureDAO {
 		}
 		return result;
 	}
+
+	public int deleteArticle(int chapter, int lecture_num) {
+		int deleteCount = 0;
+		String Lecture_delete_sql = "DELETE FROM lecture_video WHERE chapter = ? and lecture_num=?";
+		try {
+			pstmt = conn.prepareStatement(Lecture_delete_sql);
+			pstmt.setInt(1, chapter);
+			pstmt.setInt(2, lecture_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("lectureDelete 에러 : " + ex);
+		} finally {
+			if (pstmt != null)
+				close(pstmt);
+		}
+		return deleteCount;
+	}
+
 }
