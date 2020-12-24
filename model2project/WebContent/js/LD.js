@@ -15,18 +15,23 @@ $(".lu").hide();
 		$(".manageList").show();
 	});	
 	$(".op").click(function(){
+		window.resizeTo(1715, 900);
+		$("#showLecture").attr("width", 1672);
+		$("#showLecture").attr("height", 830);
+		$("body").attr("onresize", "parent.resizeTo(1715,900)");
 		$(".sidebar").hide();
 		$(".cl").show();
 		$(".op").hide();
 		$(".lu").hide();
-		$("iframe").css("width", "1690px");
-		$("body").onresize("height", "840px");
 	});
 	$(".cl").click(function(){
+		window.resizeTo(1715, 790);
+		$("#showLecture").attr("width", 1280);
+		$("#showLecture").attr("height", 720);
+		$("body").attr("onresize", "parent.resizeTo(1715,790)");
 		$(".cl").hide();
 		$(".op").show();
 		$(".sidebar").show();
-		$("iframe").css("width", "1280px");
 	});	
 	$(".lug").click(function(){
 		$(".lug").hide();
@@ -51,7 +56,7 @@ $(function () {
 			$move.find("a").removeClass("on");
 			$move.eq(num).find("a").addClass("on");
 			if (num > 0 && num < $move.length - 2) {
-				$(".photoList > ul").animate({ "top": "+=51px" });
+				$(".photoList > ul").animate({ "top": "+=58px" });
 			}
 		} else {
 			return;
@@ -65,7 +70,7 @@ $(function () {
 			$move.find("a").removeClass("on");
 			$move.eq(num).find("a").addClass("on");
 			if (num > 1 && num < $move.length - 1) {
-				$(".photoList > ul").animate({ "top": "-=51px"});
+				$(".photoList > ul").animate({ "top": "-=58px"});
 			}
 		} else {
 			return;

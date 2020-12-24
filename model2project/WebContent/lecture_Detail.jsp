@@ -17,11 +17,11 @@
 <head>
 <meta charset="UTF-8">
 <title>강의상세탭</title>
-<link rel="stylesheet" href="css/LD.css"/>
+<link rel="stylesheet" href="css/Lecture_Detail.css"/>
 <script src="js/jquery-3.5.1.js"></script>
-<script src="js/Lecture_Detail.js"></script>
+<script src="js/LD.js"></script>
 </head>
-<body onresize="parent.resizeTo(1340,730)" onload="parent.resizeTo(1340,730)">
+<body onresize="parent.resizeTo(1715,790)" onload="parent.resizeTo(1715,790)">
 <div class="main">
 <section style="float: left;">
 <%
@@ -32,10 +32,10 @@
 		video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=")+2);
 	}
 %>
-	<iframe width="900" height="650" src="https://www.youtube.com/embed/<%=video %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+	<iframe id="showLecture" width="1280" height="720" src="https://www.youtube.com/embed/<%=video %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
 </section>
-<a class="op" style="float: left; text-align: center; font-size: 10px; line-height: 650px;">▶</a>
-<a class="cl" style="float: left; text-align: center; font-size: 10px; line-height: 650px;">◀</a>
+	<a class="op" href="#" style="float: left; text-align: center; font-size: 10px; line-height: 650px; text-decoration: none;">▶</a>
+	<a class="cl" href="#" style="float: left; text-align: center; font-size: 10px; line-height: 650px; text-decoration: none;">◀</a>
 <section class="sidebar">
 <!-- 여기서부터 메인바 -->
 	<div class="tabs">
@@ -56,7 +56,7 @@
 
 	for(int i=0;i<vidList.size();i++) {
 %>				
-				<li><a href="#" onclick="false" data-url="https://www.youtube.com/watch?v=r4frgG-Z_OQ" class="lectureList"><%=vidList.get(i).getChapter_title() %></a></li>
+				<li><a href="#" onclick="return false;" class="lec" style="text-align: center;" data-url="<%=vidList.get(i).getVideo()%>"><%=vidList.get(i).getChapter_title() %></a></li>
 <%					
 	}
 %>				
@@ -100,8 +100,6 @@
 <%
 	}
 %>				
-				
-				
 				<div class="lu">
 					<form action="lectureDetailUpload.do" method="post" name="ldinfo">
 						<input type="hidden" name="lecture_num" value="<%=vidList.get(0).getLecture_num() %>"/>		
@@ -122,11 +120,21 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 	$(function(){
-		$(".lectureList").click(function(){
+		$(".lec").click(function(){
 			let nowUrl = $(this).attr("data-url");
-			console.log(nowUrl);
+			if(nowUrl.indexOf("&") > 0) {
+				nowUrl = nowUrl.substring(nowUrl.indexOf("v=") + 2, nowUrl.indexOf("&"));
+			} else {
+				nowUrl = nowUrl.substring(nowUrl.indexOf("v=")+2);
+			}
+
+			let showUrl = "https://www.youtube.com/embed/" + nowUrl;
+			console.log(showUrl);
+			$("#showLecture").attr("src", showUrl);
 		});
 	});
+	
+
 </script>
 </body>
 </html>
