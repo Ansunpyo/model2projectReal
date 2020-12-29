@@ -166,7 +166,7 @@ body {
 <%
 	if(classify != null && (!classify.equals("학생"))){
 %>
-		<div class="ml-auto"><a href="introWriteForm.do"><input type="button" class="btn btn-primary" value="작성하기"/></a></div>
+		<div style="margin-bottom: 70px; margin-right: 56px; margin-top: 20px;" class="ml-auto"><a href="introWriteForm.do"><input type="button" class="btn btn-primary" value="작성하기"/></a></div>
 <% 		
 	}
 %>		

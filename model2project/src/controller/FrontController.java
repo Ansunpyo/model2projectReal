@@ -403,13 +403,13 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/introDeleteForm.do")) {
-			String nowPage = request.getParameter("page");
-			request.setAttribute("page", nowPage);
-			int intro_num = Integer.parseInt(request.getParameter("intro_num"));
-			request.setAttribute("intro_num", intro_num);
-			forward = new ActionForward();
-			forward.setPath("/intro/intro_delete.jsp");
+//		} else if (command.equals("/introDeleteForm.do")) {
+//			String nowPage = request.getParameter("page");
+//			request.setAttribute("page", nowPage);
+//			int intro_num = Integer.parseInt(request.getParameter("intro_num"));
+//			request.setAttribute("intro_num", intro_num);
+//			forward = new ActionForward();
+//			forward.setPath("/intro/intro_delete.jsp");
 		} else if (command.equals("/introDeletePro.do")) {
 			action = new IntroDeleteProAction();
 			try {
@@ -636,13 +636,6 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//		} else if(command.contentEquals("/lectureDetailDeleteForm.do")) {
-//			action = new LectureDetailDeleteAction();
-//			int lecture_num = Integer.parseInt(request.getParameter("lecture_num"));
-//			request.setAttribute("lecture_num", lecture_num);
-//			forward = new ActionForward();
-//			forward.setPath("/lectureDetailDeletePro.do");
-//			}
 		} else if(command.contentEquals("/lectureDetailDelete.do")) {
 			action = new LectureDetailDeleteAction();
 			try {

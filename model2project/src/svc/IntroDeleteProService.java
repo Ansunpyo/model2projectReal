@@ -5,24 +5,12 @@ import java.sql.Connection;
 import dao.IntroDAO;
 
 public class IntroDeleteProService {
-
-	public boolean isArticleWriter(int number, String pass) {
-		boolean isArticleWriter = false;
-		Connection conn = getConnection();
-		IntroDAO introDAO = IntroDAO.getInstance();
-		introDAO.setConnection(conn);
-		isArticleWriter = introDAO.isArticleIntroWriter(number, pass);
-		if (conn != null) close(conn);
-		
-		return isArticleWriter;
-	}
-
-	public boolean removeArticle(int number) {
+	public boolean removeArticle(int intro_num) {
 		boolean isRemoveSuccess = false;
 		Connection conn = getConnection();
 		IntroDAO introDAO = IntroDAO.getInstance();
 		introDAO.setConnection(conn);
-		int deleteCount = introDAO.deleteArticle(number);
+		int deleteCount = introDAO.deleteArticle(intro_num);
 		
 		if(deleteCount > 0) {
 			commit(conn);

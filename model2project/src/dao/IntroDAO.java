@@ -65,7 +65,7 @@ public class IntroDAO {
 		ArrayList[] bigArticleList = null;
 		Intro intro = null;
 		Member mem = null;
-		int startrow = (page - 1) * 10; //읽기 시작할 row 번호
+		int startrow = (page - 1) * 12; //읽기 시작할 row 번호
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -283,8 +283,8 @@ public class IntroDAO {
 	//글 삭제
 	public int deleteArticle(int intro_num) {
 		PreparedStatement pstmt = null;
-		String intro_delete_sql = "DELETE FROM intro WHERE intro_num = ?";
 		int deleteCount = 0;
+		String intro_delete_sql = "DELETE FROM intro WHERE intro_num = ?";
 		try {
 			pstmt = conn.prepareStatement(intro_delete_sql);
 			pstmt.setInt(1, intro_num);

@@ -15,14 +15,7 @@ public class IntroDeleteProAction implements Action {
 		int intro_num = Integer.parseInt(request.getParameter("intro_num"));
 		String nowPage = request.getParameter("page");
 		IntroDeleteProService introDeleteProService = new IntroDeleteProService();
-		boolean isArticleWriter = introDeleteProService.isArticleWriter(intro_num, request.getParameter("password"));
-		if(!isArticleWriter) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('삭제할 권한이 없습니다');history.back();</script>");
-			out.close();
-		} else {
-			boolean isDeleteSuccess = introDeleteProService.removeArticle(intro_num);
+		boolean isDeleteSuccess = introDeleteProService.removeArticle(intro_num);
 			
 			if(!isDeleteSuccess) {
 				response.setContentType("text/html;charset=UTF-8");
@@ -34,7 +27,7 @@ public class IntroDeleteProAction implements Action {
 				forward.setRedirect(true);
 				forward.setPath("introList.do?page=" + nowPage);
 			}
-		}
+			
 		return forward;
 	}
 
