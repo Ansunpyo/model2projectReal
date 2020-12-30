@@ -40,17 +40,17 @@ li {
 	<section>
 			<ul>
 				<li style="margin-top: 10px;"><input name="img1" type="file" id="img1" required="required" />
-				<input type="text" class="inputSlot" name="imgex1" placeholder="사진 소개1" required="required"/></li>
+				<input type="text" class="inputSlot" name="imgex1" placeholder="썸네일 소개" required="required"/></li>
 				<li style="margin-top: 4px;"><input name="img2" type="file" id="img2"/>
-				<input type="text" class="inputSlot" name="imgex2" placeholder="사진 소개2"/></li>
+				<input type="text" class="inputSlot" name="imgex2" placeholder="사진 소개"/></li>
 				<li style="margin-top: 4px;"><input name="img3" type="file" id="img3"/>
-				<input type="text" class="inputSlot" name="imgex3" placeholder="사진 소개3"/></li>
+				<input type="text" class="inputSlot" name="imgex3" placeholder="사진 소개"/></li>
 				<li style="margin-top: 4px;"><input name="img4" type="file" id="img4"/>
-				<input type="text" class="inputSlot" name="imgex4" placeholder="사진 소개4"/></li>
+				<input type="text" class="inputSlot" name="imgex4" placeholder="사진 소개"/></li>
 				<li style="margin-top: 4px;"><input name="img5" type="file" id="img5"/>
-				<input type="text" class="inputSlot" name="imgex5" placeholder="사진 소개5"/></li>
+				<input type="text" class="inputSlot" name="imgex5" placeholder="사진 소개"/></li>
 				<li style="margin-top: 4px;"><input name="img6" type="file" id="img6"/>
-				<input type="text" class="inputSlot" name="imgex6" placeholder="사진 소개6"/></li>
+				<input type="text" class="inputSlot" name="imgex6" placeholder="사진 소개"/></li>
 			</ul>
 			<div>
 				<ul>

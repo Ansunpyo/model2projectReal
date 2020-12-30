@@ -3,14 +3,22 @@
 <%@ page
 	import="vo.Intro, vo.Member, java.util.*, java.text.SimpleDateFormat"%>
 <%
+	String Number = null;
+	String Intro_num = null;
+	Member loginMember = null;
+	String classify = null;
 	ArrayList[] articleList = (ArrayList[]) session.getAttribute("articleList");
 	ArrayList<Intro> intList = articleList[0];
 	ArrayList<Member> memList = articleList[1];
 	Intro article = intList.get(0);
 	Member articlem = memList.get(0);
 	String nowPage = (String) request.getAttribute("page");
-	String Number = null;
-	String Intro_num = null;
+	if(session.getAttribute("loginMember") != null) {
+		loginMember = (Member) session.getAttribute("loginMember");
+		classify = loginMember.getClassify();	
+	} else {
+		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +26,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-<title>강사소개 Detail</title>
+<title>강사소개</title>
 <style>
 body, h1, h2, h3, h4, h5, h6, p, address, header, footer, section, aside,
 	nav, ul, ol, li, dl, dt, dd, input, textarea, select, button {
@@ -53,24 +61,6 @@ h2 {
 	text-align: center;
 }
 
-#basicInfoArea {
-	height: 40px;
-	text-align: center;
-}
-
-#articleContentArea {
-	background: orange;
-	margin-top: 20px;
-	height: 350px;
-	text-align: center;
-	overflow: auto;
-}
-
-#commandList {
-	margin: auto;
-	width: 500px;
-	text-align: center;
-}
 
 #container {
 	width: 1200px;
@@ -179,10 +169,6 @@ h2 {
 	background-color: #fff;
 }
 
-#container .notice2 ul {
-	
-}
-
 #container .notice2 .news ul {
 	padding-top: 30px;
 }
@@ -214,12 +200,12 @@ h2 {
 		<section class="notice">
 			<div class="news">
 				<ul>
-					<li><a href="#">name</a><span><%=articlem.getName()%></span></li>
-					<li><a href="#">E-mail</a><span><%=articlem.getEmail()%></span></li>
-					<li><a href="#">gender</a><span><%=articlem.getGender()%></span></li>
-					<li><a href="#">major</a><span><%=articlem.getMajor()%></span></li>
-					<li><a href="#">education</a><span><%=articlem.getEducation()%></span></li>
-					<li><a href="#">introduce</a><span><%=article.getContents()%></span></li>
+					<li><a>name</a><span><%=articlem.getName()%></span></li>
+					<li><a>E-mail</a><span><%=articlem.getEmail()%></span></li>
+					<li><a>gender</a><span><%=articlem.getGender()%></span></li>
+					<li><a>major</a><span><%=articlem.getMajor()%></span></li>
+					<li><a>education</a><span><%=articlem.getEducation()%></span></li>
+					<li><a>introduce</a><span><%=article.getContents()%></span></li>
 				</ul>
 			</div>
 		</section>
@@ -240,8 +226,8 @@ h2 {
 						type="button" class="btn btn-success"
 						onclick="location.href = 'introList.do'">목록으로</button>						
 <%
-	if(Intro_num == Number) {
-%>						
+	if(loginMember.getNumber() == article.getIntro_num()) {
+%>				
 					<button id="button_event"
 						style="margin-top: 20px; margin-right: 10px; float: right;"
 						type="button" class="btn btn-danger"

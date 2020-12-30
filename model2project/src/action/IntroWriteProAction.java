@@ -58,7 +58,7 @@ public class IntroWriteProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('등록실패');");
+			out.println("alert('강사소개는 하나만 등록 가능합니다');");
 			out.println("history.back();");
 			out.println("</script>");
 		} else {

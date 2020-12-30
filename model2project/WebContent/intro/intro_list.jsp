@@ -84,7 +84,7 @@ body {
 					<div class="gallery ssg wider vipssg fs" style="margin-top:10px;">
 						<a href='/upload/<%=articleList.get(i).getImg1() %>'>
 						<img src="/upload/<%=articleList.get(i).getImg1() %>" alt="<%=articleList.get(i).getImgex1() %>" 
-						style="width : 355px; height:410px; align:center;"/></a>
+						style="width : 355px; height:410px;"/></a>
 						
 						<a href='/upload/<%=articleList.get(i).getImg2() %>'>
 						<img src="/upload/<%=articleList.get(i).getImg2() %>" alt="<%=articleList.get(i).getImgex2() %>" 
@@ -133,11 +133,11 @@ body {
 <%
 	if (nowPage <= 1) {
 %>
-	    	<li class="page-item disabled"><a class="page-link" href="introList.do?page=<%=nowPage-1 %>">Previous</a></li>
+	    	<li class="page-item disabled"><a class="page-link" href="introList.do?page=<%=nowPage-1 %>">Prev</a></li>
 <%
 	}else{
 %>
-	  	 	 <li class="page-item"><a class="page-link" href="introList.do?page=<%=nowPage-1 %>">Previous</a></li>
+	  	 	 <li class="page-item"><a class="page-link" href="introList.do?page=<%=nowPage-1 %>">Prev</a></li>
 <%
 	}for(int a = startPage;a<=endPage;a++){
 		if(a==nowPage){
@@ -166,7 +166,7 @@ body {
 <%
 	if(classify != null && (!classify.equals("학생"))){
 %>
-		<div style="margin-bottom: 70px; margin-right: 56px; margin-top: 20px;" class="ml-auto"><a href="introWriteForm.do"><input type="button" class="btn btn-primary" value="작성하기"/></a></div>
+		<div style="margin-bottom: 70px; margin-right: 56px; margin-top: 20px;" class="ml-auto"><a href="introWriteForm.do" class="btn btn-primary">작성하기</a></div>
 <% 		
 	}
 %>		
@@ -182,7 +182,7 @@ body {
 				$(window).resize(function(){
 					$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
 				});
-			});
+			});			
 		</script>
 </body>
 </html>

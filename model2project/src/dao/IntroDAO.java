@@ -206,7 +206,7 @@ public class IntroDAO {
 					intro.setImgex4(rs.getString("imgex4"));
 					intro.setImgex5(rs.getString("imgex5"));
 					intro.setImgex6(rs.getString("imgex6"));
-					intro.setReadcount(rs.getInt("readcount"));	//강사만 볼 수 있게 설정
+					intro.setReadcount(rs.getInt("readcount"));
 					member.setName(rs.getString("name"));
 					member.setEmail(rs.getString("email"));
 					member.setGender(rs.getString("gender"));
@@ -329,6 +329,30 @@ public class IntroDAO {
 			if(pstmt != null) close(pstmt);
 		}
 		return intro;
+	}
+//소개 글 중복되지 않게 하기위해 확인하는 절차
+	public boolean ArticleIntroWriter(int intro_num, String password) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String intro_sql = "SELECT * FROM member JOIN intro ON member.number = intro.number WHERE intro_num = ?";
+		boolean isWriter = false;
+		
+		try {
+			pstmt = conn.prepareStatement(intro_sql);
+			pstmt.setInt(1, intro_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+
+			
+			if(password.equals(rs.getString("password"))) {
+				isWriter = true;
+			}
+		} catch (SQLException ex) {
+			System.out.println("introWriter 에러 : " + ex);
+		} finally {
+			if(pstmt != null) close(pstmt);
+		}
+		return isWriter;
 	}
 }
 

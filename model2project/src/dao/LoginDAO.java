@@ -39,6 +39,7 @@ public class LoginDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				loginMember = new Member();
+				loginMember.setNumber(rs.getInt("number"));
 				loginMember.setId(rs.getString("id"));
 				loginMember.setPassword(rs.getString("password"));
 				loginMember.setName(rs.getString("name"));
