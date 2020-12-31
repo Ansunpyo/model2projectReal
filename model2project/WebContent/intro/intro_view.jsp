@@ -102,10 +102,6 @@ h2 {
 	background-color: #fff;
 }
 
-#container .notice ul {
-	
-}
-
 #container .notice .news ul {
 	padding-top: 20px;
 }
@@ -195,7 +191,7 @@ h2 {
 	<section id="container" class="clearfix">
 		<section class="notice1">
 			<a href="#"><img src="/upload/<%=article.getImg1()%>" alt="-"
-				style="width: 355px; height: 300px; align: center;" /><span></span></a>
+				style="width:355px; height:410px; align: center;" /><span></span></a>
 		</section>
 		<section class="notice">
 			<div class="news">

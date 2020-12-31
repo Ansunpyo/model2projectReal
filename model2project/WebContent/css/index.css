@@ -6,7 +6,7 @@
     border-radius: 6px;
     opacity: 1;
     margin-bottom: 3%;
-    background: #00e5ff;
+    background: #d7e8e9;
 }
 
 .gallery .topimg a {
@@ -46,7 +46,7 @@
     display: block;
     float: left;
     border-radius: 6px;
-    background: #00e5ff;
+    background: #d7e8e9;
     position: relative;
     overflow: hidden;    
     text-decoration: none;

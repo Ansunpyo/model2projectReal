@@ -30,10 +30,12 @@
 <head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
- 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
- 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/story-show-gallery@2/dist/ssg.min.css">
- 		<link rel="stylesheet" href="src/ssg.css" type="text/css" media="all">
-		<link rel='stylesheet' href='./css/index.css' type='text/css' media='all' />
+<!--   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+ 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/story-show-gallery@2/dist/ssg.min.css">-->
+ 		<link rel='stylesheet' href='./css/bootstrap.css' type='text/css' media='all' />
+		<link rel='stylesheet' href='./css/ssg.css' type='text/css' media='all' />
+		<link rel='stylesheet' href='./css/picture.css' type='text/css' media='all' />
+		
 		<title>강사소개</title>
 <style>
 body {
@@ -129,7 +131,7 @@ body {
 	}
 %>
 	<nav aria-label="Page navigation example">
-		<ul class="pagination pagination-sm justify-content-center">
+		<ul style="margin-right: 35px;" class="pagination pagination-sm justify-content-center">
 <%
 	if (nowPage <= 1) {
 %>

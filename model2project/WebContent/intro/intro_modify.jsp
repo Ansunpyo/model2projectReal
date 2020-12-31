@@ -14,31 +14,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+<link rel='stylesheet' href='./css/bootstrap.css' type='text/css' media='all' />
+<link rel='stylesheet' href='./css/imodywrit.css' type='text/css' media='all' />
 <title>강사소개 수정</title>
-<style>
-body, h1, h2, h3, h4, h5, h6, p, address, header, footer, section, aside,
-	nav, ul, ol, li, dl, dt, dd, input, textarea, select, button {
-	font-family: 'Malgun Gothic', sans-serif;
-	font-size: 14px;
-	color: #222328;
-}
-
-body {
-	background-image:
-		url(https://roman-flossler.github.io/StoryShowGallery/img/bg.png);
-}
-
-li {
-	list-style: none;
-}
-
-.container {
-	width: 550px;
-	margin: auto;
-}
-</style>
 </head>
 <body>
 	<section class="container">
