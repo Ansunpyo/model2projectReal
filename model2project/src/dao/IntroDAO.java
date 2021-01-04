@@ -65,7 +65,7 @@ public class IntroDAO {
 		ArrayList[] bigArticleList = null;
 		Intro intro = null;
 		Member mem = null;
-		int startrow = (page - 1) * 3; //읽기 시작할 row 번호
+		int startrow = (page - 1) * 12; //읽기 시작할 row 번호
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
