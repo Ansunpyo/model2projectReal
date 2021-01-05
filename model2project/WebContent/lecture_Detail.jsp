@@ -21,14 +21,7 @@ if (session.getAttribute("loginMember") != null) {
 <script src="js/jquery-3.5.1.js"></script>
 <style>
 @charset "UTF-8";
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
-	output, ruby, section, summary, time, mark, audio, video {
+html, body, div, iframe, h2, p, a, ul, li, form, section{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -37,26 +30,18 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 	vertical-align: baseline;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup,
-	menu, nav, section {
+section {
 	display: block;
 }
 
 body {
 	line-height: 1;
+	text-decoration: none;
+	margin: auto;
 }
 
-ol, ul {
+ul {
 	list-style: none;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-	content: '';
-	content: none;
 }
 
 .inputSlot {
@@ -78,15 +63,6 @@ textarea:focus {
 	outline: none;
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-body {
-	text-decoration: none;
-	margin: auto;
-}
 
 .sidebar {
 	width: 390px;
@@ -196,18 +172,18 @@ body {
 	font-color: white;
 }
 
-.lectureList>.lecup, .lectureList>.lecdown {
+.lectureList>.up, .lectureList>.down {
 	margin: 0 auto;
 	width: 370px;
 	height: 35px;
 	background: #444;
 }
 
-.lectureList>.lecup:hover, .lectureList>.lecdown:hover {
+.lectureList>.up:hover, .lectureList>.down:hover {
 	background: #333;
 }
 
-.lectureList>.lecup>a, .lectureList>.lecdown>a {
+.lectureList>.up>a, .lectureList>.down>a {
 	display: block;
 	line-height: 35px;
 	text-align: center;
@@ -216,18 +192,18 @@ body {
 	color: #8ac007;
 }
 
-.manageList>.admup, .manageList>.admdown {
+.manageList>.up, .manageList>.down {
 	margin: 0 auto;
 	width: 370px;
 	height: 35px;
 	background: #444;
 }
 
-.manageList>.admup:hover, .manageList>.admdown:hover {
+.manageList>.up:hover, .manageList>.down:hover {
 	background: #333;
 }
 
-.manageList>.admup>a, .manageList>.admdown>a {
+.manageList>.up>a, .manageList>.down>a {
 	display: block;
 	line-height: 35px;
 	text-align: center;
@@ -300,7 +276,7 @@ body {
 			</div>
 			<!-- 여기서부터 학생들에게 보여지는 List -->
 			<div class="lectureList">
-				<div class="lecup">
+				<div class="up">
 					<a href="#">▲</a>
 				</div>
 				<div class="lecList">
@@ -327,12 +303,12 @@ body {
 						}
 					%>
 				</div>
-				<div class="lecdown">
+				<div class="down">
 					<a href="#">▼</a>
 				</div>
 			</div>
 			<div class="manageList">
-				<div class="admup">
+				<div class="up">
 					<a href="#">▲</a>
 				</div>
 				<div class="lecList">
@@ -375,7 +351,7 @@ body {
 						</div>
 					</ul>
 				</div>
-				<div class="admdown">
+				<div class="down">
 					<a href="#">▼</a>
 				</div>
 			</div>
