@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, java.util.LinkedList" %>
 <!DOCTYPE html>
+<%
+	LinkedList<Object> lectureList = (LinkedList<Object>)session.getAttribute("lectureList");
+	Lecture lec = null;
+	Member mem = null;
+	if(lectureList != null){
+		lec = (Lecture)lectureList.get(0);
+		mem = (Member)lectureList.get(1);
+	}
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -77,17 +86,18 @@ button {
 }
 </style>
 </head>
-<body>
+<body onresize="parent.resizeTo(600,700)" onload="parent.resizeTo(600,700)">
 <h1 style="text-align: center;">결제화면</h1>
-<form action="introWritePro.do" method="post" enctype="multipart/form-data" name="introform">
+<form action="doPay.do" method="post" name="introform">
 <section class="main">
-	<a>강의번호 : </a><span>(강의번호)</span><br>
-	<a>강의명 : </a><span>(강의명)</span><br>
-	<a>교사명 : </a><span>(교사명)</span><br>
-	<a>결제가격 : </a><span>(결제가격)</span>
+	<a>강의번호 : </a><span><%=lec.getLecture_num() %></span><br>
+	<a>강의명 : </a><span><%=lec.getLecture_title() %></span><br>
+	<a>교사명 : </a><span><%=mem.getName() %></span><br>
+	<a>결제가격 : </a><span><%=lec.getPrice() %></span>
 </section>
+<input type="hidden" name="lecture_num" value="<%=lec.getLecture_num() %>" />
 <label class="reg" for="class">
-	<br><select size="1" id="class"  style="height: 30px; margin-left: 15px;">
+	<br><select size="1" id="class" style="height: 30px; margin-left: 15px;">
 		<option class="cardTab" value="card">카드</option>
 		<option class="bankingTab" value="banking">계좌이체</option>
 		<option class="phoneTab" value="phone">휴대폰</option>
@@ -124,15 +134,15 @@ button {
 	<a>카드번호</a><br><textarea style="height: 25px; width: 400px; resize: none; font-size: 20px;" name="pay_code" placeholder="-없이 입력" required="required"></textarea><br>
 </div>
 <div class="bankingCode">
-	<a>계좌번호</a><br><textarea style="height: 25px; width: 400px; resize: none; font-size: 20px;" name="pay_code" placeholder="-없이 입력" required="required"></textarea><br>
+	<a>계좌번호</a><br><textarea style="height: 25px; width: 400px; resize: none; font-size: 20px;" name="pay_code" placeholder="신한은행 150-248-945238" readonly></textarea><br>
 </div>	
 <div class="phoneCode">
 	<a>전화번호</a><br><textarea style="height: 25px; width: 400px; resize: none; font-size: 20px;" name="pay_code" placeholder="-없이 입력" required="required"></textarea><br>
 </div>		
 </fieldset>
 <div class="btn">
-	<button type="button" class="btn btn-success" style="margin-right: 185px;">목록으로</button>
-	<button type="button" class="btn btn-primary" style="margin-right: 10px;">결제하기</button>
+	<button type="button" class="btn btn-success" id="closeButton" onclick="window.close();" style="margin-right: 185px;">결제취소</button>
+	<button type="button" class="btn btn-primary" id="submitButton" style="margin-right: 10px;">결제하기</button>
 </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -166,6 +176,9 @@ $(function(){
 			$(".bankingCode").hide();
 			$(".phoneCode").show();
 		}
+	});
+	$("#submitButton").click(function(){
+		document.introform.submit();
 	});
 });
 </script>

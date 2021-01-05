@@ -58,8 +58,6 @@
 		if (nowPageNumber < 1) nowPageNumber = 1;
 		if (nowPageNumber > lastPage) nowPageNumber = lastPage;
 		LinkedList[] payList = (LinkedList[])session.getAttribute("payList");
-		LinkedList<Pay> pList = payList[0];
-		LinkedList<Lecture> lecList = payList[1];
 		int startNumber = (nowPageNumber - 1) / pageCount * range + 1;
 		int endNumber = startNumber + range - 1;
 		if (nowPageNumber <= 1) {
@@ -103,7 +101,7 @@
 				<table class="table table-sm bg-white">
 				  <thead>
 				    <tr>
-				      <th scope="col">LECTURE NUMBER</th>
+				      <th scope="col">LECTURE NUM</th>
 				      <th scope="col">LECTURE TITLE</th>
 				      <th scope="col">TYPE</th>
 				      <th scope="col">PAYCODE</th>
@@ -113,7 +111,9 @@
 				  </thead>
 				  <tbody>
 <%
-	if(pList != null) {
+	if(payList != null) {
+		LinkedList<Pay> pList = payList[0];
+		LinkedList<Lecture> lecList = payList[1];
 	
 		for(int i = 0; i < pList.size();i++) {
 %>

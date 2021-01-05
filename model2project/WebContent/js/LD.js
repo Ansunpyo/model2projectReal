@@ -15,20 +15,18 @@ $(".lu").hide();
 		$(".manageList").show();
 	});	
 	$(".op").click(function(){
-		window.resizeTo(1715, 900);
+		window.resizeTo(1698, 898);
 		$("#showLecture").attr("width", 1672);
 		$("#showLecture").attr("height", 830);
-		$("body").attr("onresize", "parent.resizeTo(1715,900)");
 		$(".sidebar").hide();
 		$(".cl").show();
 		$(".op").hide();
 		$(".lu").hide();
 	});
 	$(".cl").click(function(){
-		window.resizeTo(1715, 790);
+		window.resizeTo(1698, 790); 
 		$("#showLecture").attr("width", 1280);
-		$("#showLecture").attr("height", 720);
-		$("body").attr("onresize", "parent.resizeTo(1715,790)");
+		$("#showLecture").attr("height", 722);
 		$(".cl").hide();
 		$(".op").show();
 		$(".sidebar").show();

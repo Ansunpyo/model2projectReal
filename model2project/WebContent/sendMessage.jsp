@@ -100,18 +100,18 @@
 									<li class="bbsViewWriter">
 										<ul>
 											<li class="bbsViewWriterHeader">RECEIVER</li>
-											<li class="bbsViewWriterName"><input type="text" name="receiver" placeholder="받는 사람 이름을 입력해주세요." required="required" autocomplete="off" /></li>
+											<li class="bbsViewWriterName"><input class="form-control" type="text" name="receiver" placeholder="받는 사람 ID를 입력해주세요." required="required" autocomplete="off" /></li>
 										</ul>
 									</li>
 									<li class="bbsViewTitle">
 										<ul>
 											<li class="bbsViewTitleHeader">TITLE</li>
-											<li class="bbsViewTitleText"><input type="text" name="title" required="required" autocomplete="none" /></li>
+											<li class="bbsViewTitleText"><input class="form-control" type="text" name="title" required="required" autocomplete="off" /></li>
 										</ul>
 									</li>
 									<li class="bbsViewBody">
 										<div>
-											<textarea cols="50" rows="10" style="resize: none;" name="contents" placeholder="300자까지 적을 수 있습니다."></textarea>
+											<textarea class="form-control" cols="50" rows="10" style="resize: none;" name="contents" placeholder="300자까지 적을 수 있습니다."></textarea>
 										</div>
 									</li>
 								</ul>

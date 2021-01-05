@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Free, java.util.LinkedList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Free, vo.Free_Comment, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	int nowPage = 1;
 	String opt = "";
+	int free_num = Integer.parseInt(request.getParameter("free_num"));
 %>
 <html lang="ko">
 <head>
@@ -13,6 +14,11 @@
 	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/freeBoard.css">
+	<style>
+		.depth1, .depth2, .depth3, .depth4, .depth5, .depth6, .depth7, .depth8, .depth9, .depth10 {
+		    padding-left: 2%;
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -55,6 +61,14 @@
 				Member mem = (Member) freeViewList.get(1);
 				session.setAttribute("free_num", fr.getFree_num());
 				if(!mem.getName().equals(loginMember.getName())) opt = " invisible";
+
+				LinkedList[] freeComList = (LinkedList[])session.getAttribute("freeComList");
+				LinkedList<Member> cMemList = null;
+				LinkedList<Free_Comment> fCList = null;
+				if (freeComList != null) {
+					cMemList = freeComList[0];
+					fCList = freeComList[1];
+				}
 %>
 	<div class="topbar">
 		<ul>
@@ -104,6 +118,58 @@
 									<div>
 										<%=fr.getContents() %>
 									</div>
+								</li>
+								<li class="comments" style="width:100%;text-align:left;background:white;">
+									<form action="freeCommentWrite.do?page=<%=nowPage %>&free_num=<%=free_num %>" method="post">
+										<div style="height:5px; botder-top:2px solid gray;"></div>
+										<textarea class="form-control" name="contents" style="resize: none;" required="required"></textarea>
+										<input type="submit" value="작성하기" class="btn btn-secondary" />
+									</form>
+									<script>
+										function comment_step(parent, me, step) {
+											var oCur = document.getElementById("IAMCOMMENT_"+me);
+											if(parent>0 && step>0) {
+												var oOrg = document.getElementById("comCont" + parent);
+												var oCom = document.getElementById("com" + me);
+												oOrg.className = "depth"+step;
+												oOrg.innerHTML += oCur.innerHTML;
+												oCur.parentNode.removeChild(oCur);
+											} else {
+												oCur.style.display="";
+											}
+										}
+									</script>
+<%
+								if(freeComList != null) {
+									for(int i=0; i < cMemList.size(); i++){
+%>
+									<div id="IAMCOMMENT_<%=fCList.get(i).getComment_num() %>">
+										<div id="com<%=fCList.get(i).getComment_num() %>">
+											<span class="float-right"><%=fCList.get(i).getTime() %></span>
+											<h6><b><%=cMemList.get(i).getName() %></b></h6>
+											<button id="commentButton<%=fCList.get(i).getComment_num() %>" class="btn btn-primary float-right" onclick="$(this).parent().next('form').toggle()">+</button>
+											<%if(loginMember.getId().equals("admin") || loginMember.getNumber() == cMemList.get(i).getNumber()) { %><button class="btn btn-danger float-right" onclick="location.href='deleteFreeComment.do?page=<%=nowPage %>&free_num=<%=free_num%>&comment_num=<%=fCList.get(i).getComment_num() %>';">X</button><% } %>
+											<div style="border-bottom:1px solid gray;min-height:50px;"><%=fCList.get(i).getContents() %></div>
+										</div>
+										<form action="freeExtraComment.do" method="post" style="display: none;">
+											<input type="hidden" name="page" value="<%=nowPage %>" />
+											<input type="hidden" name="free_num" value="<%=free_num %>" />
+											<input type="hidden" name="parent" value="<%=fCList.get(i).getComment_num() %>" />
+											<textarea class="form-control" name="contents" style="resize: none;" required="required"></textarea>
+											<input type="submit" class="btn btn-secondary" value="작성하기" />
+										</form>
+										<div id="comCont<%=fCList.get(i).getComment_num() %>">
+											
+										</div>
+									</div>
+									<script>
+										comment_step(<%=fCList.get(i).getParent() %>,<%=fCList.get(i).getComment_num() %>,<%=fCList.get(i).getStep() %>);
+									</script>
+<%
+									}
+								}
+%>
+										
 								</li>
 							</ul>
 						</div>

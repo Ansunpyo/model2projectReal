@@ -123,6 +123,7 @@
 				LinkedList<Review> reList = reviewList[2];
 				
 				for (int i = 0; i < lecList.size();i++) {
+					String lecUrl = "lectureDetail.do?lecture_num=" + lecList.get(i).getLecture_num();
 %>
 								<li class="bbsBody">
 									<ul class="bbsBodyContents">
@@ -130,7 +131,7 @@
 											<a href="reviewView.do?page=<%=nowPageNumber %>&review_num=<%=reList.get(i).getReview_num() %>"><%=reList.get(i).getTitle() %></a>
 											<div class="bbsTitleDetail"><%=reList.get(i).getContents() %></div>
 										</li>
-										<li class="bbsLecture"><a href="강의페이지.do?lecture_num=<%=lecList.get(i).getLecture_num() %>"><%=lecList.get(i).getLecture_title() %></a></li>
+										<li class="bbsLecture"><a href="<%=lecUrl %>" onClick="window.open(this.href, '', 'resizable=no width=1340, height=730'); return false;"><%=lecList.get(i).getLecture_title() %></a></li>
 										<li class="bbsWriter"><%=memList.get(i).getName() %></li>
 									</ul>
 								</li>

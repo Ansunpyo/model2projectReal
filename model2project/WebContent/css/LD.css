@@ -176,7 +176,7 @@ body {
 
 .cl {
 	width: 10px;
-	height: 900px;
+	height: 830px;
 	background-color: #F5DA81;
 	font-color: white;
 }
@@ -245,9 +245,4 @@ body {
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
 	-webkit-transition: all 0.4s;
 	transition: all 0.4s;
-}
-
-.photoList>ul>li>a.on {
-	background: rgba(0, 0, 0, .1);
-	color: #f1f1f1;
 }

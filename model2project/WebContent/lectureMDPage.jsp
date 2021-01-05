@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Subject, java.util.LinkedList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Subject, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	LinkedList<Subject> subList = (LinkedList<Subject>) session.getAttribute("subList");
+	LinkedList<Subject> subList = (LinkedList<Subject>) session.getAttribute("subjectList");
+	Lecture lec = (Lecture) session.getAttribute("lec");
 %>
 <html lang="ko">
 <head>
@@ -26,7 +27,7 @@ form {
 
 @media (max-width:576px) {
 	form {
-		width: 500px;
+		width: 100%;
 	}
 }
 </style>
@@ -69,34 +70,31 @@ form {
 	
 	<div class="container mb-5">
 		<div class="p-3 mb-2 d-flex flex-wrap bg-secondary text-light position-relative">
-			<form method="post" action="lectureUpload.do" style="margin:auto;">
+			<form method="post" action="lectureModify.do" style="margin:auto;">
 				<div class="bg-light p-2">
-					<input type="text" class="form-control" name="lecture_title" placeholder="LECTURE TITLE" required="required" autocomplete="off" />
+					<input type="hidden" name="page" value="<%=Integer.parseInt(request.getParameter("page")) %>" />
+					<input type="hidden" name="lecture_num" value="<%=lec.getLecture_num() %>" />
+					<input type="text" class="form-control" name="lecture_title" placeholder="LECTURE TITLE" required="required" autocomplete="off" value="<%=lec.getLecture_title() %>" />
 				</div>
 				<div class="bg-light p-2">
 					<select class="form-control" name="subject">
 <%
 					for(int i = 0; i < subList.size(); i++) {
 %>
-						<option value="<%=subList.get(i).getCode() %>"><%=subList.get(i).getSubject_name() %></option>
+						<option value="<%=subList.get(i).getCode() %>"<% if(subList.get(i).getCode() == lec.getSubject_code()) {%> selected<% } %>><%=subList.get(i).getSubject_name() %></option>
 <%
 					}	
 %>
 					</select>
 				</div>
 				<div class="bg-light p-2">
-					<input type="number" class="form-control" name="price" placeholder="PRICE" min="0" required="required" autocomplete="off" />
-				</div>
-				<div class="bg-light p-2">
-					<input type="text" class="form-control" name="chapter1" placeholder="CHAPTER1 TITLE" required="required" autocomplete="off" />
-				</div>
-				<div class="bg-light p-2">
-					<input type="text" class="form-control videoUrl" name="video" placeholder="CHAPTER1 URL(Youtube 주소만 입력해주세요!)" required="required" autocomplete="off" />
+					<input type="number" class="form-control" name="price" placeholder="PRICE" min="0" required="required" autocomplete="off" value="<%=lec.getPrice() %>" />
 				</div>
 				<div style="text-align:center;">
-					<input type="submit" class="btn btn-primary" disabled value="강의 개설" />
+					<input type="submit" class="btn btn-primary" value="강의 수정" />
 				</div>
 			</form>
+				<button class="btn btn-danger mt-5 delLecture">강의 삭제</button>
 		</div>
 	</div>
 	
@@ -115,18 +113,9 @@ form {
 			$(window).resize(function(){
 				$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
 			});
-			$(".videoUrl").on("input",function(){
-				var str = $(this).val()
-				var index = str.indexOf("youtube.com/watch?v=");
-				if(index >= 0) {
-					var extra = str.substring(str.indexOf("=") + 1, str.length);
-					if(extra != "") {
-						$("input[type=submit]").attr("disabled", false);
-					} else {
-						$("input[type=submit]").attr("disabled", true);
-					}
-				} else {
-					$("input[type=submit]").attr("disabled", true);
+			$(".delLecture").click(function(){
+				if(confirm("정말 삭제하시겠습니까?")){
+					location.href="deleteLecture.do?lecture_num=" + <%=lec.getLecture_num() %>;					
 				}
 			});
 		});

@@ -210,12 +210,11 @@ h2 {
 				<h4 class="on">리뷰</h4>
 				<ul>
 					<li><a href="#">It was a good class.</a><span>2020.12.01</span></li>
-					<li><a href="#">I'd like to hear it again if I have a
-							chance.</a><span>2020.10.17</span></li>
+					<li><a href="#">I'd like to hear it again if I have a chance.</a><span>2020.10.17</span></li>
 					<li><a href="#">It was fun.</a><span>2020.09.21</span></li>
 					<li><a href="#">When is the next class coming?</a><span>2020.09.12</span></li>
 				</ul>
-			</div>
+			</div>		
 			<div id="notice2">
 				<div class="mr-auto">
 					<button style="margin-top: 20px; margin-right: 10px; float: right;"

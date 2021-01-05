@@ -15,18 +15,21 @@ $(".lu").hide();
 		$(".manageList").show();
 	});	
 	$(".op").click(function(){
+		window.resizeTo(1698, 898);
+		$("#showLecture").attr("width", 1672);
+		$("#showLecture").attr("height", 830);
 		$(".sidebar").hide();
 		$(".cl").show();
 		$(".op").hide();
 		$(".lu").hide();
-		$("iframe").css("width", "1690px");
-		$("body").onresize("height", "840px");
 	});
 	$(".cl").click(function(){
+		window.resizeTo(1698, 790); 
+		$("#showLecture").attr("width", 1280);
+		$("#showLecture").attr("height", 722);
 		$(".cl").hide();
 		$(".op").show();
 		$(".sidebar").show();
-		$("iframe").css("width", "1280px");
 	});	
 	$(".lug").click(function(){
 		$(".lug").hide();
@@ -37,6 +40,21 @@ $(".lu").hide();
 		$(".lug").show();
 	});	
 });
+
+	$(function(){
+		$(".lec").click(function(){
+			let nowUrl = $(this).attr("data-url");
+			if(nowUrl.indexOf("&") > 0) {
+				nowUrl = nowUrl.substring(nowUrl.indexOf("v=") + 2, nowUrl.indexOf("&"));
+			} else {
+				nowUrl = nowUrl.substring(nowUrl.indexOf("v=")+2);
+			}
+
+			let showUrl = "https://www.youtube.com/embed/" + nowUrl;
+			console.log(showUrl);
+			$("#showLecture").attr("src", showUrl);
+		});
+	});
 
 $(function () {
 	var num = 0;
@@ -51,7 +69,7 @@ $(function () {
 			$move.find("a").removeClass("on");
 			$move.eq(num).find("a").addClass("on");
 			if (num > 0 && num < $move.length - 2) {
-				$(".photoList > ul").animate({ "top": "+=51px" });
+				$(".photoList > ul").animate({ "top": "+=58px" });
 			}
 		} else {
 			return;
@@ -65,7 +83,7 @@ $(function () {
 			$move.find("a").removeClass("on");
 			$move.eq(num).find("a").addClass("on");
 			if (num > 1 && num < $move.length - 1) {
-				$(".photoList > ul").animate({ "top": "-=51px"});
+				$(".photoList > ul").animate({ "top": "-=58px"});
 			}
 		} else {
 			return;

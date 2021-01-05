@@ -151,8 +151,10 @@
 						} else {
 							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=")+2);
 						}
+						String lecUrl = "";
+						lecUrl = "lectureDetail.do?lecture_num=" + lecList.get(i).getLecture_num();
 %>
-						<img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200">
+						<a href="<%=lecUrl %>" onClick="window.open(this.href, '', 'resizable=no width=1340, height=730'); return false;"><img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200"></a>
 <%
 					}
 %>
@@ -172,8 +174,10 @@
 						} else {
 							video = lecList.get(i).getVideo().substring(lecList.get(i).getVideo().indexOf("v=")+2);
 						}
+						String lecUrl = "";
+						lecUrl = "lectureDetail.do?lecture_num=" + lecList.get(i).getLecture_num();
 %>
-						<img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200">
+						<a href="<%=lecUrl %>" onClick="window.open(this.href, '', 'resizable=no width=1340, height=730'); return false;"><img src="https://img.youtube.com/vi/<%=video %>/0.jpg" alt="thumb<%=i%>" width="296" height="200"></a>
 <%
 					}
 %>
@@ -190,9 +194,9 @@
 			<p class="btm_logo"><img src="./images/logo_btm.png" alt="JUST쇼핑몰"></p>
 			<dl class="btm_menu">
 				<dt class="blind"><strong>바닥메뉴</strong></dt>
-				<dd><a href="https://www.instagram.com/"><img src="./images/ico_in.png" alt="인스타그램으로 이동"></a></dd>
-				<dd><a href="https://twitter.com/"><img src="./images/ico_tw.png" alt="트위터로 이동"></a></dd>
-				<dd><a href="https://www.facebook.com/"><img src="./images/ico_fb.png" alt="페이스북으로 이동"></a></dd>
+				<dd><a href="https://www.instagram.com/" target="_blank"><img src="./images/ico_in.png" alt="인스타그램으로 이동"></a></dd>
+				<dd><a href="https://twitter.com/" target="_blank"><img src="./images/ico_tw.png" alt="트위터로 이동"></a></dd>
+				<dd><a href="https://www.facebook.com/" target="_blank"><img src="./images/ico_fb.png" alt="페이스북으로 이동"></a></dd>
 			</dl>
 			<p class="copy">copyright &copy; 2LW, All rights reserved.</p>
 		</footer>

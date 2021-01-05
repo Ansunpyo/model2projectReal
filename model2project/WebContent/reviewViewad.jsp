@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, java.util.LinkedList" %>
+    pageEncoding="UTF-8" import="vo.Member, vo.Lecture, vo.Review, vo.Review_Comment, java.util.LinkedList" %>
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	int nowPage = 1;
+	int review_num = Integer.parseInt(request.getParameter("review_num"));
 %>
 <html lang="ko">
 <head>
@@ -12,6 +13,11 @@
 	<link rel="stylesheet" href="css/sidebar.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/review.css">
+	<style>
+		.depth1, .depth2, .depth3, .depth4, .depth5, .depth6, .depth7, .depth8, .depth9, .depth10 {
+		    padding-left: 2%;
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -54,6 +60,14 @@
 				Review re = (Review) reviewViewList.get(0);
 				Member mem = (Member) reviewViewList.get(1);
 				session.setAttribute("review_num", re.getReview_num());
+				
+				LinkedList[] reviewComList = (LinkedList[])session.getAttribute("reviewComList");
+				LinkedList<Member> cMemList = null;
+				LinkedList<Review_Comment> rCList = null;
+				if (reviewComList != null) {
+					cMemList = reviewComList[0];
+					rCList = reviewComList[1];
+				}
 %>
 	<div class="topbar">
 		<ul>
@@ -109,6 +123,58 @@
 									<div>
 										<%=re.getContents() %>
 									</div>
+								</li>
+								<li class="comments" style="width:100%;text-align:left;background:white;">
+									<form action="reviewCommentWrite.do?page=<%=nowPage %>&review_num=<%=review_num %>" method="post">
+										<div style="height:5px; botder-top:2px solid gray;"></div>
+										<textarea class="form-control" name="contents" style="resize: none;" required="required"></textarea>
+										<input type="submit" value="작성하기" class="btn btn-secondary" />
+									</form>
+									<script>
+										function comment_step(parent, me, step) {
+											var oCur = document.getElementById("IAMCOMMENT_"+me);
+											if(parent>0 && step>0) {
+												var oOrg = document.getElementById("comCont" + parent);
+												var oCom = document.getElementById("com" + me);
+												oOrg.className = "depth"+step;
+												oOrg.innerHTML += oCur.innerHTML;
+												oCur.parentNode.removeChild(oCur);
+											} else {
+												oCur.style.display="";
+											}
+										}
+									</script>
+<%
+								if(reviewComList != null) {
+									for(int i=0; i < cMemList.size(); i++){
+%>
+									<div id="IAMCOMMENT_<%=rCList.get(i).getComment_num() %>">
+										<div id="com<%=rCList.get(i).getComment_num() %>">
+											<span class="float-right"><%=rCList.get(i).getTime() %></span>
+											<h6><b><%=cMemList.get(i).getName() %></b></h6>
+											<button id="commentButton<%=rCList.get(i).getComment_num() %>" class="btn btn-primary float-right" onclick="$(this).parent().next('form').toggle()">+</button>
+											<%if(loginMember.getId().equals("admin") || loginMember.getNumber() == cMemList.get(i).getNumber()) { %><button class="btn btn-danger float-right" onclick="location.href='deleteReviewComment.do?page=<%=nowPage %>&review_num=<%=review_num%>&comment_num=<%=rCList.get(i).getComment_num() %>';">X</button><% } %>
+											<div style="border-bottom:1px solid gray;min-height:50px;"><%=rCList.get(i).getContents() %></div>
+										</div>
+										<form action="reviewExtraComment.do" method="post" style="display: none;">
+											<input type="hidden" name="page" value="<%=nowPage %>" />
+											<input type="hidden" name="review_num" value="<%=review_num %>" />
+											<input type="hidden" name="parent" value="<%=rCList.get(i).getComment_num() %>" />
+											<textarea class="form-control" name="contents" style="resize: none;" required="required"></textarea>
+											<input type="submit" class="btn btn-secondary" value="작성하기" />
+										</form>
+										<div id="comCont<%=rCList.get(i).getComment_num() %>">
+											
+										</div>
+									</div>
+									<script>
+										comment_step(<%=rCList.get(i).getParent() %>,<%=rCList.get(i).getComment_num() %>,<%=rCList.get(i).getStep() %>);
+									</script>
+<%
+									}
+								}
+%>
+										
 								</li>
 							</ul>
 						</div>

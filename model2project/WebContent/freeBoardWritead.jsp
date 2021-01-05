@@ -96,7 +96,7 @@
 									</li>
 									<li class="bbsViewBody">
 										<div>
-											<textarea cols="50" rows="10" style="resize: none;" class="form-control" name="contents" placeholder="500자까지 적을 수 있습니다."></textarea>
+											<textarea cols="50" rows="10" style="resize: none;" class="form-control" name="contents" placeholder="1000자까지 적을 수 있습니다."></textarea>
 										</div>
 									</li>
 								</ul>

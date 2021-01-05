@@ -99,7 +99,7 @@
 				        	<li class="contentsBigWrap">
 				        		<ul class="contentsWrap">
 				        			<li class="contentsHeader"><h4><span class="badge rounded-pill bg-success text-light">CONTENTS</span></h4></li>
-				        			<li class="contentsInput"><div><textarea rows="10" class="form-control" style="resize: none;" name="contents" placeholder="500자까지 적을 수 있습니다." required="required"></textarea></div></li>
+				        			<li class="contentsInput"><div><textarea rows="10" class="form-control" style="resize: none;" name="contents" placeholder="1000자까지 적을 수 있습니다." required="required"></textarea></div></li>
 				        		</ul>
 				        	</li>
 				        </ul>
