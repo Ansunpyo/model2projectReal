@@ -10,11 +10,18 @@ import dao.FreeDAO;
 public class FreeDeleteService {
 
 	public int deleteFree(int free_num) {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		int result = freeDAO.deleteFree(free_num);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			result = freeDAO.deleteFree(free_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

@@ -12,11 +12,18 @@ import vo.Member;
 public class MembersListService {
 
 	public LinkedList<Member> getMembersList(int nowPage) {
-		Connection conn = getConnection();
-		MembersDAO membersDAO = MembersDAO.getInstance();
-		membersDAO.setConnection(conn);
-		LinkedList<Member> memList = membersDAO.selectMembersList(nowPage);
-		close(conn);
+		LinkedList<Member> memList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MembersDAO membersDAO = MembersDAO.getInstance();
+			membersDAO.setConnection(conn);
+			memList = membersDAO.selectMembersList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return memList;
 	}

@@ -32,7 +32,7 @@
 	
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#">주문관리
+					<li class="nav-item"><a class="nav-link" href="purchaseAllList.do">주문관리
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="members.do">회원관리</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout.do">로그아웃</a></li>
@@ -135,7 +135,7 @@
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item<%=prevDisabled %>">
-						      <a class="page-link" href="notice.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Previous</a>
+						      <a class="page-link" href="notice.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Prev</a>
 						    </li>
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    

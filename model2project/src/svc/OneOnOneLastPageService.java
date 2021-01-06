@@ -10,11 +10,18 @@ import dao.OneOnOneDAO;
 public class OneOnOneLastPageService {
 
 	public int getOneOnOneLastPage() {
-		Connection conn = getConnection();
-		OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
-		oneOnOneDAO.setConnection(conn);
-		int lastPage = oneOnOneDAO.getOneOnOneNumber();
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
+			oneOnOneDAO.setConnection(conn);
+			lastPage = oneOnOneDAO.getOneOnOneNumber();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

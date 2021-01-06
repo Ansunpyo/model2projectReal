@@ -12,11 +12,18 @@ import vo.Banner;
 public class MainBannerService {
 
 	public LinkedList<Banner> getBanner() {
-		Connection conn = getConnection();
-		BannerDAO bannerDAO = BannerDAO.getInstance();
-		bannerDAO.setConnection(conn);
-		LinkedList<Banner> banList = bannerDAO.selectBannerList();
-		close(conn);
+		LinkedList<Banner> banList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			BannerDAO bannerDAO = BannerDAO.getInstance();
+			bannerDAO.setConnection(conn);
+			banList = bannerDAO.selectBannerList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return banList;
 	}

@@ -105,7 +105,7 @@
 								<li class="bbsViewWriter">
 									<ul>
 										<li class="bbsViewWriterHeader">WRITER</li>
-										<li class="bbsViewWriterName"><%=mem.getName() %></li>
+										<li class="bbsViewWriterName"><% if(mem.getId().equals(loginMember.getId())) { %><%=mem.getName() %>(<%=mem.getId() %>)<% } else { %><a class="namePopover" role="button" data-placement="bottom" data-content="<div><a href='messageSend.do?receiver=<%=mem.getId() %>'>쪽지 보내기</a></div><hr/><div><a role='button' class='popoverClose'>닫기</a></div>"><%=mem.getName() %>(<%=mem.getId() %>)</a><% } %></li>
 									</ul>
 								</li>
 								<li class="bbsViewTitle">
@@ -146,7 +146,7 @@
 									<div id="IAMCOMMENT_<%=fCList.get(i).getComment_num() %>">
 										<div id="com<%=fCList.get(i).getComment_num() %>">
 											<span class="float-right"><%=fCList.get(i).getTime() %></span>
-											<h6><b><%=cMemList.get(i).getName() %></b></h6>
+											<h6><%if(cMemList.get(i).getId().equals("admin")) { %> <b>admin</b> <% } else if(cMemList.get(i).getId().equals(loginMember.getId())) { %><b><%=cMemList.get(i).getName() %>(<%=cMemList.get(i).getId() %>)</b><% } else if (cMemList.get(i).getName().equals("<탈퇴한 회원>")) { %><b><탈퇴한 회원></b><% } else { %><a class="namePopover" role="button" data-placement="bottom" data-content="<div><a href='messageSend.do?receiver=<%=cMemList.get(i).getId() %>'>쪽지 보내기</a></div><hr/><div><a role='button' class='popoverClose'>닫기</a></div>"><b><%=cMemList.get(i).getName() %>(<%=cMemList.get(i).getId() %>)</b></a><% } %></h6>
 											<button id="commentButton<%=fCList.get(i).getComment_num() %>" class="btn btn-primary float-right" onclick="$(this).parent().next('form').toggle()">+</button>
 											<%if(loginMember.getId().equals("admin") || loginMember.getNumber() == cMemList.get(i).getNumber()) { %><button class="btn btn-danger float-right" onclick="location.href='deleteFreeComment.do?page=<%=nowPage %>&free_num=<%=free_num%>&comment_num=<%=fCList.get(i).getComment_num() %>';">X</button><% } %>
 											<div style="border-bottom:1px solid gray;min-height:50px;"><%=fCList.get(i).getContents() %></div>
@@ -206,6 +206,15 @@
 			$(window).resize(function(){
 				$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
 			});
+		});
+		$(".namePopover").on("click", function(){
+			$(".namePopover").popover("hide");
+		}).popover({
+			html: true,
+			container: "body"
+		});
+		$(document).on('click', '.popoverClose', function(){
+		    $('.namePopover').popover('hide');
 		});
 	</script>
 	<script src="js/sidebar.js"></script>

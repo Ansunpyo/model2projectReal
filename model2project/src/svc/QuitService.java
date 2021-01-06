@@ -10,11 +10,19 @@ import dao.QuitDAO;
 public class QuitService {
 
 	public int deleteMember(String id) {
-		QuitDAO quitDAO = QuitDAO.getInstance();
-		Connection conn = getConnection();
-		quitDAO.setConnection(conn);
-		int result = quitDAO.deleteMember(id);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			QuitDAO quitDAO = QuitDAO.getInstance();
+			conn = getConnection();
+			quitDAO.setConnection(conn);
+			result = quitDAO.deleteMember(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return result;
 	}
 

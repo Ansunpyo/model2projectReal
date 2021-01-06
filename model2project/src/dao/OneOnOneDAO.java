@@ -172,4 +172,25 @@ public class OneOnOneDAO {
 		
 		return result;
 	}
+
+	public int delOne(int one_on_one_num) {
+		String sql = "DELETE FROM one_on_one WHERE one_on_one_num = ?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, one_on_one_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 }

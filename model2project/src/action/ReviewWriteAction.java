@@ -25,7 +25,7 @@ public class ReviewWriteAction implements Action {
 			
 			re.setLecture_num(Integer.parseInt(request.getParameter("lecture_num")));
 			re.setTitle(request.getParameter("title"));
-			re.setContents(request.getParameter("contents"));
+			re.setContents(request.getParameter("contents").replace("\n", "<br/>"));
 			
 			ReviewWriteService reviewWriteService = new ReviewWriteService();
 			result = reviewWriteService.writeReview(id, re);

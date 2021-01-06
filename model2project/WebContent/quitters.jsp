@@ -81,7 +81,6 @@
 					<ul>
 						<li><a href="members.do">회원 리스트</a></li>
 						<li><a href="quitters.do">탈퇴회원 리스트</a></li>
-						<li><a href="statistics.do">통계</a></li>
 						<li><a href="one_on_onead.do">1:1 문의함</a></li>
 					</ul>
 				</div>
@@ -94,7 +93,6 @@
 			<div>
 				<div class="myPageMenu"><a href="members.do"><img src="images/members_icon.png">&nbsp;회원 리스트</a></div>
 				<div class="myPageMenu on"><a href="quitters.do"><img src="images/x_mark_icon.png">&nbsp;탈퇴회원 리스트</a></div>
-				<div class="myPageMenu"><a href="statistics.do"><img src="images/statistics_icon.png">&nbsp;통계</a></div>
 				<div class="myPageMenu"><a href="one_on_onead.do"><img src="images/mail_icon.png">&nbsp;1:1 문의함</a></div>
 			</div>
 		</div>
@@ -128,7 +126,7 @@
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item<%=prevDisabled %>">
-						      <a class="page-link" href="quitters.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Previous</a>
+						      <a class="page-link" href="quitters.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Prev</a>
 						    </li>
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    

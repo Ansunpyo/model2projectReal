@@ -10,11 +10,18 @@ import dao.ReviewDAO;
 public class MyReviewLastPageService {
 
 	public int getMyReviewLastPage(String id) {
-		Connection conn = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-		reviewDAO.setConnection(conn);
-		int lastPage = reviewDAO.getMyReviewNumber(id);
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			reviewDAO.setConnection(conn);
+			lastPage = reviewDAO.getMyReviewNumber(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

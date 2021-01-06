@@ -62,7 +62,7 @@ public class MessengerDAO {
 	}
 
 	public LinkedList[] selectMessageList(String id, int nowPageNumber) {
-		String sql = "SELECT member.name, message.title, message.contents, message.time, message.message_num from member join message on member.number = message.sender and message.receiver = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT member.id, q.id As qid, q.name AS qname, member.name, message.title, message.contents, message.time, message.message_num FROM member RIGHT JOIN message ON member.number = message.sender LEFT JOIN quitter AS q ON q.number = message.sender WHERE message.receiver = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
 		
 		LinkedList<Member> memList = new LinkedList<Member>();
 		LinkedList<Message> mesList = new LinkedList<Message>();
@@ -80,8 +80,17 @@ public class MessengerDAO {
 				do {
 					mem = new Member();
 					mes = new Message();
-
-					mem.setName(rs.getString("name"));
+					
+					if(rs.getString("id") != null) {
+						mem.setId(rs.getString("id"));
+					} else {
+						mem.setId(rs.getString("qid"));
+					}
+					if(rs.getString("name") != null) {
+						mem.setName(rs.getString("name"));
+					} else {
+						mem.setName(rs.getString("qname"));
+					}
 					mes.setTitle(rs.getString("title"));
 					mes.setContents(rs.getString("contents"));
 					mes.setTime(rs.getString("time"));
@@ -122,11 +131,11 @@ public class MessengerDAO {
 
 	public int sendMessage(String id, Member mem, Message mes) {
 		int result = 0;
-		String sql = "INSERT INTO message VALUES ((SELECT number FROM member WHERE id = ?), (SELECT number FROM member WHERE name = ?), ?, ?, NOW(), NULL)";
+		String sql = "INSERT INTO message VALUES ((SELECT number FROM member WHERE id = ?), (SELECT number FROM member WHERE id = ?), ?, ?, NOW(), NULL)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, mem.getName());
+			pstmt.setString(2, mem.getId());
 			pstmt.setString(3, mes.getTitle());
 			pstmt.setString(4, mes.getContents());
 			result = pstmt.executeUpdate();
@@ -144,7 +153,7 @@ public class MessengerDAO {
 	}
 
 	public LinkedList[] selectMyMessageList(String id, int nowPage) {
-		String sql = "SELECT member.name, message.title, message.contents, message.time, message.message_num from member join message on member.number = message.receiver and message.sender = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT member.id, q.id AS qid, member.name, q.name AS qname, message.title, message.contents, message.time, message.message_num from member LEFT JOIN quitter AS q ON member.number = q.number JOIN message ON member.number = message.receiver AND message.sender = (SELECT number FROM member WHERE ID = ?) ORDER BY message.message_num DESC LIMIT ?, " + pageCount;
 		
 		LinkedList<Member> memList = new LinkedList<Member>();
 		LinkedList<Message> mesList = new LinkedList<Message>();
@@ -162,8 +171,16 @@ public class MessengerDAO {
 				do {
 					mem = new Member();
 					mes = new Message();
-
-					mem.setName(rs.getString("name"));
+					if(rs.getString("name") != null) {
+						mem.setName(rs.getString("name"));
+					} else {
+						mem.setName(rs.getString("qname"));
+					}
+					if(rs.getString("id") != null) {
+						mem.setId(rs.getString("id"));
+					} else {
+						mem.setId(rs.getString("qid"));
+					}
 					mes.setTitle(rs.getString("title"));
 					mes.setContents(rs.getString("contents"));
 					mes.setTime(rs.getString("time"));
@@ -205,5 +222,22 @@ public class MessengerDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public boolean isThereId(String receiver) {
+		String sql = "SELECT id FROM member WHERE id = ?";
+		boolean isThereId = false;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, receiver);
+			rs = pstmt.executeQuery();
+			if(rs.next()) isThereId = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return isThereId;
 	}
 }

@@ -134,7 +134,7 @@
 												<p class="close"><button type="button" class="btn btn-secondary">X</button></p>
 											</div>
 										</li>
-										<li class="bbsWriter"><%=memList.get(i).getName() %></li>
+										<li class="bbsWriter"><a class="namePopover" role="button" data-placement="bottom" data-content="<div><a href='messageSend.do?receiver=<%=memList.get(i).getId() %>'>쪽지 보내기</a></div><hr/><div><a role='button' class='popoverClose'>닫기</a></div>"><%=memList.get(i).getName() %>(<%=memList.get(i).getId() %>)</a></li>
 										<li class="messageDeleteButton"><input type="button" class="btn btn-danger" value="삭제" onclick="location.href='messageDelete.do?message_num=<%=mesList.get(i).getMessage_num() %>'"/></li>
 									</ul>
 								</li>
@@ -149,7 +149,7 @@
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item<%=prevDisabled %>">
-						      <a class="page-link" href="messenger.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Previous</a>
+						      <a class="page-link" href="messenger.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Prev</a>
 						    </li>
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    
@@ -187,6 +187,15 @@
 			$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
 			$(window).resize(function(){
 				$("#main").css("margin-top", $("nav").outerHeight(true) + "px");
+			});
+			$(".namePopover").on("click", function(){
+				$(".namePopover").popover("hide");
+			}).popover({
+				html: true,
+				container: "body"
+			});
+			$(document).on('click', '.popoverClose', function(){
+			    $('.namePopover').popover('hide');
 			});
 		});
 	</script>

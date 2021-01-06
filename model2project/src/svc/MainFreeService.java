@@ -12,11 +12,18 @@ import vo.Free;
 public class MainFreeService {
 
 	public LinkedList<Free> getMainFree() {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		LinkedList<Free> freeList = freeDAO.selectMainFreeList();
-		close(conn);
+		LinkedList<Free> freeList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			freeList = freeDAO.selectMainFreeList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return freeList;
 	}

@@ -11,11 +11,18 @@ import vo.Free;
 public class FreeUpdatePageService {
 
 	public Free updateFree(int free_num) {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		Free fr = freeDAO.updateFreePage(free_num);
-		close(conn);
+		Free fr = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			fr = freeDAO.updateFreePage(free_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return fr;
 	}

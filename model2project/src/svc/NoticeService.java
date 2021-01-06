@@ -12,11 +12,18 @@ import vo.Notice;
 public class NoticeService {
 
 	public LinkedList<Notice> getNoticeList(int nowPage) {
-		Connection conn = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(conn);
-		LinkedList<Notice> noticeList = noticeDAO.selectNoticeList(nowPage);
-		close(conn);
+		LinkedList<Notice> noticeList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			NoticeDAO noticeDAO = NoticeDAO.getInstance();
+			noticeDAO.setConnection(conn);
+			noticeList = noticeDAO.selectNoticeList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return noticeList;
 	}

@@ -10,11 +10,18 @@ import dao.PurchaseDAO;
 public class MyPurchaseLastPageService {
 
 	public int getMyPurchaseLastPage(String id) {
-		Connection conn = getConnection();
-		PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
-		purchaseDAO.setConnection(conn);
-		int lastPage = purchaseDAO.getMyPurchaseNumber(id);
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
+			purchaseDAO.setConnection(conn);
+			lastPage = purchaseDAO.getMyPurchaseNumber(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

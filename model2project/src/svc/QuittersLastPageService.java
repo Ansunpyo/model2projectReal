@@ -10,11 +10,18 @@ import dao.MembersDAO;
 public class QuittersLastPageService {
 
 	public int getQuittersLastPage() {
-		Connection conn = getConnection();
-		MembersDAO membersDAO = MembersDAO.getInstance();
-		membersDAO.setConnection(conn);
-		int lastPage = membersDAO.getQuittersNumber();
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MembersDAO membersDAO = MembersDAO.getInstance();
+			membersDAO.setConnection(conn);
+			lastPage = membersDAO.getQuittersNumber();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

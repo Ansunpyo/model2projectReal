@@ -12,6 +12,8 @@ public class LoginDAO {
 
 	private static LoginDAO loginDAO;
 	private Connection conn;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	private LoginDAO() {
 		
@@ -30,8 +32,6 @@ public class LoginDAO {
 
 	public Member selectLoginMember(String id, String pw) {
 		Member loginMember = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement("SELECT * FROM member WHERE id = ? AND password = ?");
 			pstmt.setString(1, id);
@@ -66,14 +66,13 @@ public class LoginDAO {
 
 	public Member getAutoMember(String id) {
 		Member loginMember = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement("SELECT * FROM member WHERE id = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				loginMember = new Member();
+				loginMember.setNumber(rs.getInt("number"));
 				loginMember.setId(rs.getString("id"));
 				loginMember.setPassword(rs.getString("password"));
 				loginMember.setName(rs.getString("name"));

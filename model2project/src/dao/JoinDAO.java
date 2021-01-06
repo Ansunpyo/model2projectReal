@@ -1,10 +1,12 @@
 package dao;
 
+import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
 import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import vo.Member;
 
@@ -12,7 +14,7 @@ public class JoinDAO {
 
 	private static JoinDAO joinDAO;
 	private Connection conn;
-	
+	ResultSet rs;
 	private JoinDAO() {
 		
 	}
@@ -45,15 +47,22 @@ public class JoinDAO {
 			pstmt.setString(9, education);
 			int result = pstmt.executeUpdate();
 			if (result > 0) {
-				joinedMember = new Member();
-				joinedMember.setId(id);
-				joinedMember.setPassword(pw);
-				joinedMember.setClassify(classify);
-				joinedMember.setEducation(education);
-				joinedMember.setEmail(email);
-				joinedMember.setGender(gender);
-				joinedMember.setMajor(major);
-				joinedMember.setName(name);
+				sql = "SELECT * FROM member WHERE id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					joinedMember = new Member();
+					joinedMember.setNumber(rs.getInt("number"));
+					joinedMember.setId(id);
+					joinedMember.setPassword(pw);
+					joinedMember.setClassify(classify);
+					joinedMember.setEducation(education);
+					joinedMember.setEmail(email);
+					joinedMember.setGender(gender);
+					joinedMember.setMajor(major);
+					joinedMember.setName(name);
+				}
 			} else {
 				rollback(conn);
 			}
@@ -62,12 +71,9 @@ public class JoinDAO {
 			rollback(conn);
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-				conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			close(pstmt);
+			close(rs);
+			close(conn);
 		}
 		return joinedMember;
 	}
@@ -89,13 +95,20 @@ public class JoinDAO {
 			pstmt.setString(9, null);
 			int result = pstmt.executeUpdate();
 			if (result > 0) {
-				joinedMember = new Member();
-				joinedMember.setId(id);
-				joinedMember.setPassword(pw);
-				joinedMember.setClassify(classify);
-				joinedMember.setEmail(email);
-				joinedMember.setGender(gender);
-				joinedMember.setName(name);
+				sql = "SELECT * FROM member WHERE id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					joinedMember = new Member();
+					joinedMember.setNumber(rs.getInt("number"));
+					joinedMember.setId(id);
+					joinedMember.setPassword(pw);
+					joinedMember.setClassify(classify);
+					joinedMember.setEmail(email);
+					joinedMember.setGender(gender);
+					joinedMember.setName(name);
+				}
 			} else {
 				rollback(conn);
 			}
@@ -104,12 +117,9 @@ public class JoinDAO {
 			rollback(conn);
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-				conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			close(pstmt);
+			close(rs);
+			close(conn);
 		}
 		return joinedMember;
 	}

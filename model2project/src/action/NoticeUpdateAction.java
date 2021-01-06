@@ -22,7 +22,7 @@ public class NoticeUpdateAction implements Action {
 			forward = new ActionForward();
 			not.setNotice_num(Integer.parseInt(request.getParameter("notice_num")));
 			not.setTitle(request.getParameter("title"));
-			not.setContents(request.getParameter("contents"));
+			not.setContents(request.getParameter("contents").replace("\n", "<br/>"));
 			
 			NoticeUpdateService noticeUpdateService = new NoticeUpdateService();
 			int result = noticeUpdateService.updateNotice(not);

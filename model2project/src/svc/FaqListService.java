@@ -12,11 +12,18 @@ import vo.Faq;
 public class FaqListService {
 
 	public LinkedList<Faq> getFaqList() {
-		Connection conn = getConnection();
-		FaqDAO faqDAO = FaqDAO.getInstance();
-		faqDAO.setConnection(conn);
-		LinkedList<Faq> faqList = faqDAO.selectFaqList();
-		close(conn);
+		LinkedList<Faq> faqList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FaqDAO faqDAO = FaqDAO.getInstance();
+			faqDAO.setConnection(conn);
+			faqList = faqDAO.selectFaqList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return faqList;
 	}

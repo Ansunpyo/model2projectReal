@@ -12,11 +12,18 @@ import vo.Subject;
 public class SubjectListService {
 
 	public LinkedList<Subject> getSubjectList() {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		LinkedList<Subject> subjectList = lectureDAO.getSubjectList();
-		close(conn);
+		LinkedList<Subject> subjectList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			subjectList = lectureDAO.getSubjectList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return subjectList;
 	}

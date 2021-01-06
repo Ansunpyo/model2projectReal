@@ -11,31 +11,52 @@ import dao.LectureDAO;
 public class LectureListService {
 
 	public LinkedList[] getLecList(int nowPage) {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		LinkedList[] lectureList = lectureDAO.selectLectureList(nowPage);
-		close(conn);
+		LinkedList[] lectureList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			lectureList = lectureDAO.selectLectureList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lectureList;
 	}
 
 	public LinkedList[] getLecList(String[] subject, int nowPage) {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		LinkedList[] lectureList = lectureDAO.selectLectureList(subject, nowPage);
-		close(conn);
+		LinkedList[] lectureList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			lectureList = lectureDAO.selectLectureList(subject, nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lectureList;
 	}
 
 	public LinkedList[] getLecList(String id, int nowPage) {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		LinkedList[] lectureList = lectureDAO.selectLectureList(id, nowPage);
-		close(conn);
+		LinkedList[] lectureList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			lectureList = lectureDAO.selectLectureList(id, nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lectureList;
 	}

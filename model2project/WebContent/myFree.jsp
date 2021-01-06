@@ -127,7 +127,7 @@
 											<a href="freeView.do?page=<%=nowPageNumber %>&free_num=<%=frList.get(i).getFree_num() %>"><%=frList.get(i).getTitle() %></a>
 											<div class="bbsTitleDetail"><%=frList.get(i).getContents() %></div>
 										</li>
-										<li class="bbsWriter"><%=memList.get(i).getName() %></li>
+										<li class="bbsWriter"><%=memList.get(i).getName() %>(<%=memList.get(i).getId() %>)</li>
 									</ul>
 								</li>
 								
@@ -141,7 +141,7 @@
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item<%=prevDisabled %>">
-						      <a class="page-link" href="freeBoard.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Previous</a>
+						      <a class="page-link" href="freeBoard.do?page=<%=nowPageNumber - 1 %>" tabindex="-1">Prev</a>
 						    </li>
 <%
 				for (int i = startNumber; i <= Math.min(endNumber, lastPage); i++) {					    

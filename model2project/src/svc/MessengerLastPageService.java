@@ -10,11 +10,18 @@ import dao.MessengerDAO;
 public class MessengerLastPageService {
 
 	public int getMessengerLastPage(String id) {
-		Connection conn = getConnection();
-		MessengerDAO messengerDAO = MessengerDAO.getInstance();
-		messengerDAO.setConnection(conn);
-		int lastPage = messengerDAO.getMessageNumber(id);
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MessengerDAO messengerDAO = MessengerDAO.getInstance();
+			messengerDAO.setConnection(conn);
+			lastPage = messengerDAO.getMessageNumber(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

@@ -11,11 +11,18 @@ import vo.Subject;
 public class CategoryWriteService {
 
 	public int insertSubject(Subject sub) {
-		Connection conn = getConnection();
-		CategoryDAO categoryDAO = CategoryDAO.getInstance();
-		categoryDAO.setConnection(conn);
-		int result = categoryDAO.insertSubject(sub);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			CategoryDAO categoryDAO = CategoryDAO.getInstance();
+			categoryDAO.setConnection(conn);
+			result = categoryDAO.insertSubject(sub);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

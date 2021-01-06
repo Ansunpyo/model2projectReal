@@ -11,11 +11,18 @@ import vo.Faq;
 public class FaqWriteService {
 
 	public int writeFaq(Faq faq) {
-		Connection conn = getConnection();
-		FaqDAO faqDAO = FaqDAO.getInstance();
-		faqDAO.setConnection(conn);
-		int result = faqDAO.writeFaq(faq);
-		close(conn);
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			FaqDAO faqDAO = FaqDAO.getInstance();
+			faqDAO.setConnection(conn);
+			result = faqDAO.writeFaq(faq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

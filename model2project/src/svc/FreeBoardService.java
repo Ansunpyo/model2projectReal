@@ -11,11 +11,18 @@ import dao.FreeDAO;
 public class FreeBoardService {
 
 	public LinkedList[] getFreeList(int nowPage) {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		LinkedList[] freeList = freeDAO.selectFreeList(nowPage);
-		close(conn);
+		LinkedList[] freeList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			freeList = freeDAO.selectFreeList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return freeList;
 	}

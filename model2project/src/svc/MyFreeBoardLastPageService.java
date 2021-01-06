@@ -10,11 +10,18 @@ import dao.FreeDAO;
 public class MyFreeBoardLastPageService {
 
 	public int getMyFreeLastPage(String id) {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		int lastPage = freeDAO.getMyFreeNumber(id);
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			lastPage = freeDAO.getMyFreeNumber(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

@@ -12,11 +12,18 @@ import vo.Subject;
 public class CategoryListService {
 
 	public LinkedList<Subject> getSubjectList() {
-		Connection conn = getConnection();
-		CategoryDAO categoryDAO = CategoryDAO.getInstance();
-		categoryDAO.setConnection(conn);
-		LinkedList<Subject> subList = categoryDAO.selectSubjectList();
-		close(conn);
+		LinkedList<Subject> subList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			CategoryDAO categoryDAO = CategoryDAO.getInstance();
+			categoryDAO.setConnection(conn);
+			subList = categoryDAO.selectSubjectList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return subList;
 	}

@@ -36,7 +36,7 @@ public class PurchaseDAO {
 		this.conn = conn;
 	}
 	public LinkedList[] selectMyPurchaseList(String id, int nowPage) {
-		String sql = "SELECT * FROM pay AS p JOIN lecture AS l ON p.lecture_num = l.lecture_num WHERE p.number = (SELECT number FROM member WHERE id = ?) ORDER BY p.pay_number DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT * FROM pay AS p LEFT JOIN lecture AS l ON p.lecture_num = l.lecture_num WHERE p.number = (SELECT number FROM member WHERE id = ?) ORDER BY p.pay_number DESC LIMIT ?, " + pageCount;
 		LinkedList[] payList = null;
 		LinkedList<Pay> pList = new LinkedList<>();
 		LinkedList<Lecture> lecList = new LinkedList<>();
@@ -60,7 +60,11 @@ public class PurchaseDAO {
 					pay.setRefund(rs.getInt("refund"));
 					pay.setDate(rs.getString("date"));
 					pay.setType(rs.getString("type"));
-					lec.setLecture_title(rs.getString("lecture_title"));
+					if(rs.getString("lecture_title") != null) {
+						lec.setLecture_title(rs.getString("lecture_title"));
+					} else {
+						lec.setLecture_title("<삭제된 강의>");
+					}
 					pList.add(pay);
 					lecList.add(lec);
 				} while(rs.next());
@@ -117,7 +121,7 @@ public class PurchaseDAO {
 		return result;
 	}
 	public LinkedList[] selectPurchaseAllList(int nowPage) {
-		String sql = "SELECT p.pay_number, p.lecture_num, p.number, p.type, p.pay_code, p.date, l.lecture_title, m4tea.name AS teacher, m4stu.name AS buyer FROM pay AS p JOIN lecture AS l ON p.lecture_num = l.lecture_num JOIN member AS m4tea ON l.number = m4tea.number JOIN member AS m4stu ON p.number = m4stu.number WHERE refund = 0 ORDER BY pay_number DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT p.pay_number, p.lecture_num, p.number, p.type, p.pay_code, p.date, l.lecture_title, m4tea.name AS teacher, m4stu.name AS buyer, q4stu.name AS qbuyer, q4tea.name AS qteacher FROM pay AS p LEFT JOIN lecture AS l ON p.lecture_num = l.lecture_num LEFT JOIN member AS m4tea ON l.number = m4tea.number LEFT JOIN member AS m4stu ON p.number = m4stu.number LEFT JOIN quitter AS q4stu ON p.number = q4stu.number LEFT JOIN quitter AS q4tea ON l.number = q4tea.number WHERE refund = 0 ORDER BY pay_number DESC LIMIT ?, " + pageCount;
 		LinkedList[] payList = null;
 		LinkedList<Pay> pList = new LinkedList<>();
 		LinkedList<Lecture> lecList = new LinkedList<>();
@@ -146,9 +150,21 @@ public class PurchaseDAO {
 					pay.setType(rs.getString("type"));
 					pay.setPay_code(rs.getString("pay_code"));
 					pay.setDate(rs.getString("date"));
-					lec.setLecture_title(rs.getString("lecture_title"));
-					tea.setName(rs.getString("teacher"));
-					stu.setName(rs.getString("buyer"));
+					if(rs.getString("lecture_title") != null) {
+						lec.setLecture_title(rs.getString("lecture_title"));
+					} else {
+						lec.setLecture_title("<삭제된 강의>");
+					}
+					if(rs.getString("teacher") != null) {
+						tea.setName(rs.getString("teacher"));
+					} else {
+						tea.setName(rs.getString("qteacher"));
+					}
+					if(rs.getString("buyer") != null) {
+						stu.setName(rs.getString("buyer"));
+					} else {
+						stu.setName(rs.getString("qbuyer"));
+					}
 					pList.add(pay);
 					lecList.add(lec);
 					teaList.add(tea);
@@ -188,7 +204,7 @@ public class PurchaseDAO {
 		return result;
 	}
 	public LinkedList[] selectPurchaseRefundList(int nowPage) {
-		String sql = "SELECT * FROM pay AS p JOIN lecture AS l ON p.lecture_num = l.lecture_num JOIN member AS m ON p.number = m.number WHERE p.refund = 1 ORDER BY p.pay_number DESC LIMIT ?, " + pageCount;
+		String sql = "SELECT p.pay_number, p.lecture_num, p.number, p.type, p.pay_code, p.date, l.lecture_title, m.id, q.id AS qid FROM pay AS p LEFT JOIN lecture AS l ON p.lecture_num = l.lecture_num LEFT JOIN member AS m ON p.number = m.number LEFT JOIN quitter AS q ON q.number = p.number WHERE p.refund = 1 ORDER BY p.pay_number DESC LIMIT ?, " + pageCount;
 		LinkedList[] payList = null;
 		LinkedList<Pay> pList = new LinkedList<>();
 		LinkedList<Lecture> lecList = new LinkedList<>();
@@ -214,8 +230,16 @@ public class PurchaseDAO {
 					pay.setType(rs.getString("type"));
 					pay.setPay_code(rs.getString("pay_code"));
 					pay.setDate(rs.getString("date"));
-					lec.setLecture_title(rs.getString("lecture_title"));
-					mem.setId(rs.getString("id"));
+					if(rs.getString("lecture_title") != null) {
+						lec.setLecture_title(rs.getString("lecture_title"));
+					} else {
+						lec.setLecture_title("<삭제된 강의>");
+					}
+					if(rs.getString("id") != null) {
+						mem.setId(rs.getString("id"));
+					} else {
+						mem.setId(rs.getString("qid"));
+					}
 					pList.add(pay);
 					lecList.add(lec);
 					memList.add(mem);

@@ -27,22 +27,21 @@ public class LectureDetailUploadAction implements Action {
 			Lecture lec = new Lecture();
 			Lecture_Video vid = new Lecture_Video();
 			
+			int lecture_num = Integer.parseInt(request.getParameter("lecture_num"));
 
 			vid.setChapter_title(request.getParameter("chapter_title"));
 			vid.setVideo(request.getParameter("video"));
-			lec.setLecture_num(Integer.parseInt(request.getParameter("lecture_num")));
+			lec.setLecture_num(lecture_num);
 //			vid.setChapter_title(request.getParameter("chapter1"));
 			
 			LectureDetailUploadService lectureDetailUploadService = new LectureDetailUploadService();
 			result = lectureDetailUploadService.lectureDetailUpload(id, lec, vid);
 			
 			if (result > 0) {
-				PrintWriter out = response.getWriter();
-				out.println("<script>history.back()</script>");
+				forward.setPath("lectureDetail.do?lecture_num=" + lecture_num);
 				return forward;
 			} else {
-				forward.setRedirect(true);
-				forward.setPath("lecture_Detail.jsp");
+				forward.setPath("lectureDetail.do?lecture_num=" + lecture_num);
 				return forward;
 			}
 			

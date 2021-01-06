@@ -11,11 +11,18 @@ import dao.ReviewDAO;
 public class ReviewService {
 
 	public LinkedList[] getReviewList(int nowPage) {
-		Connection conn = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-		reviewDAO.setConnection(conn);
-		LinkedList[] reviewList = reviewDAO.selectReviewList(nowPage);
-		close(conn);
+		LinkedList[] reviewList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			reviewDAO.setConnection(conn);
+			reviewList = reviewDAO.selectReviewList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return reviewList;
 	}

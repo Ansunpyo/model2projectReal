@@ -11,11 +11,18 @@ import vo.Notice;
 public class NoticeUpdatePageService {
 
 	public Notice updateNotice(int notice_num) {
-		Connection conn = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(conn);
-		Notice not = noticeDAO.updateNoticePage(notice_num);
-		close(conn);
+		Notice not = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			NoticeDAO noticeDAO = NoticeDAO.getInstance();
+			noticeDAO.setConnection(conn);
+			not = noticeDAO.updateNoticePage(notice_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return not;
 	}

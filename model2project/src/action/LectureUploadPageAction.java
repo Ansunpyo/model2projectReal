@@ -1,9 +1,11 @@
 package action;
 
 import java.util.LinkedList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import svc.LectureUploadPageService;
 import vo.ActionForward;
 import vo.Member;
@@ -30,7 +32,6 @@ public class LectureUploadPageAction implements Action {
 			} else {
 				forward.setRedirect(true);
 				forward.setPath("index.do");
-				System.out.println("subList : " + subList);
 				return forward;
 			}
 			

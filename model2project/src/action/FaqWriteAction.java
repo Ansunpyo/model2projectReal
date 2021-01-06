@@ -23,7 +23,7 @@ public class FaqWriteAction implements Action {
 			Faq faq = new Faq();
 			
 			faq.setQuestion(request.getParameter("question"));
-			faq.setAnswer(request.getParameter("answer"));
+			faq.setAnswer(request.getParameter("answer").replace("\n", "<br/>"));
 			
 			FaqWriteService faqWriteService = new FaqWriteService();
 			result = faqWriteService.writeFaq(faq);

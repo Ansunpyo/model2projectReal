@@ -10,11 +10,18 @@ import dao.MembersDAO;
 public class IdDuplicationCheckService {
 
 	public String dupChk(String id) {
-		Connection conn = getConnection();
-		MembersDAO membersDAO = MembersDAO.getInstance();
-		membersDAO.setConnection(conn);
-		String result = membersDAO.dupChk(id);
-		close(conn);
+		String result = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MembersDAO membersDAO = MembersDAO.getInstance();
+			membersDAO.setConnection(conn);
+			result = membersDAO.dupChk(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

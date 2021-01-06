@@ -11,11 +11,18 @@ import vo.Review;
 public class ReviewUpdatePageService {
 
 	public Review updateReview(int review_num) {
-		Connection conn = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-		reviewDAO.setConnection(conn);
-		Review re = reviewDAO.updateReviewPage(review_num);
-		close(conn);
+		Review re = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			reviewDAO.setConnection(conn);
+			re = reviewDAO.updateReviewPage(review_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return re;
 	}

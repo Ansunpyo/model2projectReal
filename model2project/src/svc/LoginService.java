@@ -11,20 +11,36 @@ import vo.Member;
 public class LoginService {
 
 	public Member getLoginMember(String id, String pw) {
-		LoginDAO loginDAO = LoginDAO.getInstance();
-		Connection conn = getConnection();
-		loginDAO.setConnection(conn);
-		Member loginMember = loginDAO.selectLoginMember(id, pw);
-		close(conn);
+		Member loginMember = null;
+		Connection conn = null;
+		try {
+			LoginDAO loginDAO = LoginDAO.getInstance();
+			conn = getConnection();
+			loginDAO.setConnection(conn);
+			loginMember = loginDAO.selectLoginMember(id, pw);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return loginMember;
 	}
 
 	public Member getAutoLogin(String id) {
-		LoginDAO loginDAO = LoginDAO.getInstance();
-		Connection conn = getConnection();
-		loginDAO.setConnection(conn);
-		Member loginMember = loginDAO.getAutoMember(id);
-		close(conn);
+		Member loginMember = null;
+		Connection conn = null;
+		try {
+			LoginDAO loginDAO = LoginDAO.getInstance();
+			conn = getConnection();
+			loginDAO.setConnection(conn);
+			loginMember = loginDAO.getAutoMember(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return loginMember;
 	}
 

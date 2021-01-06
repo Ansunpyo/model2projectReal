@@ -12,11 +12,18 @@ import vo.One_On_One;
 public class OneOnOneListService {
 
 	public LinkedList<One_On_One> getOneOnOneList(String id) {
-		Connection conn = getConnection();
-		OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
-		oneOnOneDAO.setConnection(conn);
-		LinkedList<One_On_One> oneOnOneList = oneOnOneDAO.selectOneOnOneList(id);
-		close(conn);
+		LinkedList<One_On_One> oneOnOneList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
+			oneOnOneDAO.setConnection(conn);
+			oneOnOneList = oneOnOneDAO.selectOneOnOneList(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return oneOnOneList;
 	}

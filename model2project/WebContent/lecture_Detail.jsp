@@ -3,15 +3,16 @@
 	import="vo.Lecture_Video, vo.Lecture, vo.Member, java.util.*"%>
 <%
 	Member loginMember = null;
-String classify = null;
-LinkedList<Lecture_Video> vidList = (LinkedList<Lecture_Video>) session.getAttribute("vidList");
-LinkedList<Member> memList = (LinkedList<Member>) session.getAttribute("memList");
-if (session.getAttribute("loginMember") != null) {
-	loginMember = (Member) session.getAttribute("loginMember");
-	classify = loginMember.getClassify();
-} else {
-	out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
-}
+	String classify = null;
+	LinkedList[] lvList = (LinkedList[]) session.getAttribute("lvList");
+	LinkedList<Lecture> lecList = lvList[1];
+	LinkedList<Lecture_Video> vidList =  lvList[0];
+	if (session.getAttribute("loginMember") != null) {
+		loginMember = (Member) session.getAttribute("loginMember");
+		classify = loginMember.getClassify();
+	} else {
+		out.println("<script>alert('로그인이 필요합니다.');location.href='login.jsp';</script>");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,11 @@ html, body, div, iframe, h2, p, a, ul, li, form, section{
 	vertical-align: baseline;
 }
 
+h2 {
+	text-align: center;
+	margin-top: 245px;
+}
+
 section {
 	display: block;
 }
@@ -38,14 +44,22 @@ body {
 	line-height: 1;
 	text-decoration: none;
 	margin: auto;
+	min-width: 1715px;
+	min-height: 900px;
+	overflow: hidden;
 }
 
 ul {
 	list-style: none;
 }
 
+p {
+	display: block;
+	cursor: pointer;
+}
+
 .inputSlot {
-	width: 340px;
+	width: 360px;
 	height: 20px;
 	border: 1px solid #6f6f6f;
 	border-radius: 4px;
@@ -163,6 +177,11 @@ textarea:focus {
 	height: 722px;
 	background-color: #F5DA81;
 	font-color: white;
+	float: left;
+	text-align: center;
+	font-size: 10px;
+	line-height: 650px;
+	text-decoration: none;
 }
 
 .cl {
@@ -170,40 +189,25 @@ textarea:focus {
 	height: 830px;
 	background-color: #F5DA81;
 	font-color: white;
-}
-
-.lectureList>.up, .lectureList>.down {
-	margin: 0 auto;
-	width: 370px;
-	height: 35px;
-	background: #444;
-}
-
-.lectureList>.up:hover, .lectureList>.down:hover {
-	background: #333;
-}
-
-.lectureList>.up>a, .lectureList>.down>a {
-	display: block;
-	line-height: 35px;
+	float: left;
 	text-align: center;
+	font-size: 10px;
+	line-height: 650px;
 	text-decoration: none;
-	font-weight: 700;
-	color: #8ac007;
 }
 
-.manageList>.up, .manageList>.down {
+.up, .down {
 	margin: 0 auto;
 	width: 370px;
 	height: 35px;
 	background: #444;
 }
 
-.manageList>.up:hover, .manageList>.down:hover {
+.up:hover, .down:hover {
 	background: #333;
 }
 
-.manageList>.up>a, .manageList>.down>a {
+.up>a, .down>a {
 	display: block;
 	line-height: 35px;
 	text-align: center;
@@ -216,7 +220,7 @@ textarea:focus {
 	position: relative;
 	overflow: hidden;
 	overflow-y:scroll;
-	width: 370px;
+	width: 400px;
 	height: 590px;
 }
 
@@ -225,83 +229,72 @@ textarea:focus {
 	width: 370px;
 }
 
-.lecList>ul>li>a {
+.lecList>ul>li {
 	display: block;
 	width: 370px;
 	height: 58px;
 	line-height: 58px;
-	text-decoration: none;
-	font-size: 0.875rem;
 	background: rgba(0, 0, 0, 0);
-	color: #000;
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
 	-webkit-transition: all 0.4s;
 	transition: all 0.4s;
 }
 
-.lecList>ul>li>a.on {
+.lecList>ul>li>a {
+	display: block;
+	width: 345px;
+	height: 58px;
+	line-height: 58px;
+	text-decoration: none;
+	font-size: 0.875rem;
+	color: #000;
+	-webkit-transition: all 0.4s;
+	transition: all 0.4s;
+}
+
+.lecList>ul>li.on {
 	background: rgba(0, 0, 0, .1);
-	color: #f1f1f1;
 }
 </style>
 </head>
 <!-- onresize="parent.resizeTo(1698,790)" -->
-<body onload="parent.resizeTo(1698,790)"
-	style="min-width: 1715px; min-height: 900px; overflow: hidden;">
-	<div class="main">
+<body onload="parent.resizeTo(1698,790)">
+	<div>
 		<section style="float: left;">
-			<%
-				String video = "";
-			if (vidList.get(0).getVideo().indexOf("&") > 0) {
-				video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=") + 2,
-				vidList.get(0).getVideo().indexOf("&"));
-			} else {
-				video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=") + 2);
-			}
-			%>
-			<iframe id="showLecture" width="1280" height="722"
-				src="https://www.youtube.com/embed/<%=video%>" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
-		</section>
-		<a class="op" href="#"
-			style="float: left; text-align: center; font-size: 10px; line-height: 650px; text-decoration: none;">▶</a>
-		<a class="cl" href="#"
-			style="float: left; text-align: center; font-size: 10px; line-height: 650px; text-decoration: none;">◀</a>
+<%
+	String video = "";
+	if (vidList.get(0).getVideo().indexOf("&") > 0) {
+		video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=") + 2,
+		vidList.get(0).getVideo().indexOf("&"));
+	} else {
+		video = vidList.get(0).getVideo().substring(vidList.get(0).getVideo().indexOf("v=") + 2);
+	}
+%>
+			<iframe id="showLecture" width="1280" height="722" src="https://www.youtube.com/embed/<%=video%>" frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</section>	
+			<a class="op" href="#">▶</a>
+			<a class="cl" href="#">◀</a>
 		<section class="sidebar">
-			<!-- 여기서부터 메인바 -->
 			<div class="tabs">
 				<div class="listTab on">List</div>
 				<div class="manageTab">강의관리</div>
 			</div>
-			<!-- 여기서부터 학생들에게 보여지는 List -->
 			<div class="lectureList">
 				<div class="up">
 					<a href="#">▲</a>
 				</div>
 				<div class="lecList">
-					<%
-						if (vidList != null) {
-					%>
+<% if (vidList != null) { %>
 					<ul>
-						<%
-							for (int i = 0; i < vidList.size(); i++) {
-						%>
-						<li><a href="#" onclick="return false;"
-							style="margin-left: 25px;" class="lec"
+<% for (int i = 0; i < vidList.size(); i++) { %>
+						<li class="colorCont"><a href="#" onclick="return false;" style="margin-left: 25px;" class="lec"
 							data-url="<%=vidList.get(i).getVideo()%>"><%=vidList.get(i).getChapter_title()%></a></li>
-						<%
-							}
-						%>
+<% } %>
 					</ul>
-					<%
-						} else {
-					%>
-					<h2 style="text-align: center; margin-top: 245px;">등록된 강의가
-						없습니다.</h2>
-					<%
-						}
-					%>
+<% } else { %>
+					<h2>등록된 강의가 없습니다.</h2>
+<% } %>
 				</div>
 				<div class="down">
 					<a href="#">▼</a>
@@ -312,29 +305,16 @@ textarea:focus {
 					<a href="#">▲</a>
 				</div>
 				<div class="lecList">
-					<%
-						if (vidList != null) {
-					%>
+<% if (vidList != null) { %>
 					<ul>
-						<%
-							for (int i = 0; i < vidList.size(); i++) {
-						%>
+<% for (int i = 0; i < vidList.size(); i++) { %>
 						<li><a style="margin-left: 25px;" href="#" onclick="false"><%=vidList.get(i).getChapter_title()%>
-								<button
-									onclick="location.href ='lectureDetailDelete.do?chapter=<%=vidList.get(i).getChapter()%>&lecture_num=<%=vidList.get(i).getLecture_num()%>'"
-									style="float: right; margin-top: 20px; margin-right: 55px;">X</button></a></li>
-						<%
-							}
-						%>
-						<li class="lug" style="text-align: center;"><p
-								style="display: block; cursor: pointer;">+</p></li>
-						<%
-							} else {
-						%>
-
-						<%
-							}
-						%>
+								<button onclick="location.href ='lectureDetailDelete.do?chapter=<%=vidList.get(i).getChapter()%>&lecture_num=<%=vidList.get(i).getLecture_num()%>'"
+								style="float: right; margin-top: 20px; margin-right: 25px;">X</button></a></li>
+<% } %>
+						<li class="lug" style="text-align: center;"><p>+</p></li>
+<% } else { %>
+<% } %>
 						<div class="lu">
 							<form action="lectureDetailUpload.do" method="post" name="ldinfo">
 								<input type="hidden" name="lecture_num"
@@ -343,10 +323,8 @@ textarea:focus {
 									name="chapter_title" placeholder="강의제목" autocomplete="off" required="required"/></textarea>
 								<textarea style="margin-top: 5px;" class="inputSlot"
 									name="video" placeholder="강의 URL" autocomplete="off" required="required"/></textarea>
-								<button
-									style="margin-top: 5px; margin-bottom: 5px; margin-left: 113px; height: 30px;">등록하기</button>
-								<button type="button" class="back"
-									style="margin-top: 5px; margin-bottom: 5px; height: 30px;">뒤로가기</button>
+								<button style="margin-top: 5px; margin-bottom: 5px; margin-left: 113px; height: 30px;">등록하기</button>
+								<button type="button" class="back" style="margin-top: 5px; margin-bottom: 5px; height: 30px;">뒤로가기</button>
 							</form>
 						</div>
 					</ul>
@@ -369,11 +347,18 @@ $(function(){
 			$(".lectureList").show();
 			$(".manageList").hide();
 		});
+		$(document).on("click", ".manageTab", function(){
+			
+		});
 		$(".manageTab").click(function(){
-			$(this).siblings().removeClass("on");
-			$(this).addClass("on");
-			$(".lectureList").hide();
-			$(".manageList").show();
+			if(<%=loginMember.getNumber() %> != <%=lecList.get(0).getNumber() %>) {
+				alert('수정할 권한이 없습니다.');
+			} else {
+				$(this).siblings().removeClass("on");
+				$(this).addClass("on");
+				$(".lectureList").hide();
+				$(".manageList").show();
+			}
 		});	
 		$(".op").click(function(){
 			window.resizeTo(1698, 898);
@@ -401,6 +386,7 @@ $(function(){
 			$(".lug").show();
 		});	
 	});
+
 
 		$(function(){
 			$(".lec").click(function(){

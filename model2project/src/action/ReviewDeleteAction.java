@@ -25,9 +25,6 @@ public class ReviewDeleteAction implements Action {
 			result = reviewDeleteService.deleteReview(review_num);
 			
 			if (result > 0) {
-				ReviewLastPageService reviewLastPageService = new ReviewLastPageService();
-				int lastPage = reviewLastPageService.getReviewLastPage();
-				session.setAttribute("lastPage", lastPage);
 				forward.setRedirect(true);
 				forward.setPath("review.do?page=1");
 				return forward;

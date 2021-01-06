@@ -10,21 +10,35 @@ import dao.LectureDAO;
 public class LectureLastPageService {
 
 	public int getLectureLastPage() {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		int lastPage = lectureDAO.getLectureNumber();
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			lastPage = lectureDAO.getLectureNumber();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}
 
 	public int getLectureLastPage(String id) {
-		Connection conn = getConnection();
-		LectureDAO lectureDAO = LectureDAO.getInstance();
-		lectureDAO.setConnection(conn);
-		int lastPage = lectureDAO.getLectureNumber(id);
-		close(conn);
+		int lastPage = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			LectureDAO lectureDAO = LectureDAO.getInstance();
+			lectureDAO.setConnection(conn);
+			lastPage = lectureDAO.getLectureNumber(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lastPage;
 	}

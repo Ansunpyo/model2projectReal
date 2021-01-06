@@ -22,7 +22,7 @@ public class ReviewUpdateAction implements Action {
 			forward = new ActionForward();
 			re.setReview_num(Integer.parseInt(request.getParameter("review_num")));
 			re.setTitle(request.getParameter("title"));
-			re.setContents(request.getParameter("contents"));
+			re.setContents(request.getParameter("contents").replace("\n", "<br/>"));
 			
 			ReviewUpdateService reviewUpdateService = new ReviewUpdateService();
 			int result = reviewUpdateService.updateReview(re);

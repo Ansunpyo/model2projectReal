@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	String receiver = request.getParameter("receiver");
 %>
 <html lang="ko">
 <head>
@@ -100,7 +101,7 @@
 									<li class="bbsViewWriter">
 										<ul>
 											<li class="bbsViewWriterHeader">RECEIVER</li>
-											<li class="bbsViewWriterName"><input class="form-control" type="text" name="receiver" placeholder="받는 사람 ID를 입력해주세요." required="required" autocomplete="off" /></li>
+											<li class="bbsViewWriterName"><input class="form-control" type="text" name="receiver" placeholder="받는 사람 ID를 입력해주세요." required="required" autocomplete="off" <%if(receiver != null) { %>value="<%=receiver %>"<% } %>/></li>
 										</ul>
 									</li>
 									<li class="bbsViewTitle">

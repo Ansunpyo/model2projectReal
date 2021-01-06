@@ -10,11 +10,18 @@ import dao.PurchaseDAO;
 public class PurchaseDoRefundService {
 
 	public int doRefund(int pay_number) {
-		Connection conn = getConnection();
-		PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
-		purchaseDAO.setConnection(conn);
-		int result = purchaseDAO.doRefund(pay_number);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
+			purchaseDAO.setConnection(conn);
+			result = purchaseDAO.doRefund(pay_number);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

@@ -11,11 +11,18 @@ import vo.Free;
 public class FreeBoardWriteService {
 
 	public int writeFree(String id, Free fr) {
-		Connection conn = getConnection();
-		FreeDAO freeDAO = FreeDAO.getInstance();
-		freeDAO.setConnection(conn);
-		int result = freeDAO.writeFree(id, fr);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			FreeDAO freeDAO = FreeDAO.getInstance();
+			freeDAO.setConnection(conn);
+			result = freeDAO.writeFree(id, fr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

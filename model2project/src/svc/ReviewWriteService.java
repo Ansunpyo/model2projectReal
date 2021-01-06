@@ -11,11 +11,18 @@ import vo.Review;
 public class ReviewWriteService {
 
 	public int writeReview(String id, Review re) {
-		Connection conn = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-		reviewDAO.setConnection(conn);
-		int result = reviewDAO.writeReview(id, re);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			reviewDAO.setConnection(conn);
+			result = reviewDAO.writeReview(id, re);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

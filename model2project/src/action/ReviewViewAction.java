@@ -24,12 +24,15 @@ public class ReviewViewAction implements Action {
 			ReviewViewService reviewViewService = new ReviewViewService();
 			LinkedList<Object> reviewViewList = reviewViewService.getReviewView(review_num);
 
+			LinkedList[] reviewComList = reviewViewService.getReviewCom(review_num);
+			
+			session.setAttribute("reviewComList", reviewComList);
 			session.setAttribute("reviewViewList", reviewViewList);
 			if(loginMember.getId().equals("admin")) {
-				forward.setPath("reviewViewad.jsp?page=" + request.getParameter("page"));
+				forward.setPath("reviewViewad.jsp?review_num=" + review_num + "&page=" + request.getParameter("page"));
 				return forward;
 			}
-			forward.setPath("reviewView.jsp?page=" + request.getParameter("page"));
+			forward.setPath("reviewView.jsp?review_num=" + review_num + "&page=" + request.getParameter("page"));
 			return forward;
 		} else {
 			forward = new ActionForward();

@@ -10,11 +10,18 @@ import dao.CategoryDAO;
 public class CategoryDeleteService {
 
 	public int deleteSubject(int code) {
-		Connection conn = getConnection();
-		CategoryDAO categoryDAO = CategoryDAO.getInstance();
-		categoryDAO.setConnection(conn);
-		int result = categoryDAO.deleteSubject(code);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			CategoryDAO categoryDAO = CategoryDAO.getInstance();
+			categoryDAO.setConnection(conn);
+			result = categoryDAO.deleteSubject(code);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

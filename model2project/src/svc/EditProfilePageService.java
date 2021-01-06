@@ -11,11 +11,19 @@ import vo.Member;
 public class EditProfilePageService {
 
 	public Member getProfileData(String id) {
-		EditProfilePageDAO editProfilePageDAO = EditProfilePageDAO.getInstance();
-		Connection conn = getConnection();
-		editProfilePageDAO.setConnection(conn);
-		Member loginMember = editProfilePageDAO.selectLoginMember(id);
-		close(conn);
+		Member loginMember = null;
+		Connection conn = null;
+		try {
+			EditProfilePageDAO editProfilePageDAO = EditProfilePageDAO.getInstance();
+			conn = getConnection();
+			editProfilePageDAO.setConnection(conn);
+			loginMember = editProfilePageDAO.selectLoginMember(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return loginMember;
 	}
 

@@ -11,21 +11,35 @@ import vo.Member;
 public class PwCheckService {
 
 	public boolean pwCheck(Member mem) {
-		Connection conn = getConnection();
-		PwCheckDAO pwCheckDAO = PwCheckDAO.getInstance();
-		pwCheckDAO.setConnection(conn);
-		boolean isIdEmailRight = pwCheckDAO.pwCheck(mem);
-		close(conn);
+		boolean isIdEmailRight = false;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			PwCheckDAO pwCheckDAO = PwCheckDAO.getInstance();
+			pwCheckDAO.setConnection(conn);
+			isIdEmailRight = pwCheckDAO.pwCheck(mem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return isIdEmailRight;
 	}
 
 	public String yourPw(Member mem) {
-		Connection conn = getConnection();
-		PwCheckDAO pwCheckDAO = PwCheckDAO.getInstance();
-		pwCheckDAO.setConnection(conn);
-		String pw = pwCheckDAO.yourPw(mem);
-		close(conn);
+		String pw = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			PwCheckDAO pwCheckDAO = PwCheckDAO.getInstance();
+			pwCheckDAO.setConnection(conn);
+			pw = pwCheckDAO.yourPw(mem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return pw;
 	}

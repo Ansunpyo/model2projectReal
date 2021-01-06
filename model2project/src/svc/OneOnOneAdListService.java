@@ -11,11 +11,18 @@ import dao.OneOnOneDAO;
 public class OneOnOneAdListService {
 
 	public LinkedList[] getOneOnOneAdList(int nowPage) {
-		Connection conn = getConnection();
-		OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
-		oneOnOneDAO.setConnection(conn);
-		LinkedList[] oneOnOneAdList = oneOnOneDAO.selectOneOnOneAdList(nowPage);
-		close(conn);
+		LinkedList[] oneOnOneAdList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			OneOnOneDAO oneOnOneDAO = OneOnOneDAO.getInstance();
+			oneOnOneDAO.setConnection(conn);
+			oneOnOneAdList = oneOnOneDAO.selectOneOnOneAdList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return oneOnOneAdList;
 	}

@@ -28,13 +28,14 @@ public class QuitDAO {
 
 	public int deleteMember(String id) {
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO quitter VALUES (?, (SELECT email FROM member WHERE id = ?), (SELECT number FROM member WHERE id = ?))";
+		String sql = "INSERT INTO quitter VALUES (?, (SELECT email FROM member WHERE id = ?), (SELECT number FROM member WHERE id = ?), (SELECT name FROM member WHERE id = ?))";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);
 			pstmt.setString(3, id);
+			pstmt.setString(4, id);
 			result = pstmt.executeUpdate();
 			if (result <= 0) {
 				rollback(conn);

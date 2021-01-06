@@ -49,7 +49,7 @@ public class NoticeDAO {
 				do {
 					not = new Notice();
 					not.setTitle(rs.getString("title"));
-					not.setContents(rs.getString("contents"));
+					not.setContents(rs.getString("contents").replace("<br/>", " "));
 					not.setNotice_num(rs.getInt("notice_num"));
 					noticeList.add(not);
 				} while(rs.next());
@@ -141,7 +141,7 @@ public class NoticeDAO {
 			if(rs.next()) {
 				not = new Notice();
 				not.setTitle(rs.getString("title"));
-				not.setContents(rs.getString("contents"));
+				not.setContents(rs.getString("contents").replace("<br/>", "\n"));
 				not.setNotice_num(rs.getInt("notice_num"));
 			}
 		} catch (Exception e) {

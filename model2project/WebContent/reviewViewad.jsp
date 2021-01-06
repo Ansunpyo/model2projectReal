@@ -34,7 +34,7 @@
 	
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#">주문관리
+					<li class="nav-item"><a class="nav-link" href="purchaseAllList.do">주문관리
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="members.do">회원관리</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout.do">로그아웃</a></li>
@@ -110,7 +110,7 @@
 								<li class="bbsViewWriter">
 									<ul>
 										<li class="bbsViewWriterHeader">WRITER</li>
-										<li class="bbsViewWriterName"><%=mem.getName() %></li>
+										<li class="bbsViewWriterName"><%=mem.getName() %>(<%=mem.getId() %>)</li>
 									</ul>
 								</li>
 								<li class="bbsViewTitle">
@@ -151,7 +151,7 @@
 									<div id="IAMCOMMENT_<%=rCList.get(i).getComment_num() %>">
 										<div id="com<%=rCList.get(i).getComment_num() %>">
 											<span class="float-right"><%=rCList.get(i).getTime() %></span>
-											<h6><b><%=cMemList.get(i).getName() %></b></h6>
+											<h6><%if(cMemList.get(i).getId().equals("admin")) { %><b>admin</b><% } else if (cMemList.get(i).getName().equals("<탈퇴한 회원>")) { %><b><탈퇴한 회원></b><% } else { %><b><%=cMemList.get(i).getName() %>(<%=cMemList.get(i).getId() %>)</b><% } %></h6>
 											<button id="commentButton<%=rCList.get(i).getComment_num() %>" class="btn btn-primary float-right" onclick="$(this).parent().next('form').toggle()">+</button>
 											<%if(loginMember.getId().equals("admin") || loginMember.getNumber() == cMemList.get(i).getNumber()) { %><button class="btn btn-danger float-right" onclick="location.href='deleteReviewComment.do?page=<%=nowPage %>&review_num=<%=review_num%>&comment_num=<%=rCList.get(i).getComment_num() %>';">X</button><% } %>
 											<div style="border-bottom:1px solid gray;min-height:50px;"><%=rCList.get(i).getContents() %></div>

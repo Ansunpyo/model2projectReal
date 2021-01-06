@@ -11,20 +11,36 @@ import vo.Member;
 public class JoinService {
 
 	public Member getJoinTeacherMember(String id, String pw, String classify, String name, String email, String gender, String major, String education) {
-		JoinDAO joinDAO = JoinDAO.getInstance();
-		Connection conn = getConnection();
-		joinDAO.setConnection(conn);
-		Member joinedMember = joinDAO.joinTeacher(id, pw, classify, name, email, gender, major, education);
-		close(conn);
+		Member joinedMember = null;
+		Connection conn = null;
+		try {
+			JoinDAO joinDAO = JoinDAO.getInstance();
+			conn = getConnection();
+			joinDAO.setConnection(conn);
+			joinedMember = joinDAO.joinTeacher(id, pw, classify, name, email, gender, major, education);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return joinedMember;
 	}
 
 	public Member getJoinStudentMember(String id, String pw, String classify, String name, String email, String gender) {
-		JoinDAO joinDAO = JoinDAO.getInstance();
-		Connection conn = getConnection();
-		joinDAO.setConnection(conn);
-		Member joinedMember = joinDAO.joinStudent(id, pw, classify, name, email, gender);
-		close(conn);
+		Member joinedMember = null;
+		Connection conn = null;
+		try {
+			JoinDAO joinDAO = JoinDAO.getInstance();
+			conn = getConnection();
+			joinDAO.setConnection(conn);
+			joinedMember = joinDAO.joinStudent(id, pw, classify, name, email, gender);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
+		
 		return joinedMember;
 	}
 

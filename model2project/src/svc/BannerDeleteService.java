@@ -10,11 +10,18 @@ import dao.BannerDAO;
 public class BannerDeleteService {
 
 	public int deleteBanner(String img) {
-		Connection conn = getConnection();
-		BannerDAO bannerDAO = BannerDAO.getInstance();
-		bannerDAO.setConnection(conn);
-		int result = bannerDAO.deleteBanner(img);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			BannerDAO bannerDAO = BannerDAO.getInstance();
+			bannerDAO.setConnection(conn);
+			result = bannerDAO.deleteBanner(img);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

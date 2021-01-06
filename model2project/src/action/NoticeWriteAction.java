@@ -23,7 +23,7 @@ public class NoticeWriteAction implements Action {
 			Notice not = new Notice();
 			
 			not.setTitle(request.getParameter("title"));
-			not.setContents(request.getParameter("contents"));
+			not.setContents(request.getParameter("contents").replace("\n", "<br/>"));
 			
 			NoticeWriteService noticeWriteService = new NoticeWriteService();
 			result = noticeWriteService.writeNotice(not);

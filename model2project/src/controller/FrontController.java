@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,8 @@ import action.BannerUploadAction;
 import action.CategoryDeleteAction;
 import action.CategoryInsertAction;
 import action.CategoryListAction;
+import action.DeleteLectureAction;
+import action.DoPayAction;
 import action.EditProfileAction;
 import action.EditProfilePageAction;
 import action.FaqAction;
@@ -29,6 +32,9 @@ import action.FreeBoardUpdateAction;
 import action.FreeBoardUpdatePageAction;
 import action.FreeBoardViewAction;
 import action.FreeBoardWriteAction;
+import action.FreeCommentDeleteAction;
+import action.FreeCommentExtraAction;
+import action.FreeCommentWriteAction;
 import action.IntroDeleteProAction;
 import action.IntroDetailAction;
 import action.IntroListAction;
@@ -41,6 +47,8 @@ import action.LectureDetailDeleteAction;
 import action.LectureDetailUploadAction;
 import action.LectureListAction;
 import action.LectureListCheckedAction;
+import action.LectureMDAction;
+import action.LectureModifyAction;
 import action.LectureUploadAction;
 import action.LectureUploadPageAction;
 import action.LoginAction;
@@ -51,6 +59,7 @@ import action.MainadAction;
 import action.MembersListAction;
 import action.MessageDeleteAction;
 import action.MessageSendAction;
+import action.MessageSendPageAction;
 import action.MessengerAction;
 import action.MyFreeAction;
 import action.MyLectureAction;
@@ -62,10 +71,12 @@ import action.NoticeUpdateAction;
 import action.NoticeUpdatePageAction;
 import action.NoticeViewAction;
 import action.NoticeWriteAction;
+import action.OneOnOneDeleteAction;
 import action.OneOnOneListAction;
 import action.OneOnOneSendAction;
 import action.One_on_oneAnswerAction;
 import action.One_on_oneadListAction;
+import action.PayPageAction;
 import action.PurchaseAllListAction;
 import action.PurchaseDoRefundAction;
 import action.PurchaseListAction;
@@ -75,6 +86,9 @@ import action.PwCheckAction;
 import action.QuitAction;
 import action.QuittersListAction;
 import action.ReviewAction;
+import action.ReviewCommentDeleteAction;
+import action.ReviewCommentExtraAction;
+import action.ReviewCommentWriteAction;
 import action.ReviewDeleteAction;
 import action.ReviewUpdateAction;
 import action.ReviewUpdatePageAction;
@@ -402,6 +416,13 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/introDeleteForm.do")) {
+			String nowPage = request.getParameter("page");
+			request.setAttribute("page", nowPage);
+			int intro_num = Integer.parseInt(request.getParameter("intro_num"));
+			request.setAttribute("intro_num", intro_num);
+			forward = new ActionForward();
+			forward.setPath("/intro/intro_delete.jsp");
 		} else if (command.equals("/introDeletePro.do")) {
 			action = new IntroDeleteProAction();
 			try {
@@ -614,15 +635,50 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if(command.contentEquals("/lectureDetailUpload.do")) {
-			action = new LectureDetailUploadAction();
+		} else if(command.contentEquals("/favAdd.do")) {
+			action = new FavAddAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	
-		} else if(command.contentEquals("/favAdd.do")) {
-			action = new FavAddAction();
+			}
+		} else if(command.contentEquals("/lectureMD.do")) {
+			action = new LectureMDAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/lectureModify.do")) {
+			action = new LectureModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/deleteLecture.do")) {
+			action = new DeleteLectureAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/oneDel.do")) {
+			action = new OneOnOneDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/payPage.do")) {
+			action = new PayPageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.contentEquals("/doPay.do")) {
+			action = new DoPayAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -635,8 +691,64 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	
-			
+		} else if(command.contentEquals("/lectureDetailUpload.do")) {
+			action = new LectureDetailUploadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/freeExtraComment.do")) {
+			action = new FreeCommentExtraAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/deleteFreeComment.do")) {
+			action = new FreeCommentDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/freeCommentWrite.do")) {
+			action = new FreeCommentWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/reviewExtraComment.do")) {
+			action = new ReviewCommentExtraAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/deleteReviewComment.do")) {
+			action = new ReviewCommentDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/reviewCommentWrite.do")) {
+			action = new ReviewCommentWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if(command.contentEquals("/messageSend.do")) {
+			action = new MessageSendPageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		
 		if (forward != null) {
 			
 			if (forward.isRedirect()) {

@@ -22,7 +22,7 @@ public class FreeBoardUpdateAction implements Action {
 			forward = new ActionForward();
 			fr.setFree_num(Integer.parseInt(request.getParameter("free_num")));
 			fr.setTitle(request.getParameter("title"));
-			fr.setContents(request.getParameter("contents"));
+			fr.setContents(request.getParameter("contents").replace("\n", "<br/>"));
 			
 			FreeUpdateService freeUpdateService = new FreeUpdateService();
 			int result = freeUpdateService.updateFree(fr);

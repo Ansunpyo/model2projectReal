@@ -23,13 +23,16 @@ public class FreeBoardViewAction implements Action {
 			forward = new ActionForward();
 			FreeViewService freeViewService = new FreeViewService();
 			LinkedList<Object> freeViewList = freeViewService.getFreeView(free_num);
-
+			
+			LinkedList[] freeComList = freeViewService.getFreeCom(free_num);
+			
+			session.setAttribute("freeComList", freeComList);
 			session.setAttribute("freeViewList", freeViewList);
 			if(loginMember.getId().equals("admin")) {
-				forward.setPath("freeBoardViewad.jsp?page=" + request.getParameter("page"));
+				forward.setPath("freeBoardViewad.jsp?free_num=" + free_num + "&page=" + request.getParameter("page"));
 				return forward;
 			}
-			forward.setPath("freeBoardView.jsp?page=" + request.getParameter("page"));
+			forward.setPath("freeBoardView.jsp?free_num=" + free_num + "&page=" + request.getParameter("page"));
 			return forward;
 		} else {
 			forward = new ActionForward();

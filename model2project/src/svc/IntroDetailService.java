@@ -1,6 +1,10 @@
 package svc;
 
-import static db.JdbcUtil.*;
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.commit;
+import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -10,29 +14,43 @@ import vo.Intro;
 public class IntroDetailService {
 
 	public ArrayList[] getArticle(int intro_num) {
-		Connection conn = getConnection();
-		IntroDAO introDAO = IntroDAO.getInstance();
-		introDAO.setConnection(conn);
-		int updateCount = introDAO.updateReadCount(intro_num);
-		
-		if(updateCount > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
+		ArrayList[] articleList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			IntroDAO introDAO = IntroDAO.getInstance();
+			introDAO.setConnection(conn);
+			int updateCount = introDAO.updateReadCount(intro_num);
+			
+			if(updateCount > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			articleList = introDAO.selectArticle(intro_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
 		}
-		
-		ArrayList[] articleList = introDAO.selectArticle(intro_num);
-		if(conn != null) close(conn);
 		
 		return articleList;
 	}
 
 	public Intro getArticleForModify(int intro_num) {
-		Connection conn = getConnection();
-		IntroDAO introDAO = IntroDAO.getInstance();
-		introDAO.setConnection(conn);
-		Intro intro = introDAO.selectArticleForModify(intro_num);
-		if(conn != null) close(conn);
+		Intro intro = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			IntroDAO introDAO = IntroDAO.getInstance();
+			introDAO.setConnection(conn);
+			intro = introDAO.selectArticleForModify(intro_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return intro;
 	}

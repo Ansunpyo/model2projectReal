@@ -12,11 +12,18 @@ import vo.Lecture;
 public class ReviewWritePageService {
 
 	public LinkedList<Lecture> reviewWritePage() {
-		Connection conn = getConnection();
-		ReviewDAO reviewDAO = ReviewDAO.getInstance();
-		reviewDAO.setConnection(conn);
-		LinkedList<Lecture> lecList = reviewDAO.selectLectureList();
-		close(conn);
+		LinkedList<Lecture> lecList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			reviewDAO.setConnection(conn);
+			lecList = reviewDAO.selectLectureList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return lecList;
 	}

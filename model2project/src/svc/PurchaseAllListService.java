@@ -7,16 +7,22 @@ import java.sql.Connection;
 import java.util.LinkedList;
 
 import dao.PurchaseDAO;
-import vo.Pay;
 
 public class PurchaseAllListService {
 
 	public LinkedList[] getPurchaseList(int nowPage) {
-		Connection conn = getConnection();
-		PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
-		purchaseDAO.setConnection(conn);
-		LinkedList[] payList = purchaseDAO.selectPurchaseAllList(nowPage);
-		close(conn);
+		LinkedList[] payList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			PurchaseDAO purchaseDAO = PurchaseDAO.getInstance();
+			purchaseDAO.setConnection(conn);
+			payList = purchaseDAO.selectPurchaseAllList(nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return payList;
 	}

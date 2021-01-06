@@ -10,11 +10,18 @@ import dao.MessengerDAO;
 public class MessageDeleteService {
 
 	public int deleteMessage(int message_num) {
-		Connection conn = getConnection();
-		MessengerDAO messengerDAO = MessengerDAO.getInstance();
-		messengerDAO.setConnection(conn);
-		int result = messengerDAO.deleteMessage(message_num);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MessengerDAO messengerDAO = MessengerDAO.getInstance();
+			messengerDAO.setConnection(conn);
+			result = messengerDAO.deleteMessage(message_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}

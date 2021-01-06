@@ -11,11 +11,18 @@ import dao.MessengerDAO;
 public class MyMessageService {
 
 	public LinkedList[] getMyMessageList(String id, int nowPage) {
-		Connection conn = getConnection();
-		MessengerDAO messengerDAO = MessengerDAO.getInstance();
-		messengerDAO.setConnection(conn);
-		LinkedList[] messageList = messengerDAO.selectMyMessageList(id, nowPage);
-		close(conn);
+		LinkedList[] messageList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			MessengerDAO messengerDAO = MessengerDAO.getInstance();
+			messengerDAO.setConnection(conn);
+			messageList = messengerDAO.selectMyMessageList(id, nowPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return messageList;
 	}

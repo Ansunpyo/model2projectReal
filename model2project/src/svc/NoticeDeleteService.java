@@ -10,11 +10,18 @@ import dao.NoticeDAO;
 public class NoticeDeleteService {
 
 	public int deleteNotice(int notice_num) {
-		Connection conn = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(conn);
-		int result = noticeDAO.deleteNotice(notice_num);
-		close(conn);
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			NoticeDAO noticeDAO = NoticeDAO.getInstance();
+			noticeDAO.setConnection(conn);
+			result = noticeDAO.deleteNotice(notice_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) close(conn);
+		}
 		
 		return result;
 	}
