@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="vo.Intro, vo.Member, java.util.*, java.text.SimpleDateFormat"%>
+	import="vo.Intro, vo.Member, vo.Lecture, vo.Review, java.util.*, java.text.SimpleDateFormat"%>
 <%
 	String Number = null;
 	String Intro_num = null;
+	String Lecture_num = null;
 	Member loginMember = null;
 	String classify = null;
 	ArrayList[] articleList = (ArrayList[]) session.getAttribute("articleList");
 	ArrayList<Intro> intList = articleList[0];
 	ArrayList<Member> memList = articleList[1];
+	ArrayList<Lecture> lecList = articleList[2];
+	ArrayList<Review> revList = articleList[3];
 	Intro article = intList.get(0);
 	Member articlem = memList.get(0);
+	Lecture articlel = lecList.get(0);
+	Review articler = revList.get(0);
 	String nowPage = (String) request.getAttribute("page");
 	if(session.getAttribute("loginMember") != null) {
 		loginMember = (Member) session.getAttribute("loginMember");
@@ -207,13 +212,11 @@ h2 {
 		</section>
 		<section class="notice2">
 			<div class="news">
-				<h4 class="on">리뷰</h4>
-				<ul>
-					<li><a href="#">It was a good class.</a><span>2020.12.01</span></li>
-					<li><a href="#">I'd like to hear it again if I have a chance.</a><span>2020.10.17</span></li>
-					<li><a href="#">It was fun.</a><span>2020.09.21</span></li>
-					<li><a href="#">When is the next class coming?</a><span>2020.09.12</span></li>
+				<h4 class="on">리뷰</h4>				
+				<ul>	
+					<li><a href="#"><%=articler.getTitle() %></a></li>
 				</ul>
+					<h2>등록된 리뷰가 없습니다.</h2>		
 			</div>		
 			<div id="notice2">
 				<div class="mr-auto">

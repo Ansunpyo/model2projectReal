@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import vo.Intro;
+import vo.Lecture;
 import vo.Member;
+import vo.Review;
 
 public class IntroDAO {
 
@@ -179,8 +181,12 @@ public class IntroDAO {
 		ResultSet rs = null;
 		Intro intro = null;
 		Member member = null;
+		Lecture lecture = null;
+		Review review = null;
 		ArrayList<Intro> intList = new ArrayList<Intro>();
 		ArrayList<Member> memList = new ArrayList<Member>();
+		ArrayList<Lecture> lecList = new ArrayList<Lecture>();
+		ArrayList<Review> revList = new ArrayList<Review>();
 		ArrayList[] articleList = null;
 		
 		try {
@@ -216,7 +222,24 @@ public class IntroDAO {
 					memList.add(member);
 				} while(rs.next());
 			}
-			articleList = new ArrayList[] {intList, memList};
+			String sql = "SELECT l.lecture_num, l.lecture_title, r.title, r.review_num FROM lecture AS l JOIN review AS r ON l.lecture_num = r.lecture_num WHERE l.number = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, intro_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				do {
+					lecture = new Lecture();
+					review = new Review();
+					lecture.setLecture_num(rs.getInt("lecture_num"));
+					lecture.setLecture_title(rs.getString("lecture_title"));
+					review.setTitle(rs.getString("title"));
+					review.setReview_num(rs.getInt("review_num"));
+					lecList.add(lecture);
+					revList.add(review);
+				} while(rs.next());
+			}
+			articleList = new ArrayList[] {intList, memList, lecList, revList};
 		} catch (Exception ex) {
 			System.out.println("getDetail 에러 : " + ex);
 		} finally {
