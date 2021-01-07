@@ -22,7 +22,7 @@
 		<!-- header -->
 		<header id="header">
 			<div class="inner clearfix">
-				<h1 class="logo"><a href="index.do"><img src="./images/logo.png" alt="2LW"></a></h1>
+				<h1 class="logo"><a href="index.do"><img src="./images/2lw2.png"  alt="2LW"></a></h1>
 				<nav class="nav">
 					<h2 class="blind">메인메뉴</h2>
 					<ul>
