@@ -222,20 +222,31 @@ public class IntroDAO {
 					memList.add(member);
 				} while(rs.next());
 			}
-			String sql = "SELECT l.lecture_num, l.lecture_title, r.title, r.review_num FROM lecture AS l JOIN review AS r ON l.lecture_num = r.lecture_num WHERE l.number = ?";
-			pstmt = conn.prepareStatement(sql);
+			
+			String lec_sql = "SELECT l.lecture_num, l.lecture_title FROM lecture AS l WHERE l.number = ?";
+			pstmt = conn.prepareStatement(lec_sql);
 			pstmt.setInt(1, intro_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				do {
 					lecture = new Lecture();
-					review = new Review();
 					lecture.setLecture_num(rs.getInt("lecture_num"));
 					lecture.setLecture_title(rs.getString("lecture_title"));
+					lecList.add(lecture);
+				} while(rs.next());
+			}
+			
+			String rev_sql = "SELECT r.title, r.review_num FROM lecture AS l JOIN review AS r ON l.lecture_num = r.lecture_num WHERE l.number = ?";
+			pstmt = conn.prepareStatement(rev_sql);
+			pstmt.setInt(1, intro_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				do {
+					review = new Review();
 					review.setTitle(rs.getString("title"));
 					review.setReview_num(rs.getInt("review_num"));
-					lecList.add(lecture);
 					revList.add(review);
 				} while(rs.next());
 			}
