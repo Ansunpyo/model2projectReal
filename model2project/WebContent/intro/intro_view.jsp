@@ -109,7 +109,7 @@ button {
 	margin-top: 20px;
 }
 
-.lecrev h4 {
+.rev {
 	position: relative;
 	z-index: 1;
 	float: left;
@@ -125,31 +125,51 @@ button {
 	box-sizing: border-box;
 }
 
-.lecrev h4.on {
-	border-bottom-color: #fff;
-	background-color: #fff;
+.lec {
+	position: relative;
+	z-index: 1;
+	float: left;
+	height: 30px;
+	padding: 0 12px;
+	border: 1px solid #ccc;
+	background-color: #d7d7d7;
+	font-size: 16px;
+	font-weight: bold;
+	color: #606060;
+	line-height: 35px;
+	cursor: pointer;
+	box-sizing: border-box;
 }
 
-.lecrev .news ul {
+.lecList ul, .revList ul {
 	padding-top: 30px;
 }
 
-.lecrev .news ul li {
+.lecList ul li, .revList ul li {
 	overflow: hidden;
-	margin: 0 10px;
 	border-bottom: 1px solid #dbdbdb;
 	line-height: 30px;
 }
 
-.lecrev .news ul li a {
+.lecList ul li a, .revList ul li a {
 	float: left;
 }
 
-.lecrev .news ul li span {
+.lecList ul li span, .revList ul li span  {
 	float: right;
 	color: #606060;
 }
 
+
+rev .on {
+	border-bottom-color: #fff;
+	background-color: #fff;
+}
+
+lec .on {
+	border-bottom-color: #fff;
+	background-color: #fff;
+}
 </style>
 </head>
 <body>
@@ -169,34 +189,33 @@ button {
 			</ul>
 		</div>
 	</section>
-	<section class="lecrev">
-		<div class="news">
-			<ul>
-				<li>
-					<h4 class="on">리뷰</h4> 
+	<section class="lecrev" style="margin-bottom: 30px;">
+		<div class="tabs">
+			<div class="rev on">리뷰</div>
+			<div class="lec">강의</div>
+		</div>
+			<div class="revList">
 <% if (revList != null) { %>
-						<ul>
+					<ul>
 <% for (int j = 0; j < revList.size(); j++) { %>
-							<li><a href="#"><%=revList.get(j).getTitle()%></a></li>
+						<li><a href="review.do?page=<%=revList.get(j).getReview_num()%>"><%=revList.get(j).getTitle()%></a></li>
 <% } %>
-						</ul>
+					</ul>
 <% } else { %>
-							<h2>등록된 리뷰가 없습니다.</h2>
+						<h2>등록된 리뷰가 없습니다.</h2>
 <% } %>
-				</li>
-				<li>
-					<h4>강의</h4>
+			</div>
+			<div class="lecList">
 <% if (lecList != null) { %>
-						<ul>
+					<ul>
 <% for (int k = 0; k < lecList.size(); k++) { %>
-							<li><a href="#"><%=lecList.get(k).getLecture_title()%></a></li>
+						<li><a href="lectureDetail.do?lecture_num=<%=lecList.get(k).getLecture_num()%>"><%=lecList.get(k).getLecture_title()%></a></li>
 <% } %>
-						</ul>
+					</ul>
 <% } else { %>
-							<h2>등록된 강의가 없습니다.</h2>
+						<h2>등록된 강의가 없습니다.</h2>
 <% } %>
-				</li>
-			</ul>
+			</div>
 		</div>
 		<div class="mr-auto">
 			<button class="btn btn-success" onclick="location.href = 'introList.do'">목록으로</button>
@@ -207,5 +226,23 @@ button {
 		</div>
 	</section>
 </section>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(function(){
+	$(".lecList").hide();
+		$(".rev").click(function(){
+			$(this).siblings().removeClass("on");
+			$(this).addClass("on");
+			$(".revList").show();
+			$(".lecList").hide();
+		});
+		$(".lec").click(function(){
+			$(this).siblings().removeClass("on");
+			$(this).addClass("on");
+			$(".lecList").show();
+			$(".revList").hide();
+		});
+});	
+</script>
 </body>
 </html>
