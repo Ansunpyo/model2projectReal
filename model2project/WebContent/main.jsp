@@ -22,7 +22,7 @@
 		<!-- header -->
 		<header id="header">
 			<div class="inner clearfix">
-				<h1 class="logo"><a href="index.do"><img src="./images/2lw2.png"  alt="2LW"></a></h1>
+				<h1 class="logo"><a href="index.do"><img src="./images/main.png"  alt="2LW"></a></h1>
 				<nav class="nav">
 					<h2 class="blind">메인메뉴</h2>
 					<ul>
@@ -192,7 +192,7 @@
 		<!-- //container -->
 		<!-- footer -->
 		<footer id="footer" class="clearfix">
-			<p class="btm_logo"><img src="./images/logo_btm.png" alt="JUST쇼핑몰"></p>
+			<p class="btm_logo"><img src="./images/btm.png" alt="2LW"></p>
 			<dl class="btm_menu">
 				<dt class="blind"><strong>바닥메뉴</strong></dt>
 				<dd><a href="https://www.instagram.com/" target="_blank"><img src="./images/ico_in.png" alt="인스타그램으로 이동"></a></dd>

@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<img src="images/logo_black.png" onclick="location.href='index.do'" class="logoToMain" />
+	<img src="images/mainl.png" onclick="location.href='index.do'" class="logoToMain" />
 	<div class="loginCont">
 		<div class="tabs">
 			<div class="joinTab">
